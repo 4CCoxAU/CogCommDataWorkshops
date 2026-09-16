@@ -1,0 +1,137 @@
+---
+title: "4 · Finding an island"
+---
+
+::: {.milestone}
+**Block 3** · One new function, then this morning's paper hunt done in code.
+:::
+
+## From how long to what
+
+MLU told you Anne's utterances got longer but nothing about the content of her utterances. Now we're going to go hunting for Anne's verb island constructions.
+
+## `str_detect()`
+
+`str_detect(text, pattern)` returns `TRUE` if the text contains the
+pattern. Wrap the pattern in `\\b` (*word boundary*) to match whole words
+only, and use `(a|b)` to match either of two words:
+
+```r
+str_detect("want some juice", "\\bwant\\b")     # TRUE
+str_detect("she wanted it",   "\\bwant\\b")     # FALSE - "wanted" is a different word
+str_detect("wanna go",        "\\b(want|wanna)\\b")  # TRUE - matches either
+```
+
+::: {.predict-check data-answer="TRUE" data-accept="true"}
+What does `str_detect("look at the snow", "no")` return, without the `\\b`?
+
+::: {.pc-explanation}
+`TRUE`: s-**no**-w. Without boundaries the pattern matches anywhere, including inside other words. That's what `\\b` is for.
+:::
+:::
+
+## The hunt
+
+It slots straight into `filter()`:
+
+```r
+# Keep Anne's utterances containing "want" as a whole word.
+want <- anne %>%
+  filter(str_detect(utterance, "\\bwant\\b"))
+  
+# Anne's earliest wants (22 months):
+want %>%
+  filter(age_months == min(age_months)) %>%
+  slice(1:15) %>%
+  pull(utterance)
+```
+
+```{.repl}
+ [1] "want juice"           "want juice"           "want juice"           "want these"           "want toys"            "I want the shoes off"
+ [7] "want water"           "want foot"            "want"                 "want more"            "want cupboard"        "want babys again"    
+[13] "want prams"           "want prams"           "want prams" 
+```
+
+```r
+# And her latest wants (33 months):
+want %>%
+  filter(age_months == max(age_months)) %>%
+  slice(1:15) %>%
+  pull(utterance)
+```
+
+```{.repl}
+ [1] "I want black ones"                "want the red"                     "I think want cheese"              "I want my Mummy"                 
+ [5] "um I don't want tea"              "want do another one now"          "which which one do you want"      "want this one"                   
+ [9] "I want um"                        "we don't want the the dirty ones" "I don't want that"                "I don't want the rest out"       
+[13] "don't want these ones in"         "we don't want them these ones"    "don't want them"  
+```
+
+Read both sets: What has changed by the last month? What does this tell us about the verb islands?
+
+
+## How does the island develop?
+
+You watched Anne's island grow a subject: *want juice* at 22 months, *I want the shoes off* becoming ordinary by 26. One child, one construction, one trajectory. Now the question that decides between the theories: **do all twelve islands grow the same way?**
+
+The two accounts you read make different bets. If a general rule comes online, the curves should look like *switches*: low, a jump, then high, with children differing only in when the switch flips. If islands are built from each child's own experience, the curves should *creep and wobble*, each on its own schedule, some further along at two than others at nearly three.
+
+```r
+# Of each child's wants, per month: what share carry the subject?
+iwant_growth <- manchester %>%
+  filter(speaker == "CHI") %>%
+  mutate(has_want = str_detect(utterance, "\\b(want|wanna)\\b")) %>%
+  filter(has_want) %>%
+  mutate(with_subject = str_detect(utterance, "\\bI (want|wanna)\\b")) %>%
+  group_by(child, age_months) %>%
+  summarise(subject_share = 100 * mean(with_subject),
+            n_wants = n(),
+            .groups = "drop")
+
+ggplot(iwant_growth, aes(x = age_months, y = subject_share)) +
+  geom_line(colour = "grey50") +
+  geom_point(aes(size = n_wants), alpha = .4) +
+  facet_wrap(~child) +
+  labs(title = "Twelve islands grow a subject, one child per panel",
+       x = "age (months)", y = "% of wants with 'I'",
+       size = "wants that month") +
+       theme_bw()
+```
+
+Discuss with your neighbour: do the panels look like switches flipping or slopes creeping, and is there one answer for all twelve? Are these plots a problem for the theory, or for the measurement?
+
+
+## Make the Call on Wanna
+
+One decision to make: Whether *wanna + verb* belongs to the same island as *want + thing* is a theory question wearing a coding costume.
+
+Before you count anything: does *wanna* belong to Anne's WANT island? Let's get the data first. Read her *wanna* utterances:
+
+```r
+# All of Anne's wanna-utterances.
+anne %>%
+  filter(str_detect(utterance, "____")) %>%
+  pull(utterance)
+```
+
+```{.repl}
+[1] "I wanna know in that pot"                  "wanna sleeping with Mummy"                 "wanna lie down"                           
+  [4] "they wanna go on here"                     "I wanna play"                              "I wanna play"                             
+  [7] "I wanna play my sand"                      "I wanna go in the kitchen"                 "wanna come with you and your mummie"      
+ [10] "I wanna see"                               "I wanna wanna have tea"                    "wanna sit there"                          
+ [13] "wanna play games"                          "wanna play"                                "I wanna see"                              
+ [16] "I wanna go in there"                       "don't wanna"                               "don't wanna"                              
+ [19] "don't wanna"                               "wanna go in here"                          "me wanna do it"                           
+ [22] "wanna put a video on"                      "wanna push it on"                          "wanna go nursery" 
+ ...
+```
+
+::: {.callout-note .predict icon="false" title="🤔 Think first"}
+What would Tomasello say?
+
+::: {.callout-tip collapse="true" title="Check your thinking"}
+He'd note they have different frames: *want* + thing, *wanna* + verb, and on his account, different frames are different constructions, possibly not yet connected in Anne's head. So excluding is defensible. But so is including, if your question is "how often does Anne express wanting?" What you count depends on what you're asking.
+:::
+:::
+
+Next: [Exercise 2 — Does the island grow?](05_exercise2_island.qmd).

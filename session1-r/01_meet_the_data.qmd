@@ -1,0 +1,111 @@
+---
+title: "1 · Meet the data"
+---
+
+::: milestone
+**Block 1** · Chapter 1 of 2 before the first exercise. Get the data into R and understand what one row of it means.
+:::
+
+## Twelve children learning to talk
+
+Between 1998 and 2001, researchers in Manchester recorded twelve English children at home, playing and talking with their mothers: an hour at a time, twice in every three-week period, from around each child's second birthday until around their third. The children are known by first names: Anne, Aran, Becky, Carl, Dominic, Gail, Joel, John, Liz, Nicole, Ruth and Warren.
+
+This is the **Manchester corpus** (Theakston, Lieven, Pine & Rowland, 2001). It was collected to test the theory you read this week: that children build grammar verb by verb — and it is publicly available through [CHILDES](https://childes.talkbank.org), the international database of child language.
+
+Everything the children and mothers said was transcribed. We have converted those transcripts into one table, where **each row is one utterance**: one thing one person said at one moment.
+
+| column       | what it contains                                            |
+|----------------|-------------------------------------------------------|
+| `child`      | which child's recording this is (`"Anne"`, `"Becky"`, ...)  |
+| `age_months` | the child's age at that recording, in months                |
+| `speaker`    | who is talking: `"CHI"` (the child) or `"MOT"` (the mother) |
+| `utterance`  | what they said                                              |
+| `num_tokens` | how many words that is                                      |
+
+So the row `Anne · 26 · CHI · "want some juice" · 3` means: Anne, aged 2;2, said *want some juice*: three words.
+
+:::: {.predict-check data-answer="speaker" data-accept="the speaker column||speaker column"}
+The mothers talk a lot in these recordings. Which column would you use to keep only the *children's* utterances?
+
+::: pc-explanation
+`speaker`: filtering for `speaker == "CHI"` keeps the child's own speech. `child` tells you *whose recording* it is; even in Anne's files, half the rows are her mother.
+:::
+::::
+
+## Download the data
+
+<a class="btn btn-primary" href="../data/manchester_utterances.rds" download> ⬇ manchester_utterances.rds</a>
+
+This is an `.rds` file: R's own format for saving a data frame exactly as it is, types and all. Download it, then upload it into your working folder on UCloud: drag it into the Files pane, or use the Upload button there.
+
+## Load it
+
+``` r
+# Load the tidyverse.
+library(tidyverse)
+
+# Read the data file into a variable called manchester.
+manchester <- readRDS("manchester_utterances.rds")
+```
+
+Select the lines and press *Shift+Enter*. If R complains that the file does not exist, the file and your session are in different folders. Check the Files pane.
+
+Now have a first look:
+
+``` r
+# glimpse() shows every column, its type, and the first few values.
+glimpse(manchester)
+```
+
+``` repl
+Rows: 597,644
+Columns: 6
+$ child      <chr> "Anne", "Anne", "Anne", "Anne", "Anne", "Anne", "Anne", "Anne", "Anne", "Anne", "Anne", "Anne", "Anne", "Anne", "Anne", "Anne…
+$ file       <chr> "011007", "011007", "011007", "011007", "011007", "011007", "011007", "011007", "011007", "011007", "011007", "011007", "0110…
+$ age_months <dbl> 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 2…
+$ speaker    <chr> "CHI", "MOT", "CHI", "CHI", "MOT", "MOT", "MOT", "MOT", "MOT", "MOT", "MOT", "MOT", "MOT", "MOT", "MOT", "MOT", "CHI", "MOT",…
+$ utterance  <chr> "baby", "here's baby", "it", "it fit", "baby willn't fit", "is it too big", "what about this baby look", "wanna put them on t…
+$ num_tokens <int> 1, 2, 1, 2, 3, 4, 5, 7, 6, 3, 4, 3, 3, 3, 3, 3, 3, 1, 3, 1, 3, 2, 2, 2, 2, 6, 3, 2, 1, 6, 7, 5, 1, 2, 4, 2, 1, 2, 2, 8, 9, 3,…
+```
+
+Note the types: `<chr>` means text, `<int>` means whole numbers. `speaker` and `utterance` are text; `age_months` and `num_tokens` are numbers you can compute with.
+
+:::: {.callout-note .predict icon="false" title="🤔 Think first"}
+`num_tokens` says how many *words* an utterance has. Someone had to decide what a word is. Does *don't* count as one word or two? Does a laugh count? Last Friday you made decisions exactly like this about turns.
+
+::: {.callout-tip collapse="true" title="Check your thinking"}
+There is no neutral answer. Our rule: anything separated by spaces is a word, so *don't* is one, and laughs and unintelligible stretches don't count at all. Different rules would give different numbers in everything you compute today. That isn't a flaw; it's what measurement is.
+:::
+::::
+
+## How much data is there?
+
+`count()` from Tuesday tells you what each child contributes:
+
+``` r
+# Count the number of rows for each child.
+manchester %>%
+  count(child)
+```
+
+``` repl
+# A tibble: 12 × 2
+   child       n
+   <chr>   <int>
+ 1 Anne    58403
+ 2 Aran    53900
+ 3 Becky   52512
+ 4 Carl    49030
+ 5 Dominic 60162
+ 6 Gail    46595
+ 7 Joel    52378
+ 8 John    35178
+ 9 Liz     37767
+10 Nicole  51065
+11 Ruth    57962
+12 Warren  42692
+```
+
+The totals differ a lot between children. And one thing to know about `age_months`: because ages are rounded to the month, a busy month can contain *two* recording sessions bundled together. Raw counts reflect the recording schedule as much as the child. Keep that in mind; it will matter when we start comparing sessions.
+
+Data loaded, `glimpse` looking right? Next: [Reading Anne](02_meet_anne.qmd).

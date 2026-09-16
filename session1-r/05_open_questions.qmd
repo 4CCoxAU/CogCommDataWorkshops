@@ -1,0 +1,31 @@
+---
+title: "6 · Open questions"
+---
+
+::: milestone
+**If you're ahead**, or for the weekend. No blanks, no hints worth having: just questions and the data. Everything below is solvable with today's tools.
+:::
+
+## 1 · The second island
+
+Everything today was WANT. Pick another verb (e.g., *have*, *like*, *get*, *put*) and give it the full treatment: read early and late hits, then facet its subject-share across the twelve children.
+
+The question that makes this interesting: **within one child, do the two islands grow their subject at the same time?** If grammar is one system, they should move together. If each island grows from its own use, WANT might have a subject months before LIKE does. Nobody knows the answer, yet!
+
+## 2 · The Warren problem
+
+Have a look at Warren's panel of word islands. It starts near 70%, meaning that he uses the subject already at 22 months, before Anne's has begun. Is this precocious grammar, or one frozen chunk? Try to read his early *I want*s. If the slot varies (*I want juice, I want teddy, I want down*), the frame is productive. If it's the same phrase on repeat, it's a formula wearing a subject. Figure out what's going on with Warren by looking at the data.
+
+## 3 · The error nobody taught
+
+Children say things no adult ever said to them: *goed*, *comed*, *falled*, *foots*, *mouses*. These are the classic evidence that children build rules rather than copy. You can't imitate what nobody says.
+
+Hunt them: `"\\b(goed|comed|falled|breaked|foots|mouses|sheeps)\\b"` and extend the net with your own guesses. Which children produce them, and at what ages? And then check the mothers. If an error truly has a frequency of zero in the input, what does its existence tell you, and can either theory claim it?
+
+## 4 · What's that → what's *what*?
+
+Questions have their own development: *what* and *where* come early; *why*, famously, arrives late and then detonates. Track the four question words: *what, where, who, why* per 100 utterances across age, for a child of your choice. When does *why* explode? And is the explosion a language fact or a cognition fact. What does a child need to *understand* before *why* is worth asking?
+
+------------------------------------------------------------------------
+
+Every one of these is a real research question with your name not yet on it. In November you'll need one of your own. This is what the good ones feel like: something the data made you wonder, plus a measure that could answer it.

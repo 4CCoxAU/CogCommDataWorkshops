@@ -1,0 +1,366 @@
+[
+  {
+    "objectID": "session1-r/05_open_questions.html",
+    "href": "session1-r/05_open_questions.html",
+    "title": "6 · Open questions",
+    "section": "",
+    "text": "If you’re ahead, or for the weekend. No blanks, no hints worth having: just questions and the data. Everything below is solvable with today’s tools.",
+    "crumbs": [
+      "Home",
+      "Open questions",
+      "Open questions"
+    ]
+  },
+  {
+    "objectID": "session1-r/05_open_questions.html#the-second-island",
+    "href": "session1-r/05_open_questions.html#the-second-island",
+    "title": "6 · Open questions",
+    "section": "1 · The second island",
+    "text": "1 · The second island\nEverything today was WANT. Pick another verb (e.g., have, like, get, put) and give it the full treatment: read early and late hits, then facet its subject-share across the twelve children.\nThe question that makes this interesting: within one child, do the two islands grow their subject at the same time? If grammar is one system, they should move together. If each island grows from its own use, WANT might have a subject months before LIKE does. Nobody knows the answer, yet!",
+    "crumbs": [
+      "Home",
+      "Open questions",
+      "Open questions"
+    ]
+  },
+  {
+    "objectID": "session1-r/05_open_questions.html#the-warren-problem",
+    "href": "session1-r/05_open_questions.html#the-warren-problem",
+    "title": "6 · Open questions",
+    "section": "2 · The Warren problem",
+    "text": "2 · The Warren problem\nHave a look at Warren’s panel of word islands. It starts near 70%, meaning that he uses the subject already at 22 months, before Anne’s has begun. Is this precocious grammar, or one frozen chunk? Try to read his early I wants. If the slot varies (I want juice, I want teddy, I want down), the frame is productive. If it’s the same phrase on repeat, it’s a formula wearing a subject. Figure out what’s going on with Warren by looking at the data.",
+    "crumbs": [
+      "Home",
+      "Open questions",
+      "Open questions"
+    ]
+  },
+  {
+    "objectID": "session1-r/05_open_questions.html#the-error-nobody-taught",
+    "href": "session1-r/05_open_questions.html#the-error-nobody-taught",
+    "title": "6 · Open questions",
+    "section": "3 · The error nobody taught",
+    "text": "3 · The error nobody taught\nChildren say things no adult ever said to them: goed, comed, falled, foots, mouses. These are the classic evidence that children build rules rather than copy. You can’t imitate what nobody says.\nHunt them: \"\\\\b(goed|comed|falled|breaked|foots|mouses|sheeps)\\\\b\" and extend the net with your own guesses. Which children produce them, and at what ages? And then check the mothers. If an error truly has a frequency of zero in the input, what does its existence tell you, and can either theory claim it?",
+    "crumbs": [
+      "Home",
+      "Open questions",
+      "Open questions"
+    ]
+  },
+  {
+    "objectID": "session1-r/05_open_questions.html#whats-that-whats-what",
+    "href": "session1-r/05_open_questions.html#whats-that-whats-what",
+    "title": "6 · Open questions",
+    "section": "4 · What’s that → what’s what?",
+    "text": "4 · What’s that → what’s what?\nQuestions have their own development: what and where come early; why, famously, arrives late and then detonates. Track the four question words: what, where, who, why per 100 utterances across age, for a child of your choice. When does why explode? And is the explosion a language fact or a cognition fact. What does a child need to understand before why is worth asking?\n\nEvery one of these is a real research question with your name not yet on it. In November you’ll need one of your own. This is what the good ones feel like: something the data made you wonder, plus a measure that could answer it.",
+    "crumbs": [
+      "Home",
+      "Open questions",
+      "Open questions"
+    ]
+  },
+  {
+    "objectID": "session1-r/03_exercise1_mlu.html",
+    "href": "session1-r/03_exercise1_mlu.html",
+    "title": "Exercise 1 · The growth curve",
+    "section": "",
+    "text": "Block 2 · First exercise. Compute Anne’s mean length of utterance, plot it, and test it against your sentence.",
+    "crumbs": [
+      "Home",
+      "Block 2 · The growth curve",
+      "Exercise 1: MLU"
+    ]
+  },
+  {
+    "objectID": "session1-r/03_exercise1_mlu.html#the-measure",
+    "href": "session1-r/03_exercise1_mlu.html#the-measure",
+    "title": "Exercise 1 · The growth curve",
+    "section": "The measure",
+    "text": "The measure\nMean Length of Utterance (MLU): the average number of words per utterance. It sounds almost too simple, and yet since Brown (1973) it has been the standard yardstick of early grammar, for a good reason: to say longer things, you have to combine more things. A child at MLU 1.5 is mostly naming; a child at MLU 3.5 is building sentences. You already have everything you need: num_tokens holds each utterance’s length, and age_months groups utterances into months of recording.",
+    "crumbs": [
+      "Home",
+      "Block 2 · The growth curve",
+      "Exercise 1: MLU"
+    ]
+  },
+  {
+    "objectID": "session1-r/03_exercise1_mlu.html#task-1-mlu-per-month",
+    "href": "session1-r/03_exercise1_mlu.html#task-1-mlu-per-month",
+    "title": "Exercise 1 · The growth curve",
+    "section": "Task 1: MLU per month",
+    "text": "Task 1: MLU per month\nFor every month, compute the mean of num_tokens and count how many utterances that mean is based on.\n# For each month: Anne's average utterance length, and how much data it rests on.\nmlu_anne &lt;- anne %&gt;%\n  group_by(____) %&gt;%\n  summarise(mlu = mean(____),\n            n_utts = n())\n\n# Look at the result.\nmlu_anne\n# A tibble: 12 × 3\n   age_months   mlu n_utts\n        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;\n 1         22  1.57   1122\n 2         23  1.70   2568\n 3         24  1.86   1968\n 4         25  2.20   1782\n 5         26  2.49   1154\n 6         27  2.60   1727\n 7         28  2.43   2047\n 8         29  2.46   1922\n 9         30  2.61   1088\n10         31  2.68   3057\n11         32  2.52   1024\n12         33  2.85   1286\n\n\n\n\n\n\nHint\n\n\n\n\n\nWhich column defines a month of recording? Which column holds the utterance lengths? Both are in the table on the data page.",
+    "crumbs": [
+      "Home",
+      "Block 2 · The growth curve",
+      "Exercise 1: MLU"
+    ]
+  },
+  {
+    "objectID": "session1-r/03_exercise1_mlu.html#task-2-plot-it",
+    "href": "session1-r/03_exercise1_mlu.html#task-2-plot-it",
+    "title": "Exercise 1 · The growth curve",
+    "section": "Task 2: Plot it",
+    "text": "Task 2: Plot it\n\nBefore you plot: between 22 and 33 months, which direction should the curve go overall?\n\nUpward: children’s utterances get longer as they grow. The interesting questions are how fast, how smoothly, and whether Anne matches the other eleven. That is what the plot is for.\n\n\n# Plot MLU against age.\nggplot(mlu_anne, aes(x = ____, y = ____)) +\n  geom_point() +\n  geom_line() +\n  labs(title = \"Anne's mean length of utterance\",\n       x = \"age (months)\", y = \"MLU (words)\") +\n  theme_bw()\nRun it. You should see a line with one point per month, starting near where you read Anne naming things and ending near where you read her building sentences.",
+    "crumbs": [
+      "Home",
+      "Block 2 · The growth curve",
+      "Exercise 1: MLU"
+    ]
+  },
+  {
+    "objectID": "session1-r/03_exercise1_mlu.html#task-3-read-the-plot",
+    "href": "session1-r/03_exercise1_mlu.html#task-3-read-the-plot",
+    "title": "Exercise 1 · The growth curve",
+    "section": "Task 3: Read the plot",
+    "text": "Task 3: Read the plot\nWith your partner:\n1 · The verdict on your sentence. On the last page you wrote one sentence about what changed between Anne’s first and last recordings. Does the curve agree with you? And is there anything you noticed by reading her that a per-month average could never show?\n2 · Find a dip. Somewhere the curve drops from one month to the next. Is Anne’s language deteriorating?\n\n\n\n\n\n\n🤔 Think first\n\n\n\nBefore you answer. Look at n_utts across the months. Some months have roughly double the utterances of others. Why?\n\n\n\n\n\n\nCheck your thinking\n\n\n\n\n\nAnne was recorded about twice every three weeks, but our ages are rounded to the month, so some months contain two recording sessions bundled together, and some just one. A mean over 1,000 utterances is steadier than a mean over 500; and a single session catches a single day’s mood, sleep, and lunch. Months bounce; development trends.\n\n\n\n\n\nIn Exercise 1 you computed MLU per month for Anne. The same pipeline computes it for all twelve children at once — the only change is where you start, and what you group by:\n# MLU per month, for every child: start from the FULL table this time.\nmlu_all &lt;- manchester %&gt;%                       # not anne - which table has everyone?\n  filter(speaker == \"CHI\") %&gt;%\n  group_by(child, age_months) %&gt;%               # group by child AND month\n  summarise(mlu = mean(num_tokens),\n            .groups = \"drop\")\n\nmlu_all\nGrouping by two columns gives one row per child per month. Twelve growth curves in one table. (.groups = \"drop\" just tells R to hand back a plain table afterwards; without it you get a harmless warning.)",
+    "crumbs": [
+      "Home",
+      "Block 2 · The growth curve",
+      "Exercise 1: MLU"
+    ]
+  },
+  {
+    "objectID": "session1-r/03_exercise1_mlu.html#the-plot",
+    "href": "session1-r/03_exercise1_mlu.html#the-plot",
+    "title": "Exercise 1 · The growth curve",
+    "section": "The plot",
+    "text": "The plot\nTwelve lines, one picture. Two new ggplot moves, both small: group = child draws one line per child instead of connecting everything into spaghetti, and a second geom_line() with its own data = draws Anne again, on top, in colour:\nggplot(mlu_all, aes(x = age_months, y = mlu, group = child)) +\n  geom_line(colour = \"grey70\") +\n  geom_line(data = mlu_all %&gt;% filter(child == \"Anne\"),\n            colour = \"firebrick\", linewidth = 1.2) +\n  labs(title = \"Anne among the twelve\",\n       x = \"age (months)\", y = \"MLU (words)\") +\n  theme_bw()",
+    "crumbs": [
+      "Home",
+      "Block 2 · The growth curve",
+      "Exercise 1: MLU"
+    ]
+  },
+  {
+    "objectID": "session1-r/03_exercise1_mlu.html#interpret-the-picture",
+    "href": "session1-r/03_exercise1_mlu.html#interpret-the-picture",
+    "title": "Exercise 1 · The growth curve",
+    "section": "Interpret the picture",
+    "text": "Interpret the picture\nWith your partner, discuss the following: How much do twelve normally-developing children differ at the same age? Find the widest vertical spread. How many months of “development” does that gap correspond to along the curve?\n3 · One honest limit. MLU says that the children’s utterances got longer. It cannot say what she is now able to build: whether three words is want some juice or Mummy sock fall. For that you have to look at the utterances themselves. That is exactly where we go next.\nCurve made and argued about? Next: Finding an island.",
+    "crumbs": [
+      "Home",
+      "Block 2 · The growth curve",
+      "Exercise 1: MLU"
+    ]
+  },
+  {
+    "objectID": "session1-r/01_meet_the_data.html",
+    "href": "session1-r/01_meet_the_data.html",
+    "title": "1 · Meet the data",
+    "section": "",
+    "text": "Block 1 · Chapter 1 of 2 before the first exercise. Get the data into R and understand what one row of it means.",
+    "crumbs": [
+      "Home",
+      "Block 1 · Meet the data",
+      "Meet the data"
+    ]
+  },
+  {
+    "objectID": "session1-r/01_meet_the_data.html#twelve-children-learning-to-talk",
+    "href": "session1-r/01_meet_the_data.html#twelve-children-learning-to-talk",
+    "title": "1 · Meet the data",
+    "section": "Twelve children learning to talk",
+    "text": "Twelve children learning to talk\nBetween 1998 and 2001, researchers in Manchester recorded twelve English children at home, playing and talking with their mothers: an hour at a time, twice in every three-week period, from around each child’s second birthday until around their third. The children are known by first names: Anne, Aran, Becky, Carl, Dominic, Gail, Joel, John, Liz, Nicole, Ruth and Warren.\nThis is the Manchester corpus (Theakston, Lieven, Pine & Rowland, 2001). It was collected to test the theory you read this week: that children build grammar verb by verb — and it is publicly available through CHILDES, the international database of child language.\nEverything the children and mothers said was transcribed. We have converted those transcripts into one table, where each row is one utterance: one thing one person said at one moment.\n\n\n\n\n\n\n\ncolumn\nwhat it contains\n\n\n\n\nchild\nwhich child’s recording this is (\"Anne\", \"Becky\", …)\n\n\nage_months\nthe child’s age at that recording, in months\n\n\nspeaker\nwho is talking: \"CHI\" (the child) or \"MOT\" (the mother)\n\n\nutterance\nwhat they said\n\n\nnum_tokens\nhow many words that is\n\n\n\nSo the row Anne · 26 · CHI · \"want some juice\" · 3 means: Anne, aged 2;2, said want some juice: three words.\n\nThe mothers talk a lot in these recordings. Which column would you use to keep only the children’s utterances?\n\nspeaker: filtering for speaker == \"CHI\" keeps the child’s own speech. child tells you whose recording it is; even in Anne’s files, half the rows are her mother.",
+    "crumbs": [
+      "Home",
+      "Block 1 · Meet the data",
+      "Meet the data"
+    ]
+  },
+  {
+    "objectID": "session1-r/01_meet_the_data.html#download-the-data",
+    "href": "session1-r/01_meet_the_data.html#download-the-data",
+    "title": "1 · Meet the data",
+    "section": "Download the data",
+    "text": "Download the data\n ⬇ manchester_utterances.rds\nThis is an .rds file: R’s own format for saving a data frame exactly as it is, types and all. Download it, then upload it into your working folder on UCloud: drag it into the Files pane, or use the Upload button there.",
+    "crumbs": [
+      "Home",
+      "Block 1 · Meet the data",
+      "Meet the data"
+    ]
+  },
+  {
+    "objectID": "session1-r/01_meet_the_data.html#load-it",
+    "href": "session1-r/01_meet_the_data.html#load-it",
+    "title": "1 · Meet the data",
+    "section": "Load it",
+    "text": "Load it\n# Load the tidyverse.\nlibrary(tidyverse)\n\n# Read the data file into a variable called manchester.\nmanchester &lt;- readRDS(\"manchester_utterances.rds\")\nSelect the lines and press Shift+Enter. If R complains that the file does not exist, the file and your session are in different folders. Check the Files pane.\nNow have a first look:\n# glimpse() shows every column, its type, and the first few values.\nglimpse(manchester)\nRows: 597,644\nColumns: 6\n$ child      &lt;chr&gt; \"Anne\", \"Anne\", \"Anne\", \"Anne\", \"Anne\", \"Anne\", \"Anne\", \"Anne\", \"Anne\", \"Anne\", \"Anne\", \"Anne\", \"Anne\", \"Anne\", \"Anne\", \"Anne…\n$ file       &lt;chr&gt; \"011007\", \"011007\", \"011007\", \"011007\", \"011007\", \"011007\", \"011007\", \"011007\", \"011007\", \"011007\", \"011007\", \"011007\", \"0110…\n$ age_months &lt;dbl&gt; 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 2…\n$ speaker    &lt;chr&gt; \"CHI\", \"MOT\", \"CHI\", \"CHI\", \"MOT\", \"MOT\", \"MOT\", \"MOT\", \"MOT\", \"MOT\", \"MOT\", \"MOT\", \"MOT\", \"MOT\", \"MOT\", \"MOT\", \"CHI\", \"MOT\",…\n$ utterance  &lt;chr&gt; \"baby\", \"here's baby\", \"it\", \"it fit\", \"baby willn't fit\", \"is it too big\", \"what about this baby look\", \"wanna put them on t…\n$ num_tokens &lt;int&gt; 1, 2, 1, 2, 3, 4, 5, 7, 6, 3, 4, 3, 3, 3, 3, 3, 3, 1, 3, 1, 3, 2, 2, 2, 2, 6, 3, 2, 1, 6, 7, 5, 1, 2, 4, 2, 1, 2, 2, 8, 9, 3,…\nNote the types: &lt;chr&gt; means text, &lt;int&gt; means whole numbers. speaker and utterance are text; age_months and num_tokens are numbers you can compute with.\n\n\n\n\n\n\n🤔 Think first\n\n\n\nnum_tokens says how many words an utterance has. Someone had to decide what a word is. Does don’t count as one word or two? Does a laugh count? Last Friday you made decisions exactly like this about turns.\n\n\n\n\n\n\nCheck your thinking\n\n\n\n\n\nThere is no neutral answer. Our rule: anything separated by spaces is a word, so don’t is one, and laughs and unintelligible stretches don’t count at all. Different rules would give different numbers in everything you compute today. That isn’t a flaw; it’s what measurement is.",
+    "crumbs": [
+      "Home",
+      "Block 1 · Meet the data",
+      "Meet the data"
+    ]
+  },
+  {
+    "objectID": "session1-r/01_meet_the_data.html#how-much-data-is-there",
+    "href": "session1-r/01_meet_the_data.html#how-much-data-is-there",
+    "title": "1 · Meet the data",
+    "section": "How much data is there?",
+    "text": "How much data is there?\ncount() from Tuesday tells you what each child contributes:\n# Count the number of rows for each child.\nmanchester %&gt;%\n  count(child)\n# A tibble: 12 × 2\n   child       n\n   &lt;chr&gt;   &lt;int&gt;\n 1 Anne    58403\n 2 Aran    53900\n 3 Becky   52512\n 4 Carl    49030\n 5 Dominic 60162\n 6 Gail    46595\n 7 Joel    52378\n 8 John    35178\n 9 Liz     37767\n10 Nicole  51065\n11 Ruth    57962\n12 Warren  42692\nThe totals differ a lot between children. And one thing to know about age_months: because ages are rounded to the month, a busy month can contain two recording sessions bundled together. Raw counts reflect the recording schedule as much as the child. Keep that in mind; it will matter when we start comparing sessions.\nData loaded, glimpse looking right? Next: Reading Anne.",
+    "crumbs": [
+      "Home",
+      "Block 1 · Meet the data",
+      "Meet the data"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "One Child, Word by Word",
+    "section": "",
+    "text": "Friday’s seminar · Bring the laptop you used on Tuesday. Everything runs in RStudio on UCloud — the sidebar on the left is the plan for the two hours.",
+    "crumbs": [
+      "Home",
+      "One Child, Word by Word"
+    ]
+  },
+  {
+    "objectID": "index.html#the-question",
+    "href": "index.html#the-question",
+    "title": "One Child, Word by Word",
+    "section": "The question",
+    "text": "The question\nHow does a child get from single words to grammar?\nThis week’s reading gives you Tomasello’s answer: not all at once. On his account, children don’t acquire “the verb” as a category. Each verb starts out as its own island, with its own private frame learned from use (want + thing; more + thing). Grammar emerges later, as the islands connect. Chomsky’s picture predicts something different: grammatical knowledge is general, not verb-specific. Once a structure like negation is in place, it should work with any verb the child commands, and if her verbs behave differently, that reflects what the recordings happened to catch, not what she knows.\nTwo theories, one testable difference: should a two-year-old’s verbs be uneven or uniform?\nToday you find out, on a real child. You’ll follow Anne from her second birthday toward her third, word by word, through the recordings the Manchester research group made to test exactly this. At the end, you’ll ask the question every finding has to face: does it hold beyond one child?",
+    "crumbs": [
+      "Home",
+      "One Child, Word by Word"
+    ]
+  },
+  {
+    "objectID": "index.html#how-it-works",
+    "href": "index.html#how-it-works",
+    "title": "One Child, Word by Word",
+    "section": "How it works",
+    "text": "How it works\nWork in pairs. The blocks in the sidebar run in order: a short page that shows you something, then an exercise page where you write the code. Wherever you see ____, that’s yours to fill. Every tool required for this exercise you have already have in your repertoire: filter(), mutate(), group_by(), summarise(), count(), the pipe, and ggplot().\nIf you get stuck: predict-checks and hints are built into the pages.\nReady? Start with Block 1 · Meet the data.",
+    "crumbs": [
+      "Home",
+      "One Child, Word by Word"
+    ]
+  },
+  {
+    "objectID": "session1-r/02_meet_anne.html",
+    "href": "session1-r/02_meet_anne.html",
+    "title": "2 · Reading Anne",
+    "section": "",
+    "text": "Block 1 · Chapter 2 of 2 before the first exercise. Meet one child properly and form a prediction the numbers will have to answer to.",
+    "crumbs": [
+      "Home",
+      "Block 1 · Meet the data",
+      "Reading Anne"
+    ]
+  },
+  {
+    "objectID": "session1-r/02_meet_anne.html#one-child",
+    "href": "session1-r/02_meet_anne.html#one-child",
+    "title": "2 · Reading Anne",
+    "section": "One child",
+    "text": "One child\nThe rest of today follows Anne. First step: keep only her rows, and only what she said.\n# Keep Anne's own utterances: her recordings, her speech.\nanne &lt;- manchester %&gt;%\n  filter(child == \"Anne\", speaker == \"CHI\")\nSelect the lines and press Shift+Enter. Nothing prints — the result went into the variable anne. Check what you got:\n# How many utterances, over which ages?\nanne %&gt;%\n  count(age_months)\n&gt; anne %&gt;% count(age_months)\n# A tibble: 12 × 2\n   age_months     n\n        &lt;dbl&gt; &lt;int&gt;\n 1         22  1122\n 2         23  2568\n 3         24  1968\n 4         25  1782\n 5         26  1154\n 6         27  1727\n 7         28  2047\n 8         29  1922\n 9         30  1088\n10         31  3057\n11         32  1024\n12         33  1286\nEvery row of this little table is one recording session: Anne at that age, saying that many things.\n\nSuppose you had typed filter(child == \"Anne\", speaker == \"MOT\") instead. How many of the rows would be Anne herself talking?\n\n0: that filter keeps the mother’s utterances from Anne’s recordings. Both filters matter: child picks the recordings, speaker picks the voice.",
+    "crumbs": [
+      "Home",
+      "Block 1 · Meet the data",
+      "Reading Anne"
+    ]
+  },
+  {
+    "objectID": "session1-r/02_meet_anne.html#read-her-before-you-count-her",
+    "href": "session1-r/02_meet_anne.html#read-her-before-you-count-her",
+    "title": "2 · Reading Anne",
+    "section": "Read her before you count her",
+    "text": "Read her before you count her\nStatistics come later. Start the way you’d start with any new dataset: look at it. Here is Anne at her youngest:\n# Anne's utterances from her very first recording.\nanne %&gt;%\n  filter(age_months == min(age_months)) %&gt;%\n  slice(1:40) %&gt;%\n  pull(utterance)\nTwo of the lines are new. slice(1:25) keeps rows 1 to 25, like indexing in Python, except R counts from 1, not 0. pull(utterance) takes just that one column out of the table, so the console shows you plain text instead of a tibble.\n&gt; anne %&gt;%\n+   filter(age_months == min(age_months)) %&gt;%\n+   slice(1:25) %&gt;%\n+   pull(utterance)\n [1] \"baby\"            \"it\"              \"it fit\"          \"push push push\"  \"Anne\"            \"what's that\"     \"what's that\"    \n [8] \"baby baby Mummy\" \"car\"             \"hair\"            \"what's that\"     \"train\"           \"choo o\"          \"big\"            \n[15] \"tip\"             \"tip\"             \"spider\"          \"spider\"          \"what's that\"     \"piggy\"           \"what's that\"    \n[22] \"a cake\"          \"what's that\"     \"look\"            \"teddy\"\nRead them. This is a real two-year-old, mid-play, mid-lunch. Your turn. Copy the chunk and change one thing so it shows her last recording instead.\n\n\n\n\n\n\n🤔 Think first\n\n\n\nWhich one thing?\n\n\n\n\n\n\nCheck your thinking\n\n\n\n\n\nmin becomes max. Everything else stays: the pipeline logic (i.e., filter to one session, take some rows, pull the text) is unchanged; only which session you’re pointing at differs.",
+    "crumbs": [
+      "Home",
+      "Block 1 · Meet the data",
+      "Reading Anne"
+    ]
+  },
+  {
+    "objectID": "session1-r/02_meet_anne.html#write-it-down",
+    "href": "session1-r/02_meet_anne.html#write-it-down",
+    "title": "2 · Reading Anne",
+    "section": "Write it down",
+    "text": "Write it down\nBefore any numbers: with your partner, write one sentence describing what changed between the two recordings you just read. Be concrete. Length of utterance? New kinds of words? Whole sentences?\nKeep the sentence where you can see it. In Exercise 1 you’ll compute Anne’s growth curve, and the first question will be whether the curve agrees with you.\nSentence written? Next: Exercise 1 — The growth curve.",
+    "crumbs": [
+      "Home",
+      "Block 1 · Meet the data",
+      "Reading Anne"
+    ]
+  },
+  {
+    "objectID": "session1-r/04_islands.html",
+    "href": "session1-r/04_islands.html",
+    "title": "4 · Finding an island",
+    "section": "",
+    "text": "Block 3 · One new function, then this morning’s paper hunt done in code.",
+    "crumbs": [
+      "Home",
+      "Block 3 · Verb islands",
+      "Islands, and how they grow"
+    ]
+  },
+  {
+    "objectID": "session1-r/04_islands.html#from-how-long-to-what",
+    "href": "session1-r/04_islands.html#from-how-long-to-what",
+    "title": "4 · Finding an island",
+    "section": "From how long to what",
+    "text": "From how long to what\nMLU told you Anne’s utterances got longer but nothing about the content of her utterances. Now we’re going to go hunting for Anne’s verb island constructions.",
+    "crumbs": [
+      "Home",
+      "Block 3 · Verb islands",
+      "Islands, and how they grow"
+    ]
+  },
+  {
+    "objectID": "session1-r/04_islands.html#str_detect",
+    "href": "session1-r/04_islands.html#str_detect",
+    "title": "4 · Finding an island",
+    "section": "str_detect()",
+    "text": "str_detect()\nstr_detect(text, pattern) returns TRUE if the text contains the pattern. Wrap the pattern in \\\\b (word boundary) to match whole words only, and use (a|b) to match either of two words:\nstr_detect(\"want some juice\", \"\\\\bwant\\\\b\")     # TRUE\nstr_detect(\"she wanted it\",   \"\\\\bwant\\\\b\")     # FALSE - \"wanted\" is a different word\nstr_detect(\"wanna go\",        \"\\\\b(want|wanna)\\\\b\")  # TRUE - matches either\n\nWhat does str_detect(\"look at the snow\", \"no\") return, without the \\\\b?\n\nTRUE: s-no-w. Without boundaries the pattern matches anywhere, including inside other words. That’s what \\\\b is for.",
+    "crumbs": [
+      "Home",
+      "Block 3 · Verb islands",
+      "Islands, and how they grow"
+    ]
+  },
+  {
+    "objectID": "session1-r/04_islands.html#the-hunt",
+    "href": "session1-r/04_islands.html#the-hunt",
+    "title": "4 · Finding an island",
+    "section": "The hunt",
+    "text": "The hunt\nIt slots straight into filter():\n# Keep Anne's utterances containing \"want\" as a whole word.\nwant &lt;- anne %&gt;%\n  filter(str_detect(utterance, \"\\\\bwant\\\\b\"))\n  \n# Anne's earliest wants (22 months):\nwant %&gt;%\n  filter(age_months == min(age_months)) %&gt;%\n  slice(1:15) %&gt;%\n  pull(utterance)\n [1] \"want juice\"           \"want juice\"           \"want juice\"           \"want these\"           \"want toys\"            \"I want the shoes off\"\n [7] \"want water\"           \"want foot\"            \"want\"                 \"want more\"            \"want cupboard\"        \"want babys again\"    \n[13] \"want prams\"           \"want prams\"           \"want prams\" \n# And her latest wants (33 months):\nwant %&gt;%\n  filter(age_months == max(age_months)) %&gt;%\n  slice(1:15) %&gt;%\n  pull(utterance)\n [1] \"I want black ones\"                \"want the red\"                     \"I think want cheese\"              \"I want my Mummy\"                 \n [5] \"um I don't want tea\"              \"want do another one now\"          \"which which one do you want\"      \"want this one\"                   \n [9] \"I want um\"                        \"we don't want the the dirty ones\" \"I don't want that\"                \"I don't want the rest out\"       \n[13] \"don't want these ones in\"         \"we don't want them these ones\"    \"don't want them\"  \nRead both sets: What has changed by the last month? What does this tell us about the verb islands?",
+    "crumbs": [
+      "Home",
+      "Block 3 · Verb islands",
+      "Islands, and how they grow"
+    ]
+  },
+  {
+    "objectID": "session1-r/04_islands.html#how-does-the-island-develop",
+    "href": "session1-r/04_islands.html#how-does-the-island-develop",
+    "title": "4 · Finding an island",
+    "section": "How does the island develop?",
+    "text": "How does the island develop?\nYou watched Anne’s island grow a subject: want juice at 22 months, I want the shoes off becoming ordinary by 26. One child, one construction, one trajectory. Now the question that decides between the theories: do all twelve islands grow the same way?\nThe two accounts you read make different bets. If a general rule comes online, the curves should look like switches: low, a jump, then high, with children differing only in when the switch flips. If islands are built from each child’s own experience, the curves should creep and wobble, each on its own schedule, some further along at two than others at nearly three.\n# Of each child's wants, per month: what share carry the subject?\niwant_growth &lt;- manchester %&gt;%\n  filter(speaker == \"CHI\") %&gt;%\n  mutate(has_want = str_detect(utterance, \"\\\\b(want|wanna)\\\\b\")) %&gt;%\n  filter(has_want) %&gt;%\n  mutate(with_subject = str_detect(utterance, \"\\\\bI (want|wanna)\\\\b\")) %&gt;%\n  group_by(child, age_months) %&gt;%\n  summarise(subject_share = 100 * mean(with_subject),\n            n_wants = n(),\n            .groups = \"drop\")\n\nggplot(iwant_growth, aes(x = age_months, y = subject_share)) +\n  geom_line(colour = \"grey50\") +\n  geom_point(aes(size = n_wants), alpha = .4) +\n  facet_wrap(~child) +\n  labs(title = \"Twelve islands grow a subject, one child per panel\",\n       x = \"age (months)\", y = \"% of wants with 'I'\",\n       size = \"wants that month\") +\n       theme_bw()\nDiscuss with your neighbour: do the panels look like switches flipping or slopes creeping, and is there one answer for all twelve? Are these plots a problem for the theory, or for the measurement?",
+    "crumbs": [
+      "Home",
+      "Block 3 · Verb islands",
+      "Islands, and how they grow"
+    ]
+  },
+  {
+    "objectID": "session1-r/04_islands.html#make-the-call-on-wanna",
+    "href": "session1-r/04_islands.html#make-the-call-on-wanna",
+    "title": "4 · Finding an island",
+    "section": "Make the Call on Wanna",
+    "text": "Make the Call on Wanna\nOne decision to make: Whether wanna + verb belongs to the same island as want + thing is a theory question wearing a coding costume.\nBefore you count anything: does wanna belong to Anne’s WANT island? Let’s get the data first. Read her wanna utterances:\n# All of Anne's wanna-utterances.\nanne %&gt;%\n  filter(str_detect(utterance, \"____\")) %&gt;%\n  pull(utterance)\n[1] \"I wanna know in that pot\"                  \"wanna sleeping with Mummy\"                 \"wanna lie down\"                           \n  [4] \"they wanna go on here\"                     \"I wanna play\"                              \"I wanna play\"                             \n  [7] \"I wanna play my sand\"                      \"I wanna go in the kitchen\"                 \"wanna come with you and your mummie\"      \n [10] \"I wanna see\"                               \"I wanna wanna have tea\"                    \"wanna sit there\"                          \n [13] \"wanna play games\"                          \"wanna play\"                                \"I wanna see\"                              \n [16] \"I wanna go in there\"                       \"don't wanna\"                               \"don't wanna\"                              \n [19] \"don't wanna\"                               \"wanna go in here\"                          \"me wanna do it\"                           \n [22] \"wanna put a video on\"                      \"wanna push it on\"                          \"wanna go nursery\" \n ...\n\n\n\n\n\n\n🤔 Think first\n\n\n\nWhat would Tomasello say?\n\n\n\n\n\n\nCheck your thinking\n\n\n\n\n\nHe’d note they have different frames: want + thing, wanna + verb, and on his account, different frames are different constructions, possibly not yet connected in Anne’s head. So excluding is defensible. But so is including, if your question is “how often does Anne express wanting?” What you count depends on what you’re asking.\n\n\n\n\n\nNext: Exercise 2 — Does the island grow?.",
+    "crumbs": [
+      "Home",
+      "Block 3 · Verb islands",
+      "Islands, and how they grow"
+    ]
+  }
+]

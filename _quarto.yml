@@ -1,0 +1,55 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - "*.qmd"
+    - "session1-r/"
+
+website:
+  title: "R Data Workshop - Aarhus University, Fall 2026"
+  description: "Analysing child language corpora with R and the tidyverse for Cognition & Communication."
+  navbar:
+    background: "#14213D"
+    search: true
+    left:
+      - href: index.qmd
+        text: "Home"
+  sidebar:
+    style: "docked"
+    collapse-level: 2
+    contents:
+      - href: index.qmd
+        text: "One Child, Word by Word"
+      - section: "Block 1 · Meet the data"
+        contents:
+          - href: session1-r/01_meet_the_data.qmd
+            text: "Meet the data"
+          - href: session1-r/02_meet_anne.qmd
+            text: "Reading Anne"
+      - section: "Block 2 · The growth curve"
+        contents:
+          - href: session1-r/03_exercise1_mlu.qmd
+            text: "Exercise 1: MLU"
+      - section: "Block 3 · Verb islands"
+        contents:
+          - href: session1-r/04_islands.qmd
+            text: "Islands, and how they grow"
+      - section: "Open questions"
+        contents:
+          - href: session1-r/05_open_questions.qmd
+            text: "Open questions"
+  page-navigation: true
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: darkly
+    css: styles.css
+    include-after-body: assets/predict-check.html
+    toc: true
+    toc-depth: 3
+    number-sections: false
+    code-copy: true
+    code-annotations: hover
+    highlight-style: github
