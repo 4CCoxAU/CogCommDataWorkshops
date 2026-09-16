@@ -4,22 +4,30 @@ subtitle: "Cognition & Communication · Data Analysis Workshop"
 ---
 
 ::: {.milestone}
-**Friday's seminar** · Bring the laptop you used on Tuesday. Everything runs in RStudio on UCloud — the sidebar on the left is the plan for the two hours.
+**Friday's seminar** · Everything runs in RStudio on UCloud. Use your Methods01 procedure for setting up the running of the code.
 :::
 
 ## The question
 
 How does a child get from single words to grammar?
 
-This week's reading gives you Tomasello's answer: not all at once. On his account, children don't acquire "the verb" as a category. Each verb starts out as its own **island**, with its own private frame learned from use (*want* + thing; *more* + thing). Grammar emerges later, as the islands connect. Chomsky's picture predicts something different: grammatical knowledge is general, not verb-specific. Once a structure like negation is in place, it should work with *any* verb the child commands, and if her verbs behave differently, that reflects what the recordings happened to catch, not what she knows.
+This week's reading gives you Tomasello's answer: not all at once, and not as a system. Each verb starts out as its own island, its own little construction, with its own frame learned from use (want + thing; more + thing). Grammar, on this account, is what emerges as the islands grow and connect. It's a radical claim, because the traditional picture (i.e., Chomsky's) says grammatical knowledge is general from the start, not built verb by verb.
 
-Two theories, one testable difference: **should a two-year-old's verbs be uneven or uniform?**
+Radical claims need evidence, and this one makes a checkable prediction: a two-year-old's verbs should be uneven: some flexible, some frozen, each on its own schedule. Today you check it, on the corpus that was collected to check it: you'll follow Anne from her second birthday toward her third, watch one island grow, and then ask whether what you found holds across eleven more children.
 
-Today you find out, on a real child. You'll follow **Anne** from her second birthday toward her third, word by word, through the recordings the Manchester research group made to test exactly this. At the end, you'll ask the question every finding has to face: does it hold beyond one child?
+## Learning Outcomes
+
+By the end of this seminar, you will be able to:
+
+- Load a real corpus into R and say precisely what one row of it means
+- Compute and plot a developmental measure (MLU) and read its dips without over-reading them
+- Hunt a construction through twelve months of child speech with str_detect(), and defend what you chose to count
+- Compare development across twelve children, and say what one child's data can and cannot show
+- Tell the difference between a noisy point and a finding, using the n it rests on
 
 ## How it works
 
-Work in pairs. The blocks in the sidebar run in order: a short page that shows you something, then an exercise page where **you write the code**. Wherever you see `____`, that's yours to fill. Every tool required for this exercise you have already have in your repertoire: `filter()`, `mutate()`, `group_by()`, `summarise()`, `count()`, the pipe, and `ggplot()`. 
+Work with your neighbour. Similar to the Python workshop, there will be a short page that shows you something, then an exercise page where **you write the code**. Wherever you see `____`, that's yours to fill in your own R environment. Every tool required for this exercise you have already have in your repertoire: `filter()`, `mutate()`, `group_by()`, `summarise()`, `count()`, the pipe, and `ggplot()`. 
 
 If you get stuck: predict-checks and hints are built into the pages.
 

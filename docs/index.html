@@ -308,7 +308,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./session1-r/02_meet_anne.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Reading Anne</span></a>
+ <span class="menu-text">One child: Anne</span></a>
   </div>
 </li>
       </ul>
@@ -375,6 +375,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#the-question" id="toc-the-question" class="nav-link active" data-scroll-target="#the-question">The question</a></li>
+  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes">Learning Outcomes</a></li>
   <li><a href="#how-it-works" id="toc-how-it-works" class="nav-link" data-scroll-target="#how-it-works">How it works</a></li>
   </ul>
 </nav>
@@ -404,18 +405,28 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="milestone">
-<p><strong>Friday’s seminar</strong> · Bring the laptop you used on Tuesday. Everything runs in RStudio on UCloud — the sidebar on the left is the plan for the two hours.</p>
+<p><strong>Friday’s seminar</strong> · Everything runs in RStudio on UCloud. Use your Methods01 procedure for setting up the running of the code.</p>
 </div>
 <section id="the-question" class="level2">
 <h2 class="anchored" data-anchor-id="the-question">The question</h2>
 <p>How does a child get from single words to grammar?</p>
-<p>This week’s reading gives you Tomasello’s answer: not all at once. On his account, children don’t acquire “the verb” as a category. Each verb starts out as its own <strong>island</strong>, with its own private frame learned from use (<em>want</em> + thing; <em>more</em> + thing). Grammar emerges later, as the islands connect. Chomsky’s picture predicts something different: grammatical knowledge is general, not verb-specific. Once a structure like negation is in place, it should work with <em>any</em> verb the child commands, and if her verbs behave differently, that reflects what the recordings happened to catch, not what she knows.</p>
-<p>Two theories, one testable difference: <strong>should a two-year-old’s verbs be uneven or uniform?</strong></p>
-<p>Today you find out, on a real child. You’ll follow <strong>Anne</strong> from her second birthday toward her third, word by word, through the recordings the Manchester research group made to test exactly this. At the end, you’ll ask the question every finding has to face: does it hold beyond one child?</p>
+<p>This week’s reading gives you Tomasello’s answer: not all at once, and not as a system. Each verb starts out as its own island, its own little construction, with its own frame learned from use (want + thing; more + thing). Grammar, on this account, is what emerges as the islands grow and connect. It’s a radical claim, because the traditional picture (i.e., Chomsky’s) says grammatical knowledge is general from the start, not built verb by verb.</p>
+<p>Radical claims need evidence, and this one makes a checkable prediction: a two-year-old’s verbs should be uneven: some flexible, some frozen, each on its own schedule. Today you check it, on the corpus that was collected to check it: you’ll follow Anne from her second birthday toward her third, watch one island grow, and then ask whether what you found holds across eleven more children.</p>
+</section>
+<section id="learning-outcomes" class="level2">
+<h2 class="anchored" data-anchor-id="learning-outcomes">Learning Outcomes</h2>
+<p>By the end of this seminar, you will be able to:</p>
+<ul>
+<li>Load a real corpus into R and say precisely what one row of it means</li>
+<li>Compute and plot a developmental measure (MLU) and read its dips without over-reading them</li>
+<li>Hunt a construction through twelve months of child speech with str_detect(), and defend what you chose to count</li>
+<li>Compare development across twelve children, and say what one child’s data can and cannot show</li>
+<li>Tell the difference between a noisy point and a finding, using the n it rests on</li>
+</ul>
 </section>
 <section id="how-it-works" class="level2">
 <h2 class="anchored" data-anchor-id="how-it-works">How it works</h2>
-<p>Work in pairs. The blocks in the sidebar run in order: a short page that shows you something, then an exercise page where <strong>you write the code</strong>. Wherever you see <code>____</code>, that’s yours to fill. Every tool required for this exercise you have already have in your repertoire: <code>filter()</code>, <code>mutate()</code>, <code>group_by()</code>, <code>summarise()</code>, <code>count()</code>, the pipe, and <code>ggplot()</code>.</p>
+<p>Work with your neighbour. Similar to the Python workshop, there will be a short page that shows you something, then an exercise page where <strong>you write the code</strong>. Wherever you see <code>____</code>, that’s yours to fill in your own R environment. Every tool required for this exercise you have already have in your repertoire: <code>filter()</code>, <code>mutate()</code>, <code>group_by()</code>, <code>summarise()</code>, <code>count()</code>, the pipe, and <code>ggplot()</code>.</p>
 <p>If you get stuck: predict-checks and hints are built into the pages.</p>
 <p>Ready? Start with <a href="./session1-r/01_meet_the_data.html">Block 1 · Meet the data</a>.</p>
 

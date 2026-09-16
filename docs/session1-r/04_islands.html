@@ -344,7 +344,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../session1-r/02_meet_anne.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Reading Anne</span></a>
+ <span class="menu-text">One child: Anne</span></a>
   </div>
 </li>
       </ul>
@@ -410,11 +410,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#from-how-long-to-what" id="toc-from-how-long-to-what" class="nav-link active" data-scroll-target="#from-how-long-to-what">From how long to what</a></li>
+  <li><a href="#from-how-long-to-whats-inside" id="toc-from-how-long-to-whats-inside" class="nav-link active" data-scroll-target="#from-how-long-to-whats-inside">From how long to what’s inside</a></li>
   <li><a href="#str_detect" id="toc-str_detect" class="nav-link" data-scroll-target="#str_detect"><code>str_detect()</code></a></li>
   <li><a href="#the-hunt" id="toc-the-hunt" class="nav-link" data-scroll-target="#the-hunt">The hunt</a></li>
   <li><a href="#how-does-the-island-develop" id="toc-how-does-the-island-develop" class="nav-link" data-scroll-target="#how-does-the-island-develop">How does the island develop?</a></li>
-  <li><a href="#make-the-call-on-wanna" id="toc-make-the-call-on-wanna" class="nav-link" data-scroll-target="#make-the-call-on-wanna">Make the Call on Wanna</a></li>
+  <li><a href="#and-the-other-eleven" id="toc-and-the-other-eleven" class="nav-link" data-scroll-target="#and-the-other-eleven">And the other eleven?</a></li>
+  <li><a href="#make-the-call-on-wanna" id="toc-make-the-call-on-wanna" class="nav-link" data-scroll-target="#make-the-call-on-wanna">Make the call on “Wanna”</a></li>
   </ul>
 </nav>
     </div>
@@ -442,11 +443,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="milestone">
-<p><strong>Block 3</strong> · One new function, then this morning’s paper hunt done in code.</p>
+<p>Block 3 · From how long the utterance is to what’s inside. We will have a look at how Anne’s WANT island develops through twelve months of speech.</p>
 </div>
-<section id="from-how-long-to-what" class="level2">
-<h2 class="anchored" data-anchor-id="from-how-long-to-what">From how long to what</h2>
-<p>MLU told you Anne’s utterances got longer but nothing about the content of her utterances. Now we’re going to go hunting for Anne’s verb island constructions.</p>
+<section id="from-how-long-to-whats-inside" class="level2">
+<h2 class="anchored" data-anchor-id="from-how-long-to-whats-inside">From how long to what’s inside</h2>
+<p>MLU told you Anne’s utterances got longer but nothing about the content of her utterances. Time to look inside, and the reading tells you what to look for. On Tomasello’s account, a two-year-old doesn’t have “verbs” as a category: each verb is its own little <strong>island</strong>: a fixed part plus a slot, learned as a unit from use. <em>Want</em> + thing. <em>More</em> + thing.If that’s right, Anne’s speech should contain a <strong>pattern</strong>: the same frame, over and over, with different things dropped into the slot.</p>
+<p>That’s a checkable claim, and checking it means collecting every “<em>want</em>” Anne ever produced and laying them side by side. For that, we need a new function.</p>
 </section>
 <section id="str_detect" class="level2">
 <h2 class="anchored" data-anchor-id="str_detect"><code>str_detect()</code></h2>
@@ -454,7 +456,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(<span class="st">"want some juice"</span>, <span class="st">"</span><span class="sc">\\</span><span class="st">bwant</span><span class="sc">\\</span><span class="st">b"</span>)     <span class="co"># TRUE</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(<span class="st">"she wanted it"</span>,   <span class="st">"</span><span class="sc">\\</span><span class="st">bwant</span><span class="sc">\\</span><span class="st">b"</span>)     <span class="co"># FALSE - "wanted" is a different word</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(<span class="st">"wanna go"</span>,        <span class="st">"</span><span class="sc">\\</span><span class="st">b(want|wanna)</span><span class="sc">\\</span><span class="st">b"</span>)  <span class="co"># TRUE - matches either</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="predict-check" data-answer="TRUE" data-accept="true">
+<div class="predict-check" data-answer="TRUE" data-accept="true||True||1||T">
 <p>What does <code>str_detect("look at the snow", "no")</code> return, without the <code>\\b</code>?</p>
 <div class="pc-explanation">
 <p><code>TRUE</code>: s-<strong>no</strong>-w. Without boundaries the pattern matches anywhere, including inside other words. That’s what <code>\\b</code> is for.</p>
@@ -463,7 +465,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="the-hunt" class="level2">
 <h2 class="anchored" data-anchor-id="the-hunt">The hunt</h2>
-<p>It slots straight into <code>filter()</code>:</p>
+<p>The str_detect() function slots straight into <code>filter()</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep Anne's utterances containing "want" as a whole word.</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>want <span class="ot">&lt;-</span> anne <span class="sc">%&gt;%</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(utterance, <span class="st">"</span><span class="sc">\\</span><span class="st">bwant</span><span class="sc">\\</span><span class="st">b"</span>))</span>
@@ -485,41 +487,88 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  [5] "um I don't want tea"              "want do another one now"          "which which one do you want"      "want this one"                   
  [9] "I want um"                        "we don't want the the dirty ones" "I don't want that"                "I don't want the rest out"       
 [13] "don't want these ones in"         "we don't want them these ones"    "don't want them"  </code></pre>
-<p>Read both sets: What has changed by the last month? What does this tell us about the verb islands?</p>
+<p>Read the two sets side by side — early Anne runs one bare frame into the ground; late Anne is doing several new things at once. With your neighbour, find <strong>three concrete differences</strong> between the sets.</p>
+<div class="predict callout callout-style-default callout-note no-icon callout-titled" title="🤔 Think first">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+🤔 Think first
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Got your three?</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Check your thinking">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check your thinking
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The big ones: a <strong>subject</strong> has appeared in front of the verb (<em>I want</em>, <em>we don’t want</em>). At 22 months only one utterance out of these fifteen has it; by 33 it’s everywhere. <strong>Negation</strong> has arrived (<em>don’t want</em>), which barely exists early. And the <strong>slot has grown</strong>: from single nouns (<em>juice</em>, <em>prams</em>) to phrases (<em>the red</em>, <em>the dirty ones</em>) and even verbs (<em>want do another one</em>). One frame at 22 months; a small grammar around the verb by 33. You may also have caught <em>I think want cheese</em> and <em>which one do you want</em>: the island getting embedded in bigger structures.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="how-does-the-island-develop" class="level2">
 <h2 class="anchored" data-anchor-id="how-does-the-island-develop">How does the island develop?</h2>
-<p>You watched Anne’s island grow a subject: <em>want juice</em> at 22 months, <em>I want the shoes off</em> becoming ordinary by 26. One child, one construction, one trajectory. Now the question that decides between the theories: <strong>do all twelve islands grow the same way?</strong></p>
-<p>The two accounts you read make different bets. If a general rule comes online, the curves should look like <em>switches</em>: low, a jump, then high, with children differing only in when the switch flips. If islands are built from each child’s own experience, the curves should <em>creep and wobble</em>, each on its own schedule, some further along at two than others at nearly three.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Of each child's wants, per month: what share carry the subject?</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>iwant_growth <span class="ot">&lt;-</span> manchester <span class="sc">%&gt;%</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(speaker <span class="sc">==</span> <span class="st">"CHI"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">has_want =</span> <span class="fu">str_detect</span>(utterance, <span class="st">"</span><span class="sc">\\</span><span class="st">b(want|wanna)</span><span class="sc">\\</span><span class="st">b"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(has_want) <span class="sc">%&gt;%</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">with_subject =</span> <span class="fu">str_detect</span>(utterance, <span class="st">"</span><span class="sc">\\</span><span class="st">bI (want|wanna)</span><span class="sc">\\</span><span class="st">b"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(child, age_months) <span class="sc">%&gt;%</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">subject_share =</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">mean</span>(with_subject),</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_wants =</span> <span class="fu">n</span>(),</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iwant_growth, <span class="fu">aes</span>(<span class="at">x =</span> age_months, <span class="at">y =</span> subject_share)) <span class="sc">+</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">"grey50"</span>) <span class="sc">+</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> n_wants), <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>child) <span class="sc">+</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Twelve islands grow a subject, one child per panel"</span>,</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"age (months)"</span>, <span class="at">y =</span> <span class="st">"% of wants with 'I'"</span>,</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="st">"wants that month"</span>) <span class="sc">+</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Discuss with your neighbour: do the panels look like switches flipping or slopes creeping, and is there one answer for all twelve? Are these plots a problem for the theory, or for the measurement?</p>
+<p>You just found the differences by reading fifteen utterances at each end. But two snapshots can’t show <em>how</em> the change happened: was it gradual, or sudden? For that you need every month in between, and a way to turn one of your observations into a number.</p>
+<p>Take the first one: the <strong>subject</strong>. It’s ideal to count: an utterance either has <em>I</em> before its <em>want</em> or it doesn’t. For each month, we can ask: <em>of Anne’s wants, what share carry the subject?</em></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Of Anne's wants, per month: what share carry the subject?</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>iwant_anne <span class="ot">&lt;-</span> want <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">with_subject =</span> <span class="fu">str_detect</span>(utterance, <span class="st">"</span><span class="sc">\\</span><span class="st">bI want</span><span class="sc">\\</span><span class="st">b"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(age_months) <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">subject_share =</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">mean</span>(with_subject),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_wants =</span> <span class="fu">n</span>())</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iwant_anne, <span class="fu">aes</span>(<span class="at">x =</span> age_months, <span class="at">y =</span> subject_share)) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">"grey50"</span>) <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> n_wants), <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Anne's WANT island grows a subject"</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"age (months)"</span>, <span class="at">y =</span> <span class="st">"% of wants with 'I'"</span>,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="st">"wants that month"</span>) <span class="sc">+</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Look at the shape and at the dots: they’re sized by how many wants Anne produced that month, because a share computed from twenty utterances deserves less trust than one computed from two hundred. Do you see any convincing patterns in the data?</p>
+</section>
+<section id="and-the-other-eleven" class="level2">
+<h2 class="anchored" data-anchor-id="and-the-other-eleven">And the other eleven?</h2>
+<p>One child, one trajectory. But the reading makes a bet about <em>all</em> children. One plot would allow more insight: same pipeline, started from the full table, one panel per child:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Of each child's wants, per month: what share carry the subject?</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>iwant_growth <span class="ot">&lt;-</span> manchester <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(speaker <span class="sc">==</span> <span class="st">"CHI"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">has_want =</span> <span class="fu">str_detect</span>(utterance, <span class="st">"</span><span class="sc">\\</span><span class="st">b(want)</span><span class="sc">\\</span><span class="st">b"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(has_want) <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">with_subject =</span> <span class="fu">str_detect</span>(utterance, <span class="st">"</span><span class="sc">\\</span><span class="st">bI (want)</span><span class="sc">\\</span><span class="st">b"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(child, age_months) <span class="sc">%&gt;%</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">subject_share =</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">mean</span>(with_subject),</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_wants =</span> <span class="fu">n</span>(),</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iwant_growth, <span class="fu">aes</span>(<span class="at">x =</span> age_months, <span class="at">y =</span> subject_share)) <span class="sc">+</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">"grey50"</span>) <span class="sc">+</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> n_wants), <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>child) <span class="sc">+</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Twelve islands grow a subject, one child per panel"</span>,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"age (months)"</span>, <span class="at">y =</span> <span class="st">"% of wants with 'I'"</span>,</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="st">"wants that month"</span>) <span class="sc">+</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Discuss with your neighbour.</strong> First describe what you see: are there any clear patterns? Is there one answer for all twelve, or one per panel? Then take Becky: 79% one month, 15% a few months later, back up to 70%. Did her grammar <em>un-develop</em>? If not, what is that sawing, and is it a problem for the theory or for the measurement?</p>
 </section>
 <section id="make-the-call-on-wanna" class="level2">
-<h2 class="anchored" data-anchor-id="make-the-call-on-wanna">Make the Call on Wanna</h2>
-<p>One decision to make: Whether <em>wanna + verb</em> belongs to the same island as <em>want + thing</em> is a theory question wearing a coding costume.</p>
-<p>Before you count anything: does <em>wanna</em> belong to Anne’s WANT island? Let’s get the data first. Read her <em>wanna</em> utterances:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># All of Anne's wanna-utterances.</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>anne <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(utterance, <span class="st">"____"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(utterance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<h2 class="anchored" data-anchor-id="make-the-call-on-wanna">Make the call on “Wanna”</h2>
+<p>Are these plots a problem for the theory or for the measurement? Let’s inspect our assumptions about measurement. Every count on this page used the pattern <code>\\bwant\\b</code>, but Anne also says <em>wanna</em>. Is <em>wanna + verb</em> part of the same island as <em>want + thing</em>, or a different construction? That’s a theoretical question! Let’s get some more data and read her <em>wanna</em> utterances:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># All of Anne's wanna-utterances.</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>anne <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(utterance, <span class="st">"____"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(utterance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre class="repl"><code>[1] "I wanna know in that pot"                  "wanna sleeping with Mummy"                 "wanna lie down"                           
   [4] "they wanna go on here"                     "I wanna play"                              "I wanna play"                             
   [7] "I wanna play my sand"                      "I wanna go in the kitchen"                 "wanna come with you and your mummie"      
@@ -541,7 +590,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout-body-container callout-body">
 <p>What would Tomasello say?</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Check your thinking">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -550,7 +599,7 @@ Check your thinking
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>He’d note they have different frames: <em>want</em> + thing, <em>wanna</em> + verb, and on his account, different frames are different constructions, possibly not yet connected in Anne’s head. So excluding is defensible. But so is including, if your question is “how often does Anne express wanting?” What you count depends on what you’re asking.</p>
 </div>
@@ -558,6 +607,8 @@ Check your thinking
 </div>
 </div>
 </div>
+<p><strong>Your turn.</strong> Take the twelve-panel chunk above and add <em>wanna</em> to both patterns: the <code>filter()</code> and the <code>with_subject</code> line. Rerun. Does the inclusive ruling change our main results?</p>
+<p>Done, or are you still curious? How do other verbs develop over time? You can have a look here:</p>
 <p>Next: <a href="05_exercise2_island.qmd">Exercise 2 — Does the island grow?</a>.</p>
 
 

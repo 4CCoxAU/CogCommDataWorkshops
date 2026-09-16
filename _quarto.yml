@@ -25,7 +25,7 @@ website:
           - href: session1-r/01_meet_the_data.qmd
             text: "Meet the data"
           - href: session1-r/02_meet_anne.qmd
-            text: "Reading Anne"
+            text: "One child: Anne"
       - section: "Block 2 · The growth curve"
         contents:
           - href: session1-r/03_exercise1_mlu.qmd

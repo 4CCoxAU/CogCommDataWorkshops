@@ -1,22 +1,22 @@
 ---
-title: "Exercise 1 · The growth curve"
+title: "Exercise 1 · Mean Length of Utterance"
 ---
 
 ::: milestone
-**Block 2** · First exercise. Compute Anne's mean length of utterance, plot it, and test it against your sentence.
+**Block 2** · Compute Anne's mean length of utterance, plot it, and test it against your observations from the raw data.
 :::
 
 :::::: exercise-banner
 ::: ex-kicker
-Exercise 1
+Hands-on Exercises
 :::
 
 ::: ex-title
-Anne's growth curve
+We'll calculate field's classic yardstick on a real child: Anne's growth in mean length of utterance
 :::
 
 ::: ex-sub
-The field's classic yardstick, computed by you, on a real child. Wherever you see \_\_\_\_, you write the code.
+Until now you ran our pipelines. This one has holes. Wherever you see ____, you write the correct code.
 :::
 ::::::
 
@@ -58,17 +58,27 @@ mlu_anne
 ```
 
 ::: {.callout-tip collapse="true" title="Hint"}
-Which column defines a month of recording? Which column holds the utterance lengths? Both are in the table on the data page.
+Which column defines a month of recording? Which column holds the utterance lengths? Both are shown in the table on the data page.
 :::
 
 ## Task 2: Plot it
 
-:::: {.predict-check data-answer="upward" data-accept="up||it goes up||increases||increasing||rising||climbs||higher"}
-Before you plot: between 22 and 33 months, which direction should the curve go overall?
+Before plotting, one prediction. Bring back Anne's utterances from her oldest age (you built this on the last page):
 
-::: pc-explanation
-Upward: children's utterances get longer as they grow. The interesting questions are *how fast*, *how smoothly*, and whether Anne matches the other eleven. That is what the plot is for.
-:::
+``` r
+# Anne's utterances at her oldest:eyeball their lengths.
+anne %>%
+  filter(age_months == max(age_months)) %>%
+  slice(1:25) %>%
+  pull(utterance)
+```
+
+:::: {.predict-check data-answer="between 2.5 and 3", accepts 2.5||2.6||2.7||2.8||3||about 3||around 2.5||2.5-3||roughly 3}
+Look at those 25 utterances: some long, plenty short. If you averaged their lengths, roughly where would it land? That's your prediction for where the curve *ends* at 33 months.
+
+::: {.pc-explanation}
+Just under 3. If you guessed higher, look again at how many one- and two-word turns sit between the long ones: *yeah*, *no*, *there*. The mean drags every short reply along with the impressively long sentences. The plot shows how she gets there from ~1.5: how fast, and how smoothly.
+::::
 ::::
 
 ``` r
@@ -87,25 +97,25 @@ Run it. You should see a line with one point per month, starting near where you 
 
 With your partner:
 
-**1 · The verdict on your sentence.** On the last page you wrote one sentence about what changed between Anne's first and last recordings. Does the curve agree with you? And is there anything you noticed by *reading* her that a per-month average could never show?
+**1 · The verdict on your sentence.** On the last page you wrote one sentence about what changed between Anne's first and last recordings. Does the curve agree with you? And is there anything you noticed by looking at her data that a per-month average could never show?
 
-**2 · Find a dip.** Somewhere the curve drops from one month to the next. Is Anne's language deteriorating?
+**2 · Find a dip.** Somewhere the curve drops from one month to the next. Is Anne's language deteriorating here?
 
 :::: {.callout-note .predict icon="false" title="🤔 Think first"}
 Before you answer. Look at `n_utts` across the months. Some months have roughly double the utterances of others. Why?
 
 ::: {.callout-tip collapse="true" title="Check your thinking"}
-Anne was recorded about twice every three weeks, but our ages are rounded to the month, so some months contain *two* recording sessions bundled together, and some just one. A mean over 1,000 utterances is steadier than a mean over 500; and a single session catches a single day's mood, sleep, and lunch. Months bounce; development trends.
+Anne was recorded about twice every three weeks, but our ages are rounded to the month, so some months contain *two* recording sessions bundled together, and some just one. A mean over 1,000 utterances is steadier than a mean over 500; and a single session catches a single day's mood, sleep, and lunch. We'll see later on how we can represent this in a plot.
 :::
 ::::
 
-In Exercise 1 you computed MLU per month *for Anne*. The same pipeline computes it for all twelve children at once — the only change is where you start, and what you group by:
+In Task 1, you computed MLU per month *for Anne*. The same pipeline computes it for all twelve children at once: the only change is where you start, and what you group by:
 
 ``` r
 # MLU per month, for every child: start from the FULL table this time.
-mlu_all <- manchester %>%                       # not anne - which table has everyone?
+mlu_all <- ____ %>%                       # not anne - which table has everyone?
   filter(speaker == "CHI") %>%
-  group_by(child, age_months) %>%               # group by child AND month
+  group_by(child, ____) %>%               # group by child AND month
   summarise(mlu = mean(num_tokens),
             .groups = "drop")
 
@@ -114,24 +124,25 @@ mlu_all
 
 Grouping by two columns gives one row per child per month. Twelve growth curves in one table. (`.groups = "drop"` just tells R to hand back a plain table afterwards; without it you get a harmless warning.)
 
-## The plot
+## Task 4: All twelve children at once
 
 Twelve lines, one picture. Two new ggplot moves, both small: `group = child` draws one line per child instead of connecting everything into spaghetti, and a second `geom_line()` with its own `data =` draws Anne again, on top, in colour:
 
 ``` r
 ggplot(mlu_all, aes(x = age_months, y = mlu, group = child)) +
   geom_line(colour = "grey70") +
-  geom_line(data = mlu_all %>% filter(child == "Anne"),
-            colour = "firebrick", linewidth = 1.2) +
+  geom_line(data = mlu_all %>% filter(child == "Anne"), colour = "firebrick", linewidth = 1.2) +
   labs(title = "Anne among the twelve",
        x = "age (months)", y = "MLU (words)") +
   theme_bw()
 ```
 
-## Interpret the picture
+### Interpret the plot
 
-With your partner, discuss the following: How much do twelve normally-developing children differ at the *same* age? Find the widest vertical spread. How many months of "development" does that gap correspond to along the curve?
+With your partner, discuss the following: How much do twelve normally-developing children differ at the *same* age? Find the widest vertical spread. How many months of development does that gap correspond to along the curve?
 
-**3 · One honest limit.** MLU says that the children's utterances got longer. It cannot say *what* she is now able to build: whether three words is *want some juice* or *Mummy sock fall*. For that you have to look at the utterances themselves. That is exactly where we go next.
+::: {.callout-note title="One honest limit"}
+MLU says Anne's and the other children's utterances got longer, but it says nothing about what's *in* them. *Want some juice* and *Mummy sock fall* both score three words, but they are very different achievements. Same number, different grammar. Next block, we look inside the utterances themselves.
+:::
 
 Curve made and argued about? Next: [Finding an island](04_islands.qmd).

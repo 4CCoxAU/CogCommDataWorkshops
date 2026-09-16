@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2 · Reading Anne – R Data Workshop - Aarhus University, Fall 2026</title>
+<title>2 · Meet one child properly – R Data Workshop - Aarhus University, Fall 2026</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -308,7 +308,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../session1-r/01_meet_the_data.html">Block 1 · Meet the data</a></li><li class="breadcrumb-item"><a href="../session1-r/02_meet_anne.html">Reading Anne</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../session1-r/01_meet_the_data.html">Block 1 · Meet the data</a></li><li class="breadcrumb-item"><a href="../session1-r/02_meet_anne.html">One child: Anne</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -344,7 +344,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../session1-r/02_meet_anne.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Reading Anne</span></a>
+ <span class="menu-text">One child: Anne</span></a>
   </div>
 </li>
       </ul>
@@ -410,8 +410,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#one-child" id="toc-one-child" class="nav-link active" data-scroll-target="#one-child">One child</a></li>
-  <li><a href="#read-her-before-you-count-her" id="toc-read-her-before-you-count-her" class="nav-link" data-scroll-target="#read-her-before-you-count-her">Read her before you count her</a></li>
+  <li><a href="#one-child-anne" id="toc-one-child-anne" class="nav-link active" data-scroll-target="#one-child-anne">One child: Anne</a></li>
+  <li><a href="#lets-have-a-look-at-the-raw-data" id="toc-lets-have-a-look-at-the-raw-data" class="nav-link" data-scroll-target="#lets-have-a-look-at-the-raw-data">Let’s have a look at the raw data!</a></li>
   <li><a href="#write-it-down" id="toc-write-it-down" class="nav-link" data-scroll-target="#write-it-down">Write it down</a></li>
   </ul>
 </nav>
@@ -420,9 +420,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../session1-r/01_meet_the_data.html">Block 1 · Meet the data</a></li><li class="breadcrumb-item"><a href="../session1-r/02_meet_anne.html">Reading Anne</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../session1-r/01_meet_the_data.html">Block 1 · Meet the data</a></li><li class="breadcrumb-item"><a href="../session1-r/02_meet_anne.html">One child: Anne</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">2 · Reading Anne</h1>
+<h1 class="title">2 · Meet one child properly</h1>
 </div>
 
 
@@ -440,18 +440,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="milestone">
-<p><strong>Block 1</strong> · Chapter 2 of 2 before the first exercise. Meet one child properly and form a prediction the numbers will have to answer to.</p>
+<p><strong>Block 1</strong> · Narrow the dataset to one child, look at the raw utterances, and form a prediction the numbers will have to answer to.</p>
 </div>
-<section id="one-child" class="level2">
-<h2 class="anchored" data-anchor-id="one-child">One child</h2>
-<p>The rest of today follows <strong>Anne</strong>. First step: keep only her rows, and only what <em>she</em> said.</p>
+<section id="one-child-anne" class="level2">
+<h2 class="anchored" data-anchor-id="one-child-anne">One child: Anne</h2>
+<p>We’ll first follow <strong>Anne</strong>. First step: keep only her rows, and only what <em>she</em> said.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep Anne's own utterances: her recordings, her speech.</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>anne <span class="ot">&lt;-</span> manchester <span class="sc">%&gt;%</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(child <span class="sc">==</span> <span class="st">"Anne"</span>, speaker <span class="sc">==</span> <span class="st">"CHI"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Select the lines and press <em>Shift+Enter</em>. Nothing prints — the result went into the variable <code>anne</code>. Check what you got:</p>
+<p>Select the lines and press <em>Shift+Enter</em>. Nothing prints. The result went into the variable <code>anne</code>. Check what you got:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How many utterances, over which ages?</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>anne <span class="sc">%&gt;%</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(age_months)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre class="repl"><code>&gt; anne %&gt;% count(age_months)
 # A tibble: 12 × 2
    age_months     n
@@ -468,32 +468,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 10         31  3057
 11         32  1024
 12         33  1286</code></pre>
-<p>Every row of this little table is one recording session: Anne at that age, saying that many things.</p>
+<p>Every row of this little table refers to Anne at that age, saying that many utterances.</p>
 <div class="predict-check" data-answer="0" data-accept="zero||none||empty||0 rows">
 <p>Suppose you had typed <code>filter(child == "Anne", speaker == "MOT")</code> instead. How many of the rows would be Anne herself talking?</p>
 <div class="pc-explanation">
 <p><code>0</code>: that filter keeps the <em>mother’s</em> utterances from Anne’s recordings. Both filters matter: <code>child</code> picks the recordings, <code>speaker</code> picks the voice.</p>
 </div>
 </div>
+<div class="predict-check" data-answer="more" data-accept="more rows||file has more||more files than months||count(file) is bigger">
+<p>Anne’s ages are given in months, but each row also records which recording <code>file</code> it came from. Which table will have more rows: <code>anne %&gt;% count(age_months)</code> or <code>anne %&gt;% count(file)</code>? Write the code and figure it out!</p>
+<div class="pc-explanation">
+<p><code>count(file)</code>: Anne was recorded about twice every three weeks, so most months contain <strong>two recordings</strong>, sometimes three. Run both and compare: twelve months, but many more files. Everything we compute today groups by month, which quietly bundles those sessions together — a big month is often just a <em>double</em> month. Keep that in mind when a number looks surprisingly high or low.</p>
+</div>
+</div>
 </section>
-<section id="read-her-before-you-count-her" class="level2">
-<h2 class="anchored" data-anchor-id="read-her-before-you-count-her">Read her before you count her</h2>
-<p>Statistics come later. Start the way you’d start with any new dataset: look at it. Here is Anne at her youngest:</p>
+<section id="lets-have-a-look-at-the-raw-data" class="level2">
+<h2 class="anchored" data-anchor-id="lets-have-a-look-at-the-raw-data">Let’s have a look at the raw data!</h2>
+<p>Statistics come later. Start the way you’d start with any new dataset: look at the raw data. Here is Anne at her youngest:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Anne's utterances from her very first recording.</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>anne <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age_months <span class="sc">==</span> <span class="fu">min</span>(age_months)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">40</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(utterance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age_months <span class="sc">==</span> <span class="fu">min</span>(age_months)) <span class="sc">%&gt;%</span> <span class="co"># keep only her earliest month (minimum number in age_months)</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>) <span class="sc">%&gt;%</span> <span class="co"># rows 1 to 25 (R counts from 1!)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(utterance) <span class="co"># just this column, as plain text</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Two of the lines are new. <code>slice(1:25)</code> keeps rows 1 to 25, like indexing in Python, except R counts from 1, not 0. <code>pull(utterance)</code> takes just that one column out of the table, so the console shows you plain text instead of a tibble.</p>
-<pre class="repl"><code>&gt; anne %&gt;%
-+   filter(age_months == min(age_months)) %&gt;%
-+   slice(1:25) %&gt;%
-+   pull(utterance)
- [1] "baby"            "it"              "it fit"          "push push push"  "Anne"            "what's that"     "what's that"    
+<pre class="repl"><code> [1] "baby"            "it"              "it fit"          "push push push"  "Anne"            "what's that"     "what's that"    
  [8] "baby baby Mummy" "car"             "hair"            "what's that"     "train"           "choo o"          "big"            
 [15] "tip"             "tip"             "spider"          "spider"          "what's that"     "piggy"           "what's that"    
 [22] "a cake"          "what's that"     "look"            "teddy"</code></pre>
-<p>Read them. This is a real two-year-old, mid-play, mid-lunch. <strong>Your turn.</strong> Copy the chunk and change <strong>one thing</strong> so it shows her <em>last</em> recording instead.</p>
+<p>Read them. This is a real two-year-old, mid-play, mid-lunch. <strong>Your turn.</strong> Copy the chunk above and change <strong>one thing</strong> so it shows the recording at her oldest age in the dataset instead.</p>
 <div class="predict callout callout-style-default callout-note no-icon callout-titled" title="🤔 Think first">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -526,8 +528,7 @@ Check your thinking
 </section>
 <section id="write-it-down" class="level2">
 <h2 class="anchored" data-anchor-id="write-it-down">Write it down</h2>
-<p>Before any numbers: with your partner, <strong>write one sentence</strong> describing what changed between the two recordings you just read. Be concrete. Length of utterance? New kinds of words? Whole sentences?</p>
-<p>Keep the sentence where you can see it. In Exercise 1 you’ll compute Anne’s growth curve, and the first question will be whether the curve agrees with you.</p>
+<p>Before we explore the numbers any further: <strong>write one sentence</strong> describing what changed between the two recordings you just read, from the earliest to the latest. Be concrete. Length of utterance? New kinds of words? Whole sentences? How would you describe the change?</p>
 <p>Sentence written? Next: <a href="../session1-r/03_exercise1_mlu.html">Exercise 1 — The growth curve</a>.</p>
 
 

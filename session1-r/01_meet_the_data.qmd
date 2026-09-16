@@ -10,12 +10,12 @@ title: "1 · Meet the data"
 
 Between 1998 and 2001, researchers in Manchester recorded twelve English children at home, playing and talking with their mothers: an hour at a time, twice in every three-week period, from around each child's second birthday until around their third. The children are known by first names: Anne, Aran, Becky, Carl, Dominic, Gail, Joel, John, Liz, Nicole, Ruth and Warren.
 
-This is the **Manchester corpus** (Theakston, Lieven, Pine & Rowland, 2001). It was collected to test the theory you read this week: that children build grammar verb by verb — and it is publicly available through [CHILDES](https://childes.talkbank.org), the international database of child language.
+This is the **Manchester corpus** (Theakston, Lieven, Pine & Rowland, 2001). It was collected to test the theory you read this week: that children build grammar verb by verb, and it is publicly available through [CHILDES](https://childes.talkbank.org), the international database of child language.
 
 Everything the children and mothers said was transcribed. We have converted those transcripts into one table, where **each row is one utterance**: one thing one person said at one moment.
 
 | column       | what it contains                                            |
-|----------------|-------------------------------------------------------|
+|-------------------|-----------------------------------------------------|
 | `child`      | which child's recording this is (`"Anne"`, `"Becky"`, ...)  |
 | `age_months` | the child's age at that recording, in months                |
 | `speaker`    | who is talking: `"CHI"` (the child) or `"MOT"` (the mother) |
@@ -74,7 +74,7 @@ Note the types: `<chr>` means text, `<int>` means whole numbers. `speaker` and `
 `num_tokens` says how many *words* an utterance has. Someone had to decide what a word is. Does *don't* count as one word or two? Does a laugh count? Last Friday you made decisions exactly like this about turns.
 
 ::: {.callout-tip collapse="true" title="Check your thinking"}
-There is no neutral answer. Our rule: anything separated by spaces is a word, so *don't* is one, and laughs and unintelligible stretches don't count at all. Different rules would give different numbers in everything you compute today. That isn't a flaw; it's what measurement is.
+There is no neutral answer. Our rule: anything separated by spaces is a word, so *don't* is one, and laughs and unintelligible stretches don't count at all. Different rules would give different numbers in everything you compute today. That's how measurement works.
 :::
 ::::
 

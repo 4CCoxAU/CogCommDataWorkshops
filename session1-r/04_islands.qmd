@@ -2,39 +2,40 @@
 title: "4 · Finding an island"
 ---
 
-::: {.milestone}
-**Block 3** · One new function, then this morning's paper hunt done in code.
+::: milestone
+Block 3 · From how long the utterance is to what's inside. We will have a look at how Anne's WANT island develops through twelve months of speech.
 :::
 
-## From how long to what
+## From how long to what's inside
 
-MLU told you Anne's utterances got longer but nothing about the content of her utterances. Now we're going to go hunting for Anne's verb island constructions.
+MLU told you Anne's utterances got longer but nothing about the content of her utterances. Time to look inside, and the reading tells you what to look for. On Tomasello's account, a two-year-old doesn't have "verbs" as a category: each verb is its own little **island**: a fixed part plus a slot, learned as a unit from use. *Want* + thing. *More* + thing.If that's right, Anne's
+speech should contain a **pattern**: the same frame, over and over, with different things dropped into the slot.
+
+That's a checkable claim, and checking it means collecting every "*want*" Anne ever produced and laying them side by side. For that, we need a new function.
 
 ## `str_detect()`
 
-`str_detect(text, pattern)` returns `TRUE` if the text contains the
-pattern. Wrap the pattern in `\\b` (*word boundary*) to match whole words
-only, and use `(a|b)` to match either of two words:
+`str_detect(text, pattern)` returns `TRUE` if the text contains the pattern. Wrap the pattern in `\\b` (*word boundary*) to match whole words only, and use `(a|b)` to match either of two words:
 
-```r
+``` r
 str_detect("want some juice", "\\bwant\\b")     # TRUE
 str_detect("she wanted it",   "\\bwant\\b")     # FALSE - "wanted" is a different word
 str_detect("wanna go",        "\\b(want|wanna)\\b")  # TRUE - matches either
 ```
 
-::: {.predict-check data-answer="TRUE" data-accept="true"}
+:::: {.predict-check data-answer="TRUE" data-accept="true||True||1||T"}
 What does `str_detect("look at the snow", "no")` return, without the `\\b`?
 
-::: {.pc-explanation}
+::: pc-explanation
 `TRUE`: s-**no**-w. Without boundaries the pattern matches anywhere, including inside other words. That's what `\\b` is for.
 :::
-:::
+::::
 
 ## The hunt
 
-It slots straight into `filter()`:
+The str_detect() function slots straight into `filter()`:
 
-```r
+``` r
 # Keep Anne's utterances containing "want" as a whole word.
 want <- anne %>%
   filter(str_detect(utterance, "\\bwant\\b"))
@@ -46,13 +47,13 @@ want %>%
   pull(utterance)
 ```
 
-```{.repl}
+``` repl
  [1] "want juice"           "want juice"           "want juice"           "want these"           "want toys"            "I want the shoes off"
  [7] "want water"           "want foot"            "want"                 "want more"            "want cupboard"        "want babys again"    
 [13] "want prams"           "want prams"           "want prams" 
 ```
 
-```r
+``` r
 # And her latest wants (33 months):
 want %>%
   filter(age_months == max(age_months)) %>%
@@ -60,29 +61,59 @@ want %>%
   pull(utterance)
 ```
 
-```{.repl}
+``` repl
  [1] "I want black ones"                "want the red"                     "I think want cheese"              "I want my Mummy"                 
  [5] "um I don't want tea"              "want do another one now"          "which which one do you want"      "want this one"                   
  [9] "I want um"                        "we don't want the the dirty ones" "I don't want that"                "I don't want the rest out"       
 [13] "don't want these ones in"         "we don't want them these ones"    "don't want them"  
 ```
 
-Read both sets: What has changed by the last month? What does this tell us about the verb islands?
+Read the two sets side by side — early Anne runs one bare frame into the ground; late Anne is doing several new things at once. With your neighbour, find **three concrete differences** between the sets.
 
+:::: {.callout-note .predict icon="false" title="🤔 Think first"}
+Got your three?
+
+::: {.callout-tip collapse="true" title="Check your thinking"}
+The big ones: a **subject** has appeared in front of the verb (*I want*, *we don't want*). At 22 months only one utterance out of these fifteen has it; by 33 it's everywhere. **Negation** has arrived (*don't want*), which barely exists early. And the **slot has grown**: from single nouns (*juice*, *prams*) to phrases (*the red*, *the dirty ones*) and even verbs (*want do another one*). One frame at 22 months; a small grammar around the verb by 33. You may also have caught *I think want cheese* and *which one do you want*: the island getting embedded in bigger structures.
+:::
+::::
 
 ## How does the island develop?
 
-You watched Anne's island grow a subject: *want juice* at 22 months, *I want the shoes off* becoming ordinary by 26. One child, one construction, one trajectory. Now the question that decides between the theories: **do all twelve islands grow the same way?**
+You just found the differences by reading fifteen utterances at each end. But two snapshots can't show *how* the change happened: was it gradual, or sudden? For that you need every month in between, and a way to turn one of your observations into a number.
 
-The two accounts you read make different bets. If a general rule comes online, the curves should look like *switches*: low, a jump, then high, with children differing only in when the switch flips. If islands are built from each child's own experience, the curves should *creep and wobble*, each on its own schedule, some further along at two than others at nearly three.
+Take the first one: the **subject**. It's ideal to count: an utterance either has *I* before its *want* or it doesn't. For each month, we can ask: *of Anne's wants, what share carry the subject?*
 
-```r
+``` r
+# Of Anne's wants, per month: what share carry the subject?
+iwant_anne <- want %>%
+  mutate(with_subject = str_detect(utterance, "\\bI want\\b")) %>%
+  group_by(age_months) %>%
+  summarise(subject_share = 100 * mean(with_subject),
+            n_wants = n())
+
+ggplot(iwant_anne, aes(x = age_months, y = subject_share)) +
+  geom_line(colour = "grey50") +
+  geom_point(aes(size = n_wants), alpha = .4) +
+  labs(title = "Anne's WANT island grows a subject",
+       x = "age (months)", y = "% of wants with 'I'",
+       size = "wants that month") +
+  theme_bw()
+```
+
+Look at the shape and at the dots: they're sized by how many wants Anne produced that month, because a share computed from twenty utterances deserves less trust than one computed from two hundred. Do you see any convincing patterns in the data?
+
+## And the other eleven?
+
+One child, one trajectory. But the reading makes a bet about *all* children. One plot would allow more insight: same pipeline, started from the full table, one panel per child:
+
+``` r
 # Of each child's wants, per month: what share carry the subject?
 iwant_growth <- manchester %>%
   filter(speaker == "CHI") %>%
-  mutate(has_want = str_detect(utterance, "\\b(want|wanna)\\b")) %>%
+  mutate(has_want = str_detect(utterance, "\\b(want)\\b")) %>%
   filter(has_want) %>%
-  mutate(with_subject = str_detect(utterance, "\\bI (want|wanna)\\b")) %>%
+  mutate(with_subject = str_detect(utterance, "\\bI (want)\\b")) %>%
   group_by(child, age_months) %>%
   summarise(subject_share = 100 * mean(with_subject),
             n_wants = n(),
@@ -98,23 +129,21 @@ ggplot(iwant_growth, aes(x = age_months, y = subject_share)) +
        theme_bw()
 ```
 
-Discuss with your neighbour: do the panels look like switches flipping or slopes creeping, and is there one answer for all twelve? Are these plots a problem for the theory, or for the measurement?
+**Discuss with your neighbour.** First describe what you see: are there any clear patterns? Is there one answer for all twelve, or one per panel? Then take Becky: 79% one month, 15% a few months later, back up to 70%. Did her grammar *un-develop*? If not, what is that sawing, and is it a problem for the theory or for the measurement?
 
+## Make the call on "Wanna"
 
-## Make the Call on Wanna
+Are these plots a problem for the theory or for the measurement? Let's inspect our assumptions about measurement. Every count
+on this page used the pattern `\\bwant\\b`, but Anne also says *wanna*. Is *wanna + verb* part of the same island as *want + thing*, or a different construction? That's a theoretical question! Let's get some more data and read her *wanna* utterances:
 
-One decision to make: Whether *wanna + verb* belongs to the same island as *want + thing* is a theory question wearing a coding costume.
-
-Before you count anything: does *wanna* belong to Anne's WANT island? Let's get the data first. Read her *wanna* utterances:
-
-```r
+``` r
 # All of Anne's wanna-utterances.
 anne %>%
   filter(str_detect(utterance, "____")) %>%
   pull(utterance)
 ```
 
-```{.repl}
+``` repl
 [1] "I wanna know in that pot"                  "wanna sleeping with Mummy"                 "wanna lie down"                           
   [4] "they wanna go on here"                     "I wanna play"                              "I wanna play"                             
   [7] "I wanna play my sand"                      "I wanna go in the kitchen"                 "wanna come with you and your mummie"      
@@ -126,12 +155,16 @@ anne %>%
  ...
 ```
 
-::: {.callout-note .predict icon="false" title="🤔 Think first"}
+:::: {.callout-note .predict icon="false" title="🤔 Think first"}
 What would Tomasello say?
 
 ::: {.callout-tip collapse="true" title="Check your thinking"}
 He'd note they have different frames: *want* + thing, *wanna* + verb, and on his account, different frames are different constructions, possibly not yet connected in Anne's head. So excluding is defensible. But so is including, if your question is "how often does Anne express wanting?" What you count depends on what you're asking.
 :::
-:::
+::::
+
+**Your turn.** Take the twelve-panel chunk above and add *wanna* to both patterns: the `filter()` and the `with_subject` line. Rerun. Does the inclusive ruling change our main results?
+
+Done, or are you still curious? How do other verbs develop over time? You can have a look here:
 
 Next: [Exercise 2 — Does the island grow?](05_exercise2_island.qmd).

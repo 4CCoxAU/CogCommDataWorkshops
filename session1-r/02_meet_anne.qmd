@@ -1,18 +1,14 @@
 ---
-title: "dsad"
----
-
----
-title: "2 · Reading Anne"
+title: "2 · Meet one child properly"
 ---
 
 ::: milestone
-**Block 1** · Chapter 2 of 2 before the first exercise. Meet one child properly and form a prediction the numbers will have to answer to.
+**Block 1** · Narrow the dataset to one child, look at the raw utterances, and form a prediction the numbers will have to answer to.
 :::
 
-## One child
+## One child: Anne
 
-The rest of today follows **Anne**. First step: keep only her rows, and only what *she* said.
+We'll first follow **Anne**. First step: keep only her rows, and only what *she* said.
 
 ``` r
 # Keep Anne's own utterances: her recordings, her speech.
@@ -20,12 +16,12 @@ anne <- manchester %>%
   filter(child == "Anne", speaker == "CHI")
 ```
 
-Select the lines and press *Shift+Enter*. Nothing prints — the result went into the variable `anne`. Check what you got:
+Select the lines and press *Shift+Enter*. Nothing prints. The result went into the variable `anne`. Check what you got:
 
 ``` r
 # How many utterances, over which ages?
 anne %>%
-  count(age_months)
+  count(file)
 ```
 
 ``` repl
@@ -47,7 +43,7 @@ anne %>%
 12         33  1286
 ```
 
-Every row of this little table is one recording session: Anne at that age, saying that many things.
+Every row of this little table refers to Anne at that age, saying that many utterances.
 
 :::: {.predict-check data-answer="0" data-accept="zero||none||empty||0 rows"}
 Suppose you had typed `filter(child == "Anne", speaker == "MOT")` instead. How many of the rows would be Anne herself talking?
@@ -57,32 +53,37 @@ Suppose you had typed `filter(child == "Anne", speaker == "MOT")` instead. How m
 :::
 ::::
 
-## Read her before you count her
+:::: {.predict-check data-answer="more" data-accept="more rows||file has more||more files than months||count(file) is bigger"}
+Anne's ages are given in months, but each row also records which recording `file` it came from. Which table will have more rows:
+`anne %>% count(age_months)` or `anne %>% count(file)`? Write the code and figure it out!
 
-Statistics come later. Start the way you'd start with any new dataset: look at it. Here is Anne at her youngest:
+::: {.pc-explanation}
+`count(file)`: Anne was recorded about twice every three weeks, so most months contain **two recordings**, sometimes three. Run both and compare: twelve months, but many more files. Everything we compute today groups by month, which quietly bundles those sessions together — a big month is often just a *double* month. Keep that in mind when a number looks surprisingly high or low.
+::::
+::::
+
+## Let's have a look at the raw data!
+
+Statistics come later. Start the way you'd start with any new dataset: look at the raw data. Here is Anne at her youngest:
 
 ``` r
 # Anne's utterances from her very first recording.
 anne %>%
-  filter(age_months == min(age_months)) %>%
-  slice(1:40) %>%
-  pull(utterance)
+  filter(age_months == min(age_months)) %>% # keep only her earliest month (minimum number in age_months)
+  slice(1:25) %>% # rows 1 to 25 (R counts from 1!)
+  pull(utterance) # just this column, as plain text
 ```
 
 Two of the lines are new. `slice(1:25)` keeps rows 1 to 25, like indexing in Python, except R counts from 1, not 0. `pull(utterance)` takes just that one column out of the table, so the console shows you plain text instead of a tibble.
 
 ``` repl
-> anne %>%
-+   filter(age_months == min(age_months)) %>%
-+   slice(1:25) %>%
-+   pull(utterance)
  [1] "baby"            "it"              "it fit"          "push push push"  "Anne"            "what's that"     "what's that"    
  [8] "baby baby Mummy" "car"             "hair"            "what's that"     "train"           "choo o"          "big"            
 [15] "tip"             "tip"             "spider"          "spider"          "what's that"     "piggy"           "what's that"    
 [22] "a cake"          "what's that"     "look"            "teddy"
 ```
 
-Read them. This is a real two-year-old, mid-play, mid-lunch. **Your turn.** Copy the chunk and change **one thing** so it shows her *last* recording instead.
+Read them. This is a real two-year-old, mid-play, mid-lunch. **Your turn.** Copy the chunk above and change **one thing** so it shows the recording at her oldest age in the dataset instead.
 
 :::: {.callout-note .predict icon="false" title="🤔 Think first"}
 Which one thing?
@@ -94,8 +95,6 @@ Which one thing?
 
 ## Write it down
 
-Before any numbers: with your partner, **write one sentence** describing what changed between the two recordings you just read. Be concrete. Length of utterance? New kinds of words? Whole sentences?
-
-Keep the sentence where you can see it. In Exercise 1 you'll compute Anne's growth curve, and the first question will be whether the curve agrees with you.
+Before we explore the numbers any further: **write one sentence** describing what changed between the two recordings you just read, from the earliest to the latest. Be concrete. Length of utterance? New kinds of words? Whole sentences? How would you describe the change?
 
 Sentence written? Next: [Exercise 1 — The growth curve](03_exercise1_mlu.qmd).

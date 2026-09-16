@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Exercise 1 · The growth curve – R Data Workshop - Aarhus University, Fall 2026</title>
+<title>Exercise 1 · Mean Length of Utterance – R Data Workshop - Aarhus University, Fall 2026</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -344,7 +344,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../session1-r/02_meet_anne.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Reading Anne</span></a>
+ <span class="menu-text">One child: Anne</span></a>
   </div>
 </li>
       </ul>
@@ -414,8 +414,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#task-1-mlu-per-month" id="toc-task-1-mlu-per-month" class="nav-link" data-scroll-target="#task-1-mlu-per-month">Task 1: MLU per month</a></li>
   <li><a href="#task-2-plot-it" id="toc-task-2-plot-it" class="nav-link" data-scroll-target="#task-2-plot-it">Task 2: Plot it</a></li>
   <li><a href="#task-3-read-the-plot" id="toc-task-3-read-the-plot" class="nav-link" data-scroll-target="#task-3-read-the-plot">Task 3: Read the plot</a></li>
-  <li><a href="#the-plot" id="toc-the-plot" class="nav-link" data-scroll-target="#the-plot">The plot</a></li>
-  <li><a href="#interpret-the-picture" id="toc-interpret-the-picture" class="nav-link" data-scroll-target="#interpret-the-picture">Interpret the picture</a></li>
+  <li><a href="#task-4-all-twelve-children-at-once" id="toc-task-4-all-twelve-children-at-once" class="nav-link" data-scroll-target="#task-4-all-twelve-children-at-once">Task 4: All twelve children at once</a>
+  <ul class="collapse">
+  <li><a href="#interpret-the-plot" id="toc-interpret-the-plot" class="nav-link" data-scroll-target="#interpret-the-plot">Interpret the plot</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -425,7 +427,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../session1-r/03_exercise1_mlu.html">Block 2 · The growth curve</a></li><li class="breadcrumb-item"><a href="../session1-r/03_exercise1_mlu.html">Exercise 1: MLU</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Exercise 1 · The growth curve</h1>
+<h1 class="title">Exercise 1 · Mean Length of Utterance</h1>
 </div>
 
 
@@ -443,17 +445,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="milestone">
-<p><strong>Block 2</strong> · First exercise. Compute Anne’s mean length of utterance, plot it, and test it against your sentence.</p>
+<p><strong>Block 2</strong> · Compute Anne’s mean length of utterance, plot it, and test it against your observations from the raw data.</p>
 </div>
 <div class="exercise-banner">
 <div class="ex-kicker">
-<p>Exercise 1</p>
+<p>Hands-on Exercises</p>
 </div>
 <div class="ex-title">
-<p>Anne’s growth curve</p>
+<p>We’ll calculate field’s classic yardstick on a real child: Anne’s growth in mean length of utterance</p>
 </div>
 <div class="ex-sub">
-<p>The field’s classic yardstick, computed by you, on a real child. Wherever you see ____, you write the code.</p>
+<p>Until now you ran our pipelines. This one has holes. Wherever you see ____, you write the correct code.</p>
 </div>
 </div>
 <section id="the-measure" class="level2">
@@ -498,33 +500,38 @@ Hint
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Which column defines a month of recording? Which column holds the utterance lengths? Both are in the table on the data page.</p>
+<p>Which column defines a month of recording? Which column holds the utterance lengths? Both are shown in the table on the data page.</p>
 </div>
 </div>
 </div>
 </section>
 <section id="task-2-plot-it" class="level2">
 <h2 class="anchored" data-anchor-id="task-2-plot-it">Task 2: Plot it</h2>
-<div class="predict-check" data-answer="upward" data-accept="up||it goes up||increases||increasing||rising||climbs||higher">
-<p>Before you plot: between 22 and 33 months, which direction should the curve go overall?</p>
+<p>Before plotting, one prediction. Bring back Anne’s utterances from her oldest age (you built this on the last page):</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Anne's utterances at her oldest:eyeball their lengths.</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>anne <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age_months <span class="sc">==</span> <span class="fu">max</span>(age_months)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(utterance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>:::: {.predict-check data-answer=“between 2.5 and 3”, accepts 2.5||2.6||2.7||2.8||3||about 3||around 2.5||2.5-3||roughly 3} Look at those 25 utterances: some long, plenty short. If you averaged their lengths, roughly where would it land? That’s your prediction for where the curve <em>ends</em> at 33 months.</p>
 <div class="pc-explanation">
-<p>Upward: children’s utterances get longer as they grow. The interesting questions are <em>how fast</em>, <em>how smoothly</em>, and whether Anne matches the other eleven. That is what the plot is for.</p>
+<p>Just under 3. If you guessed higher, look again at how many one- and two-word turns sit between the long ones: <em>yeah</em>, <em>no</em>, <em>there</em>. The mean drags every short reply along with the impressively long sentences. The plot shows how she gets there from ~1.5: how fast, and how smoothly.</p>
 </div>
-</div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot MLU against age.</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mlu_anne, <span class="fu">aes</span>(<span class="at">x =</span> ____, <span class="at">y =</span> ____)) <span class="sc">+</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Anne's mean length of utterance"</span>,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"age (months)"</span>, <span class="at">y =</span> <span class="st">"MLU (words)"</span>) <span class="sc">+</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>::::</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot MLU against age.</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mlu_anne, <span class="fu">aes</span>(<span class="at">x =</span> ____, <span class="at">y =</span> ____)) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Anne's mean length of utterance"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"age (months)"</span>, <span class="at">y =</span> <span class="st">"MLU (words)"</span>) <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Run it. You should see a line with one point per month, starting near where you read Anne naming things and ending near where you read her building sentences.</p>
 </section>
 <section id="task-3-read-the-plot" class="level2">
 <h2 class="anchored" data-anchor-id="task-3-read-the-plot">Task 3: Read the plot</h2>
 <p>With your partner:</p>
-<p><strong>1 · The verdict on your sentence.</strong> On the last page you wrote one sentence about what changed between Anne’s first and last recordings. Does the curve agree with you? And is there anything you noticed by <em>reading</em> her that a per-month average could never show?</p>
-<p><strong>2 · Find a dip.</strong> Somewhere the curve drops from one month to the next. Is Anne’s language deteriorating?</p>
+<p><strong>1 · The verdict on your sentence.</strong> On the last page you wrote one sentence about what changed between Anne’s first and last recordings. Does the curve agree with you? And is there anything you noticed by looking at her data that a per-month average could never show?</p>
+<p><strong>2 · Find a dip.</strong> Somewhere the curve drops from one month to the next. Is Anne’s language deteriorating here?</p>
 <div class="predict callout callout-style-default callout-note no-icon callout-titled" title="🤔 Think first">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -548,41 +555,52 @@ Check your thinking
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Anne was recorded about twice every three weeks, but our ages are rounded to the month, so some months contain <em>two</em> recording sessions bundled together, and some just one. A mean over 1,000 utterances is steadier than a mean over 500; and a single session catches a single day’s mood, sleep, and lunch. Months bounce; development trends.</p>
+<p>Anne was recorded about twice every three weeks, but our ages are rounded to the month, so some months contain <em>two</em> recording sessions bundled together, and some just one. A mean over 1,000 utterances is steadier than a mean over 500; and a single session catches a single day’s mood, sleep, and lunch. We’ll see later on how we can represent this in a plot.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
-<p>In Exercise 1 you computed MLU per month <em>for Anne</em>. The same pipeline computes it for all twelve children at once — the only change is where you start, and what you group by:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># MLU per month, for every child: start from the FULL table this time.</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mlu_all <span class="ot">&lt;-</span> manchester <span class="sc">%&gt;%</span>                       <span class="co"># not anne - which table has everyone?</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(speaker <span class="sc">==</span> <span class="st">"CHI"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(child, age_months) <span class="sc">%&gt;%</span>               <span class="co"># group by child AND month</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mlu =</span> <span class="fu">mean</span>(num_tokens),</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>mlu_all</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In Task 1, you computed MLU per month <em>for Anne</em>. The same pipeline computes it for all twelve children at once: the only change is where you start, and what you group by:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># MLU per month, for every child: start from the FULL table this time.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>mlu_all <span class="ot">&lt;-</span> ____ <span class="sc">%&gt;%</span>                       <span class="co"># not anne - which table has everyone?</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(speaker <span class="sc">==</span> <span class="st">"CHI"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(child, ____) <span class="sc">%&gt;%</span>               <span class="co"># group by child AND month</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mlu =</span> <span class="fu">mean</span>(num_tokens),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>mlu_all</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Grouping by two columns gives one row per child per month. Twelve growth curves in one table. (<code>.groups = "drop"</code> just tells R to hand back a plain table afterwards; without it you get a harmless warning.)</p>
 </section>
-<section id="the-plot" class="level2">
-<h2 class="anchored" data-anchor-id="the-plot">The plot</h2>
+<section id="task-4-all-twelve-children-at-once" class="level2">
+<h2 class="anchored" data-anchor-id="task-4-all-twelve-children-at-once">Task 4: All twelve children at once</h2>
 <p>Twelve lines, one picture. Two new ggplot moves, both small: <code>group = child</code> draws one line per child instead of connecting everything into spaghetti, and a second <code>geom_line()</code> with its own <code>data =</code> draws Anne again, on top, in colour:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mlu_all, <span class="fu">aes</span>(<span class="at">x =</span> age_months, <span class="at">y =</span> mlu, <span class="at">group =</span> child)) <span class="sc">+</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">"grey70"</span>) <span class="sc">+</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> mlu_all <span class="sc">%&gt;%</span> <span class="fu">filter</span>(child <span class="sc">==</span> <span class="st">"Anne"</span>),</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">colour =</span> <span class="st">"firebrick"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Anne among the twelve"</span>,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"age (months)"</span>, <span class="at">y =</span> <span class="st">"MLU (words)"</span>) <span class="sc">+</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="interpret-the-picture" class="level2">
-<h2 class="anchored" data-anchor-id="interpret-the-picture">Interpret the picture</h2>
-<p>With your partner, discuss the following: How much do twelve normally-developing children differ at the <em>same</em> age? Find the widest vertical spread. How many months of “development” does that gap correspond to along the curve?</p>
-<p><strong>3 · One honest limit.</strong> MLU says that the children’s utterances got longer. It cannot say <em>what</em> she is now able to build: whether three words is <em>want some juice</em> or <em>Mummy sock fall</em>. For that you have to look at the utterances themselves. That is exactly where we go next.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mlu_all, <span class="fu">aes</span>(<span class="at">x =</span> age_months, <span class="at">y =</span> mlu, <span class="at">group =</span> child)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">"grey70"</span>) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> mlu_all <span class="sc">%&gt;%</span> <span class="fu">filter</span>(child <span class="sc">==</span> <span class="st">"Anne"</span>), <span class="at">colour =</span> <span class="st">"firebrick"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Anne among the twelve"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"age (months)"</span>, <span class="at">y =</span> <span class="st">"MLU (words)"</span>) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="interpret-the-plot" class="level3">
+<h3 class="anchored" data-anchor-id="interpret-the-plot">Interpret the plot</h3>
+<p>With your partner, discuss the following: How much do twelve normally-developing children differ at the <em>same</em> age? Find the widest vertical spread. How many months of development does that gap correspond to along the curve?</p>
+<div class="callout callout-style-default callout-note callout-titled" title="One honest limit">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+One honest limit
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>MLU says Anne’s and the other children’s utterances got longer, but it says nothing about what’s <em>in</em> them. <em>Want some juice</em> and <em>Mummy sock fall</em> both score three words, but they are very different achievements. Same number, different grammar. Next block, we look inside the utterances themselves.</p>
+</div>
+</div>
 <p>Curve made and argued about? Next: <a href="../session1-r/04_islands.html">Finding an island</a>.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1222,8 +1240,8 @@ body.quarto-dark .predict-check.pc-done textarea.pc-input { background: #1b2437;
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../session1-r/02_meet_anne.html" class="pagination-link" aria-label="Reading Anne">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Reading Anne</span>
+      <a href="../session1-r/02_meet_anne.html" class="pagination-link" aria-label="One child: Anne">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">One child: Anne</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
