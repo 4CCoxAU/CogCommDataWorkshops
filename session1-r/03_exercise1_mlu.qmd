@@ -72,13 +72,12 @@ anne %>%
   slice(1:25) %>%
   pull(utterance)
 ```
-
-:::: {.predict-check data-answer="between 2.5 and 3", accepts 2.5||2.6||2.7||2.8||3||about 3||around 2.5||2.5-3||roughly 3}
+:::: {.predict-check data-answer="between 2.5 and 3" data-accept="2.5||2.6||2.7||2.8||3||about 3||around 2.5||2.5-3||roughly 3"}
 Look at those 25 utterances: some long, plenty short. If you averaged their lengths, roughly where would it land? That's your prediction for where the curve *ends* at 33 months.
 
 ::: {.pc-explanation}
 Just under 3. If you guessed higher, look again at how many one- and two-word turns sit between the long ones: *yeah*, *no*, *there*. The mean drags every short reply along with the impressively long sentences. The plot shows how she gets there from ~1.5: how fast, and how smoothly.
-::::
+:::
 ::::
 
 ``` r

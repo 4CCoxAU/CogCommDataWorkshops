@@ -513,11 +513,12 @@ Hint
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age_months <span class="sc">==</span> <span class="fu">max</span>(age_months)) <span class="sc">%&gt;%</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(utterance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>:::: {.predict-check data-answer=“between 2.5 and 3”, accepts 2.5||2.6||2.7||2.8||3||about 3||around 2.5||2.5-3||roughly 3} Look at those 25 utterances: some long, plenty short. If you averaged their lengths, roughly where would it land? That’s your prediction for where the curve <em>ends</em> at 33 months.</p>
+<div class="predict-check" data-answer="between 2.5 and 3" data-accept="2.5||2.6||2.7||2.8||3||about 3||around 2.5||2.5-3||roughly 3">
+<p>Look at those 25 utterances: some long, plenty short. If you averaged their lengths, roughly where would it land? That’s your prediction for where the curve <em>ends</em> at 33 months.</p>
 <div class="pc-explanation">
 <p>Just under 3. If you guessed higher, look again at how many one- and two-word turns sit between the long ones: <em>yeah</em>, <em>no</em>, <em>there</em>. The mean drags every short reply along with the impressively long sentences. The plot shows how she gets there from ~1.5: how fast, and how smoothly.</p>
 </div>
-<p>::::</p>
+</div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot MLU against age.</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mlu_anne, <span class="fu">aes</span>(<span class="at">x =</span> ____, <span class="at">y =</span> ____)) <span class="sc">+</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
