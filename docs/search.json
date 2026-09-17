@@ -62,73 +62,73 @@
   {
     "objectID": "session1-r/03_exercise1_mlu.html",
     "href": "session1-r/03_exercise1_mlu.html",
-    "title": "Exercise 1 · Mean Length of Utterance",
+    "title": "Mean Length of Utterance",
     "section": "",
     "text": "Block 2 · Compute Anne’s mean length of utterance, plot it, and test it against your observations from the raw data.",
     "crumbs": [
       "Home",
       "Block 2 · The growth curve",
-      "Exercise 1: MLU"
+      "Mean Length of Utterance"
     ]
   },
   {
     "objectID": "session1-r/03_exercise1_mlu.html#the-measure",
     "href": "session1-r/03_exercise1_mlu.html#the-measure",
-    "title": "Exercise 1 · Mean Length of Utterance",
+    "title": "Mean Length of Utterance",
     "section": "The measure",
     "text": "The measure\nMean Length of Utterance (MLU): the average number of words per utterance. It sounds almost too simple, and yet since Brown (1973) it has been the standard yardstick of early grammar, for a good reason: to say longer things, you have to combine more things. A child at MLU 1.5 is mostly naming; a child at MLU 3.5 is building sentences. You already have everything you need: num_tokens holds each utterance’s length, and age_months groups utterances into months of recording.",
     "crumbs": [
       "Home",
       "Block 2 · The growth curve",
-      "Exercise 1: MLU"
+      "Mean Length of Utterance"
     ]
   },
   {
     "objectID": "session1-r/03_exercise1_mlu.html#task-1-mlu-per-month",
     "href": "session1-r/03_exercise1_mlu.html#task-1-mlu-per-month",
-    "title": "Exercise 1 · Mean Length of Utterance",
+    "title": "Mean Length of Utterance",
     "section": "Task 1: MLU per month",
     "text": "Task 1: MLU per month\nFor every month, compute the mean of num_tokens and count how many utterances that mean is based on.\n# For each month: Anne's average utterance length, and how much data it rests on.\nmlu_anne &lt;- anne %&gt;%\n  group_by(____) %&gt;%\n  summarise(mlu = mean(____),\n            n_utts = n())\n\n# Look at the result.\nmlu_anne\n# A tibble: 12 × 3\n   age_months   mlu n_utts\n        &lt;dbl&gt; &lt;dbl&gt;  &lt;int&gt;\n 1         22  1.57   1122\n 2         23  1.70   2568\n 3         24  1.86   1968\n 4         25  2.20   1782\n 5         26  2.49   1154\n 6         27  2.60   1727\n 7         28  2.43   2047\n 8         29  2.46   1922\n 9         30  2.61   1088\n10         31  2.68   3057\n11         32  2.52   1024\n12         33  2.85   1286\n\n\n\n\n\n\nHint\n\n\n\n\n\nWhich column defines a month of recording? Which column holds the utterance lengths? Both are shown in the table on the data page.",
     "crumbs": [
       "Home",
       "Block 2 · The growth curve",
-      "Exercise 1: MLU"
+      "Mean Length of Utterance"
     ]
   },
   {
     "objectID": "session1-r/03_exercise1_mlu.html#task-2-plot-it",
     "href": "session1-r/03_exercise1_mlu.html#task-2-plot-it",
-    "title": "Exercise 1 · Mean Length of Utterance",
+    "title": "Mean Length of Utterance",
     "section": "Task 2: Plot it",
     "text": "Task 2: Plot it\nBefore plotting, one prediction. Bring back Anne’s utterances from her oldest age (you built this on the last page):\n# Anne's utterances at her oldest:eyeball their lengths.\nanne %&gt;%\n  filter(age_months == max(age_months)) %&gt;%\n  slice(1:25) %&gt;%\n  pull(utterance)\n:::: {.predict-check data-answer=“between 2.5 and 3”, accepts 2.5||2.6||2.7||2.8||3||about 3||around 2.5||2.5-3||roughly 3} Look at those 25 utterances: some long, plenty short. If you averaged their lengths, roughly where would it land? That’s your prediction for where the curve ends at 33 months.\n\nJust under 3. If you guessed higher, look again at how many one- and two-word turns sit between the long ones: yeah, no, there. The mean drags every short reply along with the impressively long sentences. The plot shows how she gets there from ~1.5: how fast, and how smoothly.\n\n::::\n# Plot MLU against age.\nggplot(mlu_anne, aes(x = ____, y = ____)) +\n  geom_point() +\n  geom_line() +\n  labs(title = \"Anne's mean length of utterance\",\n       x = \"age (months)\", y = \"MLU (words)\") +\n  theme_bw()\nRun it. You should see a line with one point per month, starting near where you read Anne naming things and ending near where you read her building sentences.",
     "crumbs": [
       "Home",
       "Block 2 · The growth curve",
-      "Exercise 1: MLU"
+      "Mean Length of Utterance"
     ]
   },
   {
     "objectID": "session1-r/03_exercise1_mlu.html#task-3-read-the-plot",
     "href": "session1-r/03_exercise1_mlu.html#task-3-read-the-plot",
-    "title": "Exercise 1 · Mean Length of Utterance",
+    "title": "Mean Length of Utterance",
     "section": "Task 3: Read the plot",
     "text": "Task 3: Read the plot\nWith your partner:\n1 · The verdict on your sentence. On the last page you wrote one sentence about what changed between Anne’s first and last recordings. Does the curve agree with you? And is there anything you noticed by looking at her data that a per-month average could never show?\n2 · Find a dip. Somewhere the curve drops from one month to the next. Is Anne’s language deteriorating here?\n\n\n\n\n\n\n🤔 Think first\n\n\n\nBefore you answer. Look at n_utts across the months. Some months have roughly double the utterances of others. Why?\n\n\n\n\n\n\nCheck your thinking\n\n\n\n\n\nAnne was recorded about twice every three weeks, but our ages are rounded to the month, so some months contain two recording sessions bundled together, and some just one. A mean over 1,000 utterances is steadier than a mean over 500; and a single session catches a single day’s mood, sleep, and lunch. We’ll see later on how we can represent this in a plot.\n\n\n\n\n\nIn Task 1, you computed MLU per month for Anne. The same pipeline computes it for all twelve children at once: the only change is where you start, and what you group by:\n# MLU per month, for every child: start from the FULL table this time.\nmlu_all &lt;- ____ %&gt;%                       # not anne - which table has everyone?\n  filter(speaker == \"CHI\") %&gt;%\n  group_by(child, ____) %&gt;%               # group by child AND month\n  summarise(mlu = mean(num_tokens),\n            .groups = \"drop\")\n\nmlu_all\nGrouping by two columns gives one row per child per month. Twelve growth curves in one table. (.groups = \"drop\" just tells R to hand back a plain table afterwards; without it you get a harmless warning.)",
     "crumbs": [
       "Home",
       "Block 2 · The growth curve",
-      "Exercise 1: MLU"
+      "Mean Length of Utterance"
     ]
   },
   {
     "objectID": "session1-r/03_exercise1_mlu.html#task-4-all-twelve-children-at-once",
     "href": "session1-r/03_exercise1_mlu.html#task-4-all-twelve-children-at-once",
-    "title": "Exercise 1 · Mean Length of Utterance",
+    "title": "Mean Length of Utterance",
     "section": "Task 4: All twelve children at once",
     "text": "Task 4: All twelve children at once\nTwelve lines, one picture. Two new ggplot moves, both small: group = child draws one line per child instead of connecting everything into spaghetti, and a second geom_line() with its own data = draws Anne again, on top, in colour:\nggplot(mlu_all, aes(x = age_months, y = mlu, group = child)) +\n  geom_line(colour = \"grey70\") +\n  geom_line(data = mlu_all %&gt;% filter(child == \"Anne\"), colour = \"firebrick\", linewidth = 1.2) +\n  labs(title = \"Anne among the twelve\",\n       x = \"age (months)\", y = \"MLU (words)\") +\n  theme_bw()\n\nInterpret the plot\nWith your partner, discuss the following: How much do twelve normally-developing children differ at the same age? Find the widest vertical spread. How many months of development does that gap correspond to along the curve?\n\n\n\n\n\n\nOne honest limit\n\n\n\nMLU says Anne’s and the other children’s utterances got longer, but it says nothing about what’s in them. Want some juice and Mummy sock fall both score three words, but they are very different achievements. Same number, different grammar. Next block, we look inside the utterances themselves.\n\n\nCurve made and argued about? Next: Finding an island.",
     "crumbs": [
       "Home",
       "Block 2 · The growth curve",
-      "Exercise 1: MLU"
+      "Mean Length of Utterance"
     ]
   },
   {

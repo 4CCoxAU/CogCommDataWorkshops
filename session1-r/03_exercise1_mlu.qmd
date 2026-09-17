@@ -1,5 +1,5 @@
 ---
-title: "Exercise 1 · Mean Length of Utterance"
+title: "Mean Length of Utterance"
 ---
 
 ::: milestone

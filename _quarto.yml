@@ -29,7 +29,7 @@ website:
       - section: "Block 2 · The growth curve"
         contents:
           - href: session1-r/03_exercise1_mlu.qmd
-            text: "Exercise 1: MLU"
+            text: "Mean Length of Utterance"
       - section: "Block 3 · Verb islands"
         contents:
           - href: session1-r/04_islands.qmd
