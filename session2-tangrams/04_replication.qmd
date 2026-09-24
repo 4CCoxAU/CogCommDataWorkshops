@@ -69,7 +69,7 @@ ggplot(red_multi, aes(x = repetition, y = mean_words,
   labs(title = "Everyone gets shorter, but big groups take a little longer",
        x = "repetition", y = "mean words per description",
        colour = "group size") +
-       theme_bw()
+  theme_bw()
 ```
 
 :::: {.predict-check data-answer="slower" data-accept="slower||big groups slower||they take longer||more slowly||the big groups are slower||crowds are slower"}
@@ -96,7 +96,7 @@ multiparty %>%
   labs(title = "Pairs reach near-perfect. Big groups never quite do",
        x = "repetition", y = "% of matchers correct",
        colour = "group size") +
-       theme_bw()
+  theme_bw()
 ```
 
 ``` repl

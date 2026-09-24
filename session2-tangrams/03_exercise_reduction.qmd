@@ -1,5 +1,5 @@
 ---
-title: "Exercise 1 · Less and less, better and better"
+title: "Less and less, better and better"
 ---
 
 ::: milestone
@@ -82,6 +82,7 @@ ggplot(____, aes(x = ____, y = ____)) +
   geom_line() +
   labs(title = "____",
        x = "round", y = "____")
+  theme_bw()
 ```
 
 ## Task 2: For this pair and no other
@@ -158,7 +159,8 @@ tangrams %>%
   geom_point() +
   geom_line() +
   labs(title = "____",
-       x = "repetition", y = "% of messages that hedge")
+       x = "repetition", y = "% of messages that hedge") +
+  theme_bw()
 ```
 
 ::: milestone

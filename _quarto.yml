@@ -48,7 +48,7 @@ website:
           - href: session2-tangrams/01_meet_the_data.qmd
             text: "1 · The corpus"
           - href: session2-tangrams/03_exercise_reduction.qmd
-            text: "Exercise 1: Less and less, better and better"
+            text: "Less and less, better and better"
           - href: session2-tangrams/04_replication.qmd
             text: "2 · The replication"
           - href: session2-tangrams/05_open_questions.qmd
