@@ -464,6 +464,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#task-1-the-two-curves" id="toc-task-1-the-two-curves" class="nav-link active" data-scroll-target="#task-1-the-two-curves">Task 1: The two curves</a></li>
   <li><a href="#task-2-for-this-pair-and-no-other" id="toc-task-2-for-this-pair-and-no-other" class="nav-link" data-scroll-target="#task-2-for-this-pair-and-no-other">Task 2: For this pair and no other</a></li>
+  <li><a href="#task-3-watch-the-hedging-disappear" id="toc-task-3-watch-the-hedging-disappear" class="nav-link" data-scroll-target="#task-3-watch-the-hedging-disappear">Task 3: Watch the hedging disappear</a></li>
   </ul>
 </nav>
     </div>
@@ -491,14 +492,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="milestone">
-<p><strong>Block 2</strong> · Measure the compression across all 83 pairs, check what it cost, and see what the common ground became.</p>
+<p><strong>Block 2</strong> · Measure the change across all 83 pairs, check what it cost the matchers, and see what the descriptions turned into.</p>
 </div>
 <div class="exercise-banner">
 <div class="ex-kicker">
 <p>Your code</p>
-</div>
-<div class="ex-title">
-<p>Two curves and a table of private languages</p>
 </div>
 <div class="ex-sub">
 <p>Wherever you see ____, you write the code. The tools are all from the last two Fridays.</p>
@@ -506,21 +504,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="task-1-the-two-curves" class="level2">
 <h2 class="anchored" data-anchor-id="task-1-the-two-curves">Task 1: The two curves</h2>
-<p>Pair 1 went from sixteen words to three. Rule or habit? And what did the matchers pay for it? Two pipelines, same shape:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For each repetition: average director message length.</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>reduction <span class="ot">&lt;-</span> tangrams <span class="sc">%&gt;%</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(role <span class="sc">==</span> <span class="st">"____"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(____) <span class="sc">%&gt;%</span> <span class="co"># Which variable are we interested in seeing the progression over here?</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_words =</span> <span class="fu">mean</span>(____))</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>reduction</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># For each repetition: how often the matcher picked right.</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>accuracy <span class="ot">&lt;-</span> tangrams <span class="sc">%&gt;%</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(repetition) <span class="sc">%&gt;%</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">pct_correct =</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">mean</span>(____))</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>accuracy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Pair 1 went from sixteen words to three on tangram B. But that’s one pair, one shape. Maybe they were unusual. To find out if it’s the general pattern, average across all 83 pairs and all twelve shapes: for each repetition, how long is the director’s average message?</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 1 — for each repetition, the director's average message length.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>reduction <span class="ot">&lt;-</span> tangrams <span class="sc">%&gt;%</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(role <span class="sc">==</span> <span class="st">"____"</span>) <span class="sc">%&gt;%</span>      <span class="co"># whose messages? the ones doing the describing</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(____) <span class="sc">%&gt;%</span>              <span class="co"># what do we want the progression across?</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_words =</span> <span class="fu">mean</span>(____)) </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>reduction</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And there’s a second question hiding underneath. Saying less could mean the matchers understood less. So let’s measure that too: for each repetition, how often did the matcher pick the right shape? Two questions, two near-identical pipelines:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 2 — for each repetition, how often the matcher was right.</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>accuracy <span class="ot">&lt;-</span> tangrams <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(repetition) <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">pct_correct =</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">mean</span>(____))   <span class="co"># which column is 1-for-right, 0-for-wrong?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre class="repl"><code># A tibble: 6 × 2
   repetition mean_words
        &lt;dbl&gt;      &lt;dbl&gt;
@@ -540,22 +537,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 4          4          92
 5          5          95
 6          6          95</code></pre>
-<div class="predict-check" data-answer="up" data-accept="up||rises||it rises||increases||improves||goes up||higher">
-<p>Before you looked: directors say three times less by round six. What did you expect accuracy to do, and what does it actually do?</p>
-<div class="pc-explanation">
-<p>It <strong>rises</strong>: 78% to 95%. Less said, more understood. Grice’s maxim of quantity (i.e., <em>as much as is needed</em>) has a moving target in this experiment: what’s <em>needed</em> shrinks as common ground grows. The words that disappeared had become redundant <em>for this pair</em>.</p>
-</div>
-</div>
-<p>Try to plot both <code>repetition</code> on x, the measure on y, <code>geom_point() + geom_line()</code>. Two plots, four blanks, no help needed by now.</p>
+<p>Let’s plot the data so we can see what’s going on! Here’s the first plot, complete. Run it and then adapt it for the accuracy plot:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The reduction curve: words on the y-axis, repetition on the x.</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(reduction, <span class="fu">aes</span>(<span class="at">x =</span> repetition, <span class="at">y =</span> mean_words)) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Descriptions get shorter"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"round"</span>, <span class="at">y =</span> <span class="st">"mean words per message"</span>) <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now make the accuracy plot yourself. Copy the block above and change three things: the table it reads (<code>accuracy</code>, not <code>reduction</code>), the y-axis column (<code>pct_correct</code>), and the labels. Everything else stays identical.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(____, <span class="fu">aes</span>(<span class="at">x =</span> ____, <span class="at">y =</span> ____)) <span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"____"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"round"</span>, <span class="at">y =</span> <span class="st">"____"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="task-2-for-this-pair-and-no-other" class="level2">
 <h2 class="anchored" data-anchor-id="task-2-for-this-pair-and-no-other">Task 2: For this pair and no other</h2>
-<p><em>For this pair</em>. Here’s what tangram B ended up being called, across pairs, in round six:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Final-round names for tangram B.</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>tangrams <span class="sc">%&gt;%</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(role <span class="sc">==</span> <span class="st">"director"</span>, repetition <span class="sc">==</span> <span class="dv">6</span>, tangram <span class="sc">==</span> <span class="st">"B"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pair, message) <span class="sc">%&gt;%</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The descriptions shrank but shrank <em>to what</em>? Here is what one shape, tangram B, was being called by round six, across the first twelve pairs:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The round-six name for tangram B, in each pair.</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>tangrams <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(role <span class="sc">==</span> <span class="st">"director"</span>, repetition <span class="sc">==</span> ____, tangram <span class="sc">==</span> <span class="st">"B"</span>) <span class="sc">%&gt;%</span> <span class="co"># which round should we filter for?</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pair, message) <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre class="repl"><code>   pair    message
  1 pair01  triangle square head
  2 pair02  mountain praying
@@ -569,13 +573,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 10 pair10  praying monk
 11 pair11  mouse
 12 pair12  kneel arms right and left</code></pre>
-<p>One shape: <em>triangle square head</em>, <em>angel praying</em>, <em>arms wide</em>, <em>mouse</em>. Every pair compressed onto <strong>its own</strong> name, grown from its own first description. Drop pair 10’s matcher into pair 11 and <em>mouse</em> means nothing. Conventions are local to the dyad in communication!</p>
+<p>Every pair settled on a short name but a <em>different</em> short name: <em>triangle square head</em>, <em>angel praying</em>, <em>arms wide</em>, <em>mouse</em>. Each grew out of that pair’s own first description, so each pair ended up with a private name that works perfectly between the two of them and nowhere else. This is what “convention” means: an agreement about what a word refers to.</p>
+</section>
+<section id="task-3-watch-the-hedging-disappear" class="level2">
+<h2 class="anchored" data-anchor-id="task-3-watch-the-hedging-disappear">Task 3: Watch the hedging disappear</h2>
+<p>On the last page you noticed the tentative words (i.e., <em>kinda looks like</em>, <em>maybe</em>) dropping out. Those are <strong>hedges</strong>: the words we add when we’re unsure and offering a guess, rather than stating something we both know. If common ground really is what makes them unnecessary, hedges should fade round by round. Let’s count them.</p>
+<p>To find a hedge, we check whether a message contains any of a short list of hedge words. <code>str_detect</code> with the <code>|</code> (“or”) pattern does it (that is, <em>“looks like|kinda|maybe|sort of”</em>). This net would catch <em>looks like</em>, <em>kinda</em>, <em>maybe</em>, or <em>sort of</em>:</p>
 <p>Hedges (<em>looks like, kinda, maybe, sort of</em>) are the grammar of not-yet-knowing-together. Count their disappearance:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tangrams <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(role <span class="sc">==</span> <span class="st">"director"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">hedged =</span> <span class="fu">str_detect</span>(message, <span class="st">"looks like|kinda|maybe|sort of"</span>)) <span class="sc">%&gt;%</span>    <span class="co"># the net, alternatives joined by |</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(repetition) <span class="sc">%&gt;%</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">pct_hedged =</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">mean</span>(hedged, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tangrams <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(role <span class="sc">==</span> <span class="st">"director"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">hedged =</span> <span class="fu">str_detect</span>(message, ____)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(repetition) <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">pct_hedged =</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">mean</span>(hedged, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre class="repl"><code># A tibble: 6 × 2
   repetition pct_hedged
        &lt;dbl&gt;      &lt;dbl&gt;
@@ -585,9 +594,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 4          4          1
 5          5          1
 6          6          0</code></pre>
-<p>Twenty-nine percent to zero. Widen the net (<em>I think, possibly, seems</em>) and check the story survives your ruling.</p>
+<p>Nearly a third of round-one messages hedge; by round six, none do. The tentativeness of not-yet-knowing-together evaporates. Try to widen the net (<em>I think, possibly, seems</em>) and check the story survives your ruling. Maybe it’s easier to see this as plot:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pipe the hedge table straight into a plot.</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>tangrams <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(role <span class="sc">==</span> <span class="st">"director"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">hedged =</span> <span class="fu">str_detect</span>(message, <span class="st">"looks like|kinda|maybe|sort of"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(repetition) <span class="sc">%&gt;%</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">pct_hedged =</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">mean</span>(hedged, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> ____, <span class="at">y =</span> ____)) <span class="sc">+</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"____"</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"repetition"</span>, <span class="at">y =</span> <span class="st">"% of messages that hedge"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="milestone">
-<p><strong>So far:</strong> between two people, common ground grows, words fall, hedges vanish, understanding climbs, and the expression that remains is a private language. Next block: what does having an audience do to the task?</p>
+<p><strong>So far:</strong> when two people refer to the same things again and again, their descriptions get shorter, their hedges disappear, their accuracy climbs, and each pair ends up with private names that only work between them. Next: what happens when you’re describing not to one partner, but to a whole group at once?</p>
 </div>
 <p>Next: <a href="../session2-tangrams/04_replication.html">The replication: two’s company</a>.</p>
 

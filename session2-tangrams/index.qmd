@@ -4,14 +4,23 @@ subtitle: "Cognition & Communication · Data Analysis Workshop II"
 ---
 
 ::: milestone
-**Friday's seminar, second hour** · You just played the game. Now we analyse it: first in a corpus of 83 pairs who played what you played, then in 104 *groups*. Audiences change everything. Everything runs in RStudio on UCloud. Use your Methods01 procedure for setting up the running of the code.
+**Friday's seminar, second hour** · You just played the game. Now we analyse data from people who played it before you: first 83 pairs, then 104 groups of two to six people, where one person describes for up to five matchers at once. Everything runs in RStudio on UCloud. Use your Methods01 procedure for setting up the code.
 :::
 
 ## The question
 
-An hour ago, describing a tangram took you a sentence. By round six, likely only two words did it, and your partner got *faster* at recognising the pictures. Yesterday's lecture gave you Grice's frame: say as much as is needed, no more, and *what is needed* tends to shrink as common ground grows.
+An hour ago, describing a tangram likely took you a whole sentence. By round six, a couple of words did the same job, and your partner found the right picture *faster*. Somewhere in those rounds, the two of you built something: names for the shapes that only you two share, resting on everything you now both know about what worked before. That growing pool of shared knowledge is what yesterday's lecture called **common ground**, and the private names are **conventions**: agreements about what words mean.
 
-But needed *by whom*? Today's data lets us ask two different questions: what happens between two people building common ground (Hawkins, Frank & Goodman, 2020: 83 pairs, every message preserved), and what happens when the audience grows (Boyce, Hawkins, Goodman & Frank, 2024: the same game, groups of two to six).
+Grice's idea from yesterday connects the two: speakers say as much as is needed, and no more. In round one, a lot is needed. Your partner knows nothing yet. By round six, almost nothing is needed, because the common ground carries most of the load. Fewer words, *more* understanding. *What is needed*, then, tends to shrink as common ground grows.
+
+That's the story for two people. But what happens if you need to build common ground with a whole group at once? Describing for five listeners is a different job: they don't all know the same things, they can't all ask questions, and a name that clicks for one of them may mean nothing to the rest.
+
+So today has two questions. 
+
+- When two people talk about the same things again and again, what happens to the words they use? 
+- What changes when the audience grows?
+
+We'll use data from two published studies of exactly this game. In the first, 83 pairs played it over online chat, so every message they typed is preserved (Hawkins, Frank & Goodman, 2020). In the second, the same game was played by 104 groups of two to six people — one describer, the rest matching (Boyce, Hawkins, Goodman & Frank, 2024).
 
 ## Learning Outcomes
 
@@ -27,3 +36,7 @@ By the end of this seminar, you will be able to:
 Same format as last week. Work with your partner from the game. Wherever you see `____`, you write the code; everything comes from the last two Fridays, plus exactly one new ggplot move, introduced when you need it.
 
 Start with [Block 1 · The corpus](01_meet_the_data.qmd).
+
+Hawkins, R. D., Frank, M. C., & Goodman, N. D. (2020). Characterizing the dynamics of learning in repeated reference games. Cognitive science, 44(6), e12845.
+
+Boyce, V., Hawkins, R. D., Goodman, N. D., & Frank, M. C. (2024). Interaction structure constrains the emergence of conventions in group communication. Proceedings of the National Academy of Sciences, 121(28), e2403888121.

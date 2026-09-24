@@ -3,17 +3,17 @@ title: "1 · The corpus"
 ---
 
 ::: milestone
-**Block 1** · Load the pair corpus, understand one row, and read one pair building shorthand in their own words.
+**Block 1** · Load the data, understand what one row is, and read one pair play the game in their own words.
 :::
 
 ## 83 pairs, playing your game
 
-Stanford researchers had pairs of strangers play the Tangram game online (i.e., same twelve tangrams, director and matcher, six rounds, that you just played), but typed through a chat box, so every message survives (Hawkins, Frank & Goodman, 2020). Each row is one message:
+The data comes from pairs of strangers who played the same game you just played (i.e., the same twelve tangrams, one director, one matcher, six rounds), except they played online, typing to each other through a chat box. Because it was typed, every single message was saved (Hawkins, Frank & Goodman, 2020). That's what we have: a table with one row for every message anyone sent. Here is what each column means:
 
 | column       | what it contains                                          |
 |--------------|-----------------------------------------------------------|
 | `pair`       | which pair (`"pair01"` ... `"pair83"`)                    |
-| `trial`      | trial within the game (1–72)                              |
+| `trial`      | trial within the game (1-72)                              |
 | `repetition` | which round this is *for that tangram* (1-6)              |
 | `role`       | `"director"` or `"matcher"`                               |
 | `tangram`    | the target shape (`"A"` ... `"L"`)                        |
@@ -23,6 +23,9 @@ Stanford researchers had pairs of strangers play the Tangram game online (i.e., 
 
 <a class="btn btn-primary" href="tangrams_teaching.csv" download>
 ⬇ tangrams_teaching.csv</a>
+
+
+Download it, put it in your working folder on UCloud, and load it, like you did last week:
 
 ``` r
 # Load and look.
@@ -44,18 +47,11 @@ $ num_words  <int> 17, 4, 5, 4, 7, 5, 14, 15, 6, 12, 5, 12, 3, 3, 5, 3, 12, 7, 1
 $ correct    <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
 > 
 ```
-
-:::: {.predict-check data-answer="repetition" data-accept="repetition||the repetition column||repetition column"}
-The shorthand builds up over rounds. Which column is the corpus's clock (i.e., the one almost everything today gets grouped by)?
-
-::: {.pc-explanation}
-`repetition`: how many times the pair has met *that tangram*: 1 the first time, 6 the last. (`trial` just counts 1–72 through the game, all tangrams mixed.)
-:::
-::::
+Two columns are easy to confuse, so it's worth pausing on them. `trial` counts *every* turn in the game, 1 to 72, with all twelve shapes jumbled together. `repetition` is different: it counts how many times this pair has dealt with *one particular shape*. So a shape's first appearance is `repetition` 1 no matter which trial it happens to fall on, and its sixth and last appearance is `repetition` 6. Almost everything we do today groups the data by `repetition`, because the whole question is what changes from a shape's first mention to its sixth.
 
 ## Read one pair first
 
-Raw data before numbers, as always. Pair 1's director, tangram B, all six rounds:
+Before counting anything, look at the raw data: the same habit as last week. Here is one pair's director describing one shape, tangram B, every one of the six times it came up:
 
 ``` r
 # One pair, one shape, six rounds.
@@ -79,16 +75,18 @@ tangrams %>%
 9          6 triangle square head
 ```
 
-Sixteen words become three. And notice rows 3 and 6: *do not think we had this one*, *like last time*: they're managing what the two of them remember. The common ground is being mutually negotiated between them.
+Read it from top to bottom. The first time, tangram B takes a whole sentence. By the last round, it is three words: *triangle square head*. The description has shrunk to almost nothing, and it still works. 
 
-:::: {.callout-note .predict icon="false" title="🤔 Think first"}
-Look at what survived to round 6 (*square, triangle, head*) and what vanished (*kinda looks like, maybe, this one*). What is being compressed and what isn't?
+Look also at rows 3 and 6: *do not think we had this one* and *like last time*. These descriptions show the pair keeping track of what they've already sorted out together. That shared, growing store of "things we both know now" is the **common ground** from yesterday's lecture, and you can watch them building it in real time. Round by round, the pair whittles the description down to just the part that distinguishes this shape from the other eleven, and throws away everything else.
 
-::: {.callout-tip collapse="true" title="Check your thinking"}
-What survives is what *distinguishes* this tangram from the other eleven. What vanishes is hedging and scaffolding: the apparatus of describing to someone who doesn't know it yet. Once your partner knows it, the scaffolding is dead weight and removed (maxim of quantity, only convey what you need).
+:::: {.predict-check data-answer="B" data-accept="\"B\"||tangram == \"B\"||the B||B to L"}
+The code above follows tangram B. To follow tangram L instead, you change one thing. What is it? What do you replace, and with what?
+
+::: {.pc-explanation}
+Replace `"B"` with `"L"` in the filter line: `filter(pair == "pair01", role == "director", tangram == "L")`. Everything else stays: same pair, same director, same six rounds. Only the shape changes.
 :::
 ::::
 
 **Your turn.** Change one thing in the above code and follow tangram `"L"` instead. Does this exhibit the same progression?
 
-Next: [Exercise 1 — Less and less, better and better](03_exercise_reduction.qmd).
+Next: [Exercise 1: Less and less, better and better](03_exercise_reduction.qmd).

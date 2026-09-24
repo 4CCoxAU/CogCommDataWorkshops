@@ -464,8 +464,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#needed-by-whom" id="toc-needed-by-whom" class="nav-link active" data-scroll-target="#needed-by-whom">Needed, by whom?</a></li>
   <li><a href="#task-1-the-measure-has-to-match-the-unit" id="toc-task-1-the-measure-has-to-match-the-unit" class="nav-link" data-scroll-target="#task-1-the-measure-has-to-match-the-unit">Task 1: The measure has to match the unit</a></li>
-  <li><a href="#task-2-five-curves-one-plot" id="toc-task-2-five-curves-one-plot" class="nav-link" data-scroll-target="#task-2-five-curves-one-plot">Task 2: Five curves, one plot</a></li>
-  <li><a href="#task-3-and-what-does-the-audience-pay" id="toc-task-3-and-what-does-the-audience-pay" class="nav-link" data-scroll-target="#task-3-and-what-does-the-audience-pay">Task 3: And what does the audience pay?</a></li>
+  <li><a href="#task-2-five-curves-on-one-plot" id="toc-task-2-five-curves-on-one-plot" class="nav-link" data-scroll-target="#task-2-five-curves-on-one-plot">Task 2: Five curves on one plot</a></li>
+  <li><a href="#task-3-what-does-the-crowd-cost-in-accuracy" id="toc-task-3-what-does-the-crowd-cost-in-accuracy" class="nav-link" data-scroll-target="#task-3-what-does-the-crowd-cost-in-accuracy">Task 3: What does the crowd cost in accuracy?</a></li>
   <li><a href="#discuss-with-your-neighbour" id="toc-discuss-with-your-neighbour" class="nav-link" data-scroll-target="#discuss-with-your-neighbour">Discuss with your neighbour</a></li>
   </ul>
 </nav>
@@ -494,7 +494,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="milestone">
-<p><strong>Block 3</strong> · The same game, groups of two to six. Does common ground survive a crowd, and what does it cost to build?</p>
+<p><strong>Block 3</strong> · The same game, but played in groups of two to six. Does common ground still form when one person describes for a whole audience — and does the crowd change how fast it builds?</p>
 </div>
 <section id="needed-by-whom" class="level2">
 <h2 class="anchored" data-anchor-id="needed-by-whom">Needed, by whom?</h2>
@@ -542,24 +542,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <p><a class="btn btn-primary" href="multiparty_teaching.csv" download=""> ⬇ multiparty_teaching.csv</a></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>multiparty <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"multiparty_teaching.csv"</span>)</span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>multiparty <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"multiparty_teaching.csv"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(multiparty)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="task-1-the-measure-has-to-match-the-unit" class="level2">
 <h2 class="anchored" data-anchor-id="task-1-the-measure-has-to-match-the-unit">Task 1: The measure has to match the unit</h2>
-<p>One wrinkle before any curve. Describers facing a crowd don’t type one long message; they <em>split</em> the description across several short ones, waiting for the stragglers. So <code>mean(n_words)</code> per message would hide exactly what we’re looking for. The unit of communication here is the <strong>trial</strong>, so first sum words within each trial, <em>then</em> average:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: total describer words per trial.</span></span>
+<p>In this dataset, the describer often sends several short messages for one shape rather than one long one, so we want the total words spent on each shape each round. That means two steps: sum the words within each trial, then average those totals per group size and round.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: total describer words in each trial.</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>per_trial <span class="ot">&lt;-</span> multiparty <span class="sc">%&gt;%</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group, group_size, repetition, trial) <span class="sc">%&gt;%</span>   <span class="co"># the unit: which column completes it?</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group, group_size, repetition, trial) <span class="sc">%&gt;%</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">words =</span> <span class="fu">sum</span>(n_words), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: average trials, per group size and repetition.</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: average those totals, per group size and round.</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>red_multi <span class="ot">&lt;-</span> per_trial <span class="sc">%&gt;%</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group_size, repetition) <span class="sc">%&gt;%</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_words =</span> <span class="fu">mean</span>(words), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>red_multi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre class="repl"><code># A tibble: 30 × 3  (your table - here as size x repetition)
+<pre class="repl"><code># A tibble: 30 × 3  (your table: here as size x repetition)
 repetition      2     3     4     5     6
 1            21.7  23.2  27.3  27.3  24.9
 2            15.8  15.9  18.2  25.9  17.5
@@ -568,49 +568,51 @@ repetition      2     3     4     5     6
 5             5.7   6.1   9.1  10.2  11.3
 6             5.2   6.0   6.6   6.8   7.3</code></pre>
 </section>
-<section id="task-2-five-curves-one-plot" class="level2">
-<h2 class="anchored" data-anchor-id="task-2-five-curves-one-plot">Task 2: Five curves, one plot</h2>
-<p>The one new ggplot move of the day: <code>colour =</code> inside <code>aes()</code> draws one line per value of a variable; wrap the variable in <code>factor()</code> so R treats 2-6 as five categories, not a number line:</p>
+<section id="task-2-five-curves-on-one-plot" class="level2">
+<h2 class="anchored" data-anchor-id="task-2-five-curves-on-one-plot">Task 2: Five curves on one plot</h2>
+<p>Putting <code>colour =</code> inside <code>aes()</code> draws a separate line for each value of a variable. Here, one line per group size. We wrap it in <code>factor()</code> so R treats the sizes as five distinct categories to colour, not as numbers on a scale:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(red_multi, <span class="fu">aes</span>(<span class="at">x =</span> repetition, <span class="at">y =</span> mean_words,</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">colour =</span> <span class="fu">factor</span>(group_size))) <span class="sc">+</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Everyone compresses, but crowds compress slightly less."</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Everyone gets shorter, but big groups take a little longer"</span>,</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"repetition"</span>, <span class="at">y =</span> <span class="st">"mean words per description"</span>,</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">"group size"</span>) <span class="sc">+</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="predict-check" data-answer="bigger groups stay longer" data-accept="bigger groups stay longer||big groups higher||larger groups compress less||6 stays highest||crowds stay longer||the big groups">
-<p>Before you run it: all five curves will fall. What separates them; which sizes end up <em>saying more</em> at round six?</p>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="predict-check" data-answer="slower" data-accept="slower||big groups slower||they take longer||more slowly||the big groups are slower||crowds are slower">
+<p>Every line falls to about the same place by round six. Do all the groups get there at the same <em>speed</em>, or do some shrink faster than others?</p>
 <div class="pc-explanation">
-<p>The bigger the audience, the longer the descriptions stay: 2-player groups reach ~5 words by round six, 6-player groups ~7, and the gap in the middle rounds is wider still. Shorthand for five people is slower to build than shorthand for one.</p>
+<p>The bigger the group, the slower the shrink. Everyone lands near the floor by round six. Pairs around 5 words, six-player groups around 7, but they get there very differently: at round three, pairs are already down to about 11 words while six-player groups are still near 18. Common ground with five people is slower to form than with one.</p>
 </div>
 </div>
 </section>
-<section id="task-3-and-what-does-the-audience-pay" class="level2">
-<h2 class="anchored" data-anchor-id="task-3-and-what-does-the-audience-pay">Task 3: And what does the audience pay?</h2>
-<p>Accuracy needs one care-step: <code>n_correct</code> repeats on every message within a trial, so keep one row per trial first; <code>distinct()</code> does it (one new helper, self-explanatory):</p>
+<section id="task-3-what-does-the-crowd-cost-in-accuracy" class="level2">
+<h2 class="anchored" data-anchor-id="task-3-what-does-the-crowd-cost-in-accuracy">Task 3: What does the crowd cost in accuracy?</h2>
+<p>Now the other half: did the bigger groups understand as well? One care-step first. <code>n_correct</code> is recorded on every message in a trial, so the same trial’s score appears several times. We want each trial counted once. <code>distinct()</code> keeps one row per trial:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>multiparty <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(group, trial, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span>     <span class="co"># one row per trial</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(group, trial, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span>   <span class="co"># one row per trial, not per message</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group_size, repetition) <span class="sc">%&gt;%</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">pct_correct =</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">mean</span>(n_correct <span class="sc">/</span> n_matchers)) <span class="sc">%&gt;%</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> repetition, <span class="at">y =</span> pct_correct,</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span> <span class="fu">factor</span>(group_size))) <span class="sc">+</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Two reach ceiling. Six never do."</span>,</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">"group size"</span>) <span class="sc">+</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Pairs reach near-perfect. Big groups never quite do"</span>,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"repetition"</span>, <span class="at">y =</span> <span class="st">"% of matchers correct"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">"group size"</span>) <span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>       <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <pre class="repl"><code>% matchers correct, size x repetition:
 repetition      2     3     4     5     6
 1            82    83    84    78    80
 2            89    87    88    84    85
 6            97    91    87    83    86</code></pre>
-<p>Pairs end near 97%. Six-player groups plateau in the mid-80s, with longer descriptions. More words, less understanding, per listener.</p>
+<p>Pairs finish near 97% correct. Six-player groups level off in the mid-80s, and they got there using slightly <em>more</em> words. More said, less understood, per listener: the mirror image of what pairs achieved.</p>
 </section>
 <section id="discuss-with-your-neighbour" class="level2">
 <h2 class="anchored" data-anchor-id="discuss-with-your-neighbour">Discuss with your neighbour</h2>
-<p>Why would five matchers make establishing common ground harder. The describer can’t tailor to anyone in particular, the matchers can’t all ask, feedback is private? And there is the Grice question underneath: when “as much as is needed” must satisfy five different common grounds at once, what is a speaker supposed to do: aim at the average, the slowest, or the room?</p>
+<p>Why would five matchers make common ground harder to build?</p>
 <div class="milestone">
-<p><strong>Where this leaves the theory.</strong> Reduction replicated at every size: the phenomenon is robust. But its <em>rate</em> depends on the audience: common ground builds through interaction, and interaction gets thinner as it’s shared five ways. “As much as is needed” turns out to have a hidden variable (<em>needed by whom</em>), and now you have a better grasp on it!</p>
+<p><strong>Where this leaves the theory.</strong> The core finding held at every group size: describe something repeatedly and the description shrinks. That’s a robust phenomenon. But <em>how fast</em> it shrinks depends on the audience. Common ground is built through back-and-forth, and that back-and-forth gets thinner when it’s split five ways.</p>
 </div>
 <p>Done, or still curious? <a href="../session2-tangrams/05_open_questions.html">Open questions</a>.</p>
 

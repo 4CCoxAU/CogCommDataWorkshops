@@ -3,24 +3,19 @@ title: "3 · Open questions"
 ---
 
 ::: milestone
-**If you're ahead**, you can explore the following questions. Not everything here has a known answer.
+**If you're interested and want to explore further**, have a look at the following questions. Not everything here has a known answer.
 :::
 
-## 1 · The matcher goes quiet
+## 1 · Does the matcher go quiet?
 
-In the pair corpus, filter `role == "matcher"` and track their messages per repetition: how many, and how many containing `"\\?"`. They nearly vanish by round six. So who built the shorthand: the one who shortened, or the one who stopped needing to ask? And in the multiparty data the matchers *couldn't* all ask: is that exactly why the crowds stayed wordy?
+The director's words drop round by round. What about the matcher? In the pair data, keep only `role == "matcher"` and count their messages per repetition. Do they fade out as the common ground grows, and if so, what does that tell you about who was doing the work?
 
 ## 2 · Do crowds invent different names?
 
-Pair-built names got weird: *mouse*, *angel praying*. A name for five people has to work for five first-impressions at once. Pull round-6 descriptions for one tangram from the 2-player and the 6-player groups and read them side by side: are crowd names more literal? More *square-triangle-head*? Less *mouse*?
+Pair-built names got a little weird: *mouse*, *angel praying*. A name for five people has to work for five first-impressions at once. Pull round-6 descriptions for one tangram from the 2-player and the 6-player groups and read them side by side: are crowd names more literal? More *square-triangle-head*? Less *mouse*?
 
+## 3 · Which shapes were hardest?
 
-## 3 · Does shorthand transfer?
-
-Pair 11's *mouse* would baffle pair 10. But a matcher from a 6-player group has heard descriptions built for a crowd. Would *they* fare better with a stranger's names? Wilkes-Gibbs & Clark (1992) swapped listeners mid-game to test this in pairs; design the group version: measure, prediction, and the result that would surprise you.
-
-## 4 · Invent the measure
-
-Hedges vanished in pairs. Pick something else that marks *not-yet-knowing-together*: pointing language (*this one*), questions from the describer, politeness, and track it in **both** datasets: does it fade faster with one matcher than with five?
+Some shapes get a short name fast; others stay wordy for rounds. Using the pair data, find each shape's average description length at round 6, and pick out the two or three that stayed longest. How much variability is there among the shapes?
 
 ---

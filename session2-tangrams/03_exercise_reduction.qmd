@@ -3,16 +3,12 @@ title: "Exercise 1 · Less and less, better and better"
 ---
 
 ::: milestone
-**Block 2** · Measure the compression across all 83 pairs, check what it cost, and see what the common ground became.
+**Block 2** · Measure the change across all 83 pairs, check what it cost the matchers, and see what the descriptions turned into.
 :::
 
 :::::: exercise-banner
 ::: ex-kicker
 Your code
-:::
-
-::: ex-title
-Two curves and a table of private languages
 :::
 
 ::: ex-sub
@@ -22,23 +18,26 @@ Wherever you see ____, you write the code. The tools are all from the last two F
 
 ## Task 1: The two curves
 
-Pair 1 went from sixteen words to three. Rule or habit? And what did the matchers pay for it? Two pipelines, same shape:
+Pair 1 went from sixteen words to three on tangram B. But that's one pair, one shape. Maybe they were unusual. To find out if it's the general pattern, average across all 83 pairs and all twelve shapes: for each repetition, how long is the director's average message?
 
 ``` r
-# For each repetition: average director message length.
+
+# Question 1 — for each repetition, the director's average message length.
 reduction <- tangrams %>%
-  filter(role == "____") %>%
-  group_by(____) %>% # Which variable are we interested in seeing the progression over here?
-  summarise(mean_words = mean(____))
+  filter(role == "____") %>%      # whose messages? the ones doing the describing
+  group_by(____) %>%              # what do we want the progression across?
+  summarise(mean_words = mean(____)) 
 
 reduction
+```
 
-# For each repetition: how often the matcher picked right.
+And there's a second question hiding underneath. Saying less could mean the matchers understood less. So let's measure that too: for each repetition, how often did the matcher pick the right shape? Two questions, two near-identical pipelines:
+
+``` r
+# Question 2 — for each repetition, how often the matcher was right.
 accuracy <- tangrams %>%
   group_by(repetition) %>%
-  summarise(pct_correct = 100 * mean(____))
-
-accuracy
+  summarise(pct_correct = 100 * mean(____))   # which column is 1-for-right, 0-for-wrong?
 ```
 
 ``` repl
@@ -63,27 +62,41 @@ accuracy
 6          6          95
 ```
 
-:::: {.predict-check data-answer="up" data-accept="up||rises||it rises||increases||improves||goes up||higher"}
-Before you looked: directors say three times less by round six. What did you expect accuracy to do, and what does it actually do?
+Let's plot the data so we can see what's going on! Here's the first plot, complete. Run it and then adapt it for the accuracy plot:
 
-::: {.pc-explanation}
-It **rises**: 78% to 95%. Less said, more understood. Grice's maxim of quantity (i.e., *as much as is needed*) has a moving target in this experiment: what's *needed* shrinks as common ground grows. The words that disappeared had become redundant *for this pair*.
-:::
-::::
+``` r
+# The reduction curve: words on the y-axis, repetition on the x.
+ggplot(reduction, aes(x = repetition, y = mean_words)) +
+  geom_point() +
+  geom_line() +
+  labs(title = "Descriptions get shorter",
+       x = "round", y = "mean words per message") +
+       theme_bw()
+```
 
-Try to plot both `repetition` on x, the measure on y, `geom_point() + geom_line()`. Two plots, four blanks, no help needed by now.
+Now make the accuracy plot yourself. Copy the block above and change three things: the table it reads (`accuracy`, not `reduction`), the y-axis column (`pct_correct`), and the labels. Everything else stays identical.
+
+``` r
+ggplot(____, aes(x = ____, y = ____)) +
+  geom_point() +
+  geom_line() +
+  labs(title = "____",
+       x = "round", y = "____")
+```
 
 ## Task 2: For this pair and no other
 
-*For this pair*. Here's what tangram B ended up being called, across pairs, in round six:
+The descriptions shrank but shrank *to what*? Here is what one shape, tangram B, was being called by round six, across the first twelve pairs:
+
 
 ``` r
-# Final-round names for tangram B.
+# The round-six name for tangram B, in each pair.
 tangrams %>%
-  filter(role == "director", repetition == 6, tangram == "B") %>%
+  filter(role == "director", repetition == ____, tangram == "B") %>% # which round should we filter for?
   select(pair, message) %>%
   slice(1:12)
 ```
+
 
 ``` repl
    pair    message
@@ -101,14 +114,21 @@ tangrams %>%
 12 pair12  kneel arms right and left
 ```
 
-One shape: *triangle square head*, *angel praying*, *arms wide*, *mouse*. Every pair compressed onto **its own** name, grown from its own first description. Drop pair 10's matcher into pair 11 and *mouse* means nothing. Conventions are local to the dyad in communication!
+Every pair settled on a short name but a *different* short name: *triangle square head*, *angel praying*, *arms wide*, *mouse*. Each grew out of that pair's own first description, so each pair ended up with a private name that works perfectly between the two of them and nowhere else. This is what "convention" means: an agreement about what a word refers to.
+
+## Task 3: Watch the hedging disappear
+
+On the last page you noticed the tentative words (i.e., *kinda looks like*, *maybe*) dropping out. Those are **hedges**: the words we add when we're unsure and offering a guess, rather than stating something we both know. If common ground really is what makes them unnecessary, hedges should fade round by round. Let's count them.
+
+To find a hedge, we check whether a message contains any of a short list of hedge words. `str_detect` with the `|` ("or") pattern does it (that is, *"looks like|kinda|maybe|sort of"*). This net would catch *looks like*, *kinda*, *maybe*, or *sort of*:
+
 
 Hedges (*looks like, kinda, maybe, sort of*) are the grammar of not-yet-knowing-together. Count their disappearance:
 
 ``` r
 tangrams %>%
   filter(role == "director") %>%
-  mutate(hedged = str_detect(message, "looks like|kinda|maybe|sort of")) %>%    # the net, alternatives joined by |
+  mutate(hedged = str_detect(message, ____)) %>%
   group_by(repetition) %>%
   summarise(pct_hedged = 100 * mean(hedged, na.rm = TRUE))
 ```
@@ -125,10 +145,24 @@ tangrams %>%
 6          6          0
 ```
 
-Twenty-nine percent to zero. Widen the net (*I think, possibly, seems*) and check the story survives your ruling.
+Nearly a third of round-one messages hedge; by round six, none do. The tentativeness of not-yet-knowing-together evaporates. Try to widen the net (*I think, possibly, seems*) and check the story survives your ruling. Maybe it's easier to see this as plot:
+
+``` r
+# Pipe the hedge table straight into a plot.
+tangrams %>%
+  filter(role == "director") %>%
+  mutate(hedged = str_detect(message, "looks like|kinda|maybe|sort of")) %>%
+  group_by(repetition) %>%
+  summarise(pct_hedged = 100 * mean(hedged, na.rm = TRUE)) %>%
+  ggplot(aes(x = ____, y = ____)) +
+  geom_point() +
+  geom_line() +
+  labs(title = "____",
+       x = "repetition", y = "% of messages that hedge")
+```
 
 ::: milestone
-**So far:** between two people, common ground grows, words fall, hedges vanish, understanding climbs, and the expression that remains is a private language. Next block: what does having an audience do to the task?
+**So far:** when two people refer to the same things again and again, their descriptions get shorter, their hedges disappear, their accuracy climbs, and each pair ends up with private names that only work between them. Next: what happens when you're describing not to one partner, but to a whole group at once?
 :::
 
 Next: [The replication: two's company](04_replication.qmd).
