@@ -1,0 +1,134 @@
+---
+title: "Exercise 1 · Less and less, better and better"
+---
+
+::: milestone
+**Block 2** · Measure the compression across all 83 pairs, check what it cost, and see what the common ground became.
+:::
+
+:::::: exercise-banner
+::: ex-kicker
+Your code
+:::
+
+::: ex-title
+Two curves and a table of private languages
+:::
+
+::: ex-sub
+Wherever you see ____, you write the code. The tools are all from the last two Fridays.
+:::
+::::::
+
+## Task 1: The two curves
+
+Pair 1 went from sixteen words to three. Rule or habit? And what did the matchers pay for it? Two pipelines, same shape:
+
+``` r
+# For each repetition: average director message length.
+reduction <- tangrams %>%
+  filter(role == "____") %>%
+  group_by(____) %>% # Which variable are we interested in seeing the progression over here?
+  summarise(mean_words = mean(____))
+
+reduction
+
+# For each repetition: how often the matcher picked right.
+accuracy <- tangrams %>%
+  group_by(repetition) %>%
+  summarise(pct_correct = 100 * mean(____))
+
+accuracy
+```
+
+``` repl
+# A tibble: 6 × 2
+  repetition mean_words
+       <dbl>      <dbl>
+1          1        9.6
+2          2        7.0
+3          3        5.2
+4          4        4.0
+5          5        3.6
+6          6        3.2
+
+# A tibble: 6 × 2
+  repetition pct_correct
+       <dbl>       <dbl>
+1          1          78
+2          2          85
+3          3          91
+4          4          92
+5          5          95
+6          6          95
+```
+
+:::: {.predict-check data-answer="up" data-accept="up||rises||it rises||increases||improves||goes up||higher"}
+Before you looked: directors say three times less by round six. What did you expect accuracy to do, and what does it actually do?
+
+::: {.pc-explanation}
+It **rises**: 78% to 95%. Less said, more understood. Grice's maxim of quantity (i.e., *as much as is needed*) has a moving target in this experiment: what's *needed* shrinks as common ground grows. The words that disappeared had become redundant *for this pair*.
+:::
+::::
+
+Try to plot both `repetition` on x, the measure on y, `geom_point() + geom_line()`. Two plots, four blanks, no help needed by now.
+
+## Task 2: For this pair and no other
+
+*For this pair*. Here's what tangram B ended up being called, across pairs, in round six:
+
+``` r
+# Final-round names for tangram B.
+tangrams %>%
+  filter(role == "director", repetition == 6, tangram == "B") %>%
+  select(pair, message) %>%
+  slice(1:12)
+```
+
+``` repl
+   pair    message
+ 1 pair01  triangle square head
+ 2 pair02  mountain praying
+ 3 pair03  hand is only a triangle to the right side
+ 4 pair04  kneeling tilted head
+ 5 pair05  angel praying
+ 6 pair06  on knees feet in back pointed down head bent next to triangle
+ 7 pair07  arms wide
+ 8 pair08  box being held up by triangle on the right
+ 9 pair09  split triangle
+10 pair10  praying monk
+11 pair11  mouse
+12 pair12  kneel arms right and left
+```
+
+One shape: *triangle square head*, *angel praying*, *arms wide*, *mouse*. Every pair compressed onto **its own** name, grown from its own first description. Drop pair 10's matcher into pair 11 and *mouse* means nothing. Conventions are local to the dyad in communication!
+
+Hedges (*looks like, kinda, maybe, sort of*) are the grammar of not-yet-knowing-together. Count their disappearance:
+
+``` r
+tangrams %>%
+  filter(role == "director") %>%
+  mutate(hedged = str_detect(message, "looks like|kinda|maybe|sort of")) %>%    # the net, alternatives joined by |
+  group_by(repetition) %>%
+  summarise(pct_hedged = 100 * mean(hedged, na.rm = TRUE))
+```
+
+``` repl
+# A tibble: 6 × 2
+  repetition pct_hedged
+       <dbl>      <dbl>
+1          1         29
+2          2          9
+3          3          3
+4          4          1
+5          5          1
+6          6          0
+```
+
+Twenty-nine percent to zero. Widen the net (*I think, possibly, seems*) and check the story survives your ruling.
+
+::: milestone
+**So far:** between two people, common ground grows, words fall, hedges vanish, understanding climbs, and the expression that remains is a private language. Next block: what does having an audience do to the task?
+:::
+
+Next: [The replication: two's company](04_replication.qmd).

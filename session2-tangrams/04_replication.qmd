@@ -1,0 +1,118 @@
+---
+title: "2 · The replication: two's company"
+---
+
+::: milestone
+**Block 3** · The same game, groups of two to six. Does common ground survive a crowd, and what does it cost to build?
+:::
+
+## Needed, by whom?
+
+Grice's speakers say as much as is *needed*. With one matcher, that's one person's common ground to track. Boyce, Hawkins, Goodman & Frank (2024) ran the exact game from Block 1 in **groups of two to six**: one describer, up to five matchers, everyone seeing the same twelve tangrams, six rounds. One description per trial has to work for the *whole audience* and each matcher only learns whether *they themselves* were right. 104 groups:
+
+| column        | what it contains                                       |
+|---------------|--------------------------------------------------------|
+| `group`       | which group (`"group001"` ...)                         |
+| `group_size`  | how many players: 2, 3, 4, 5, or 6                     |
+| `trial` · `repetition` · `tangram` | as before                          |
+| `message`     | one describer message                                  |
+| `n_words`     | its length                                             |
+| `n_correct`   | how many matchers picked right on this trial           |
+| `n_matchers`  | how many matchers there were (`group_size - 1`)        |
+
+<a class="btn btn-primary" href="multiparty_teaching.csv" download>
+⬇ multiparty_teaching.csv</a>
+
+``` r
+multiparty <- read_csv("multiparty_teaching.csv")
+glimpse(multiparty)
+```
+
+## Task 1: The measure has to match the unit
+
+One wrinkle before any curve. Describers facing a crowd don't type one long message; they *split* the description across several short ones, waiting for the stragglers. So `mean(n_words)` per message would hide exactly what we're looking for. The unit of communication here is the **trial**, so first sum words within each trial, *then* average:
+
+``` r
+# Step 1: total describer words per trial.
+per_trial <- multiparty %>%
+  group_by(group, group_size, repetition, trial) %>%   # the unit: which column completes it?
+  summarise(words = sum(n_words), .groups = "drop")
+
+# Step 2: average trials, per group size and repetition.
+red_multi <- per_trial %>%
+  group_by(group_size, repetition) %>%
+  summarise(mean_words = mean(words), .groups = "drop")
+
+red_multi
+```
+
+``` repl
+# A tibble: 30 × 3  (your table - here as size x repetition)
+repetition      2     3     4     5     6
+1            21.7  23.2  27.3  27.3  24.9
+2            15.8  15.9  18.2  25.9  17.5
+3            10.7  13.0  14.1  15.4  18.1
+4             8.2   8.8  11.5  13.3  13.4
+5             5.7   6.1   9.1  10.2  11.3
+6             5.2   6.0   6.6   6.8   7.3
+```
+
+## Task 2: Five curves, one plot
+
+The one new ggplot move of the day: `colour =` inside `aes()` draws one line per value of a variable; wrap the variable in `factor()` so R treats 2-6 as five categories, not a number line:
+
+``` r
+ggplot(red_multi, aes(x = repetition, y = mean_words,
+                      colour = factor(group_size))) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Everyone compresses, but crowds compress slightly less.",
+       x = "repetition", y = "mean words per description",
+       colour = "group size") +
+  theme_bw()
+```
+
+:::: {.predict-check data-answer="bigger groups stay longer" data-accept="bigger groups stay longer||big groups higher||larger groups compress less||6 stays highest||crowds stay longer||the big groups"}
+Before you run it: all five curves will fall. What separates them; which sizes end up *saying more* at round six?
+
+::: {.pc-explanation}
+The bigger the audience, the longer the descriptions stay: 2-player groups reach ~5 words by round six, 6-player groups ~7, and the gap in the middle rounds is wider still. Shorthand for five people is slower to build than shorthand for one.
+:::
+::::
+
+## Task 3: And what does the audience pay?
+
+Accuracy needs one care-step: `n_correct` repeats on every message within a trial, so keep one row per trial first; `distinct()` does it (one new helper, self-explanatory):
+
+``` r
+multiparty %>%
+  distinct(group, trial, .keep_all = TRUE) %>%     # one row per trial
+  group_by(group_size, repetition) %>%
+  summarise(pct_correct = 100 * mean(n_correct / n_matchers)) %>%
+  ggplot(aes(x = repetition, y = pct_correct,
+             colour = factor(group_size))) +
+  geom_line() + geom_point() +
+  labs(title = "Two reach ceiling. Six never do.",
+       colour = "group size") +
+  theme_bw()
+```
+
+``` repl
+% matchers correct, size x repetition:
+repetition      2     3     4     5     6
+1            82    83    84    78    80
+2            89    87    88    84    85
+6            97    91    87    83    86
+```
+
+Pairs end near 97%. Six-player groups plateau in the mid-80s, with longer descriptions. More words, less understanding, per listener.
+
+## Discuss with your neighbour
+
+Why would five matchers make establishing common ground harder. The describer can't tailor to anyone in particular, the matchers can't all ask, feedback is private? And there is the Grice question underneath: when "as much as is needed" must satisfy five different common grounds at once, what is a speaker supposed to do: aim at the average, the slowest, or the room?
+
+::: milestone
+**Where this leaves the theory.** Reduction replicated at every size: the phenomenon is robust. But its *rate* depends on the audience: common ground builds through interaction, and interaction gets thinner as it's shared five ways. "As much as is needed" turns out to have a hidden variable (*needed by whom*), and now you have a better grasp on it!
+:::
+
+Done, or still curious? [Open questions](05_open_questions.qmd).

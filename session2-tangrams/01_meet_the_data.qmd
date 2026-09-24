@@ -1,0 +1,94 @@
+---
+title: "1 · The corpus"
+---
+
+::: milestone
+**Block 1** · Load the pair corpus, understand one row, and read one pair building shorthand in their own words.
+:::
+
+## 83 pairs, playing your game
+
+Stanford researchers had pairs of strangers play the Tangram game online (i.e., same twelve tangrams, director and matcher, six rounds, that you just played), but typed through a chat box, so every message survives (Hawkins, Frank & Goodman, 2020). Each row is one message:
+
+| column       | what it contains                                          |
+|--------------|-----------------------------------------------------------|
+| `pair`       | which pair (`"pair01"` ... `"pair83"`)                    |
+| `trial`      | trial within the game (1–72)                              |
+| `repetition` | which round this is *for that tangram* (1-6)              |
+| `role`       | `"director"` or `"matcher"`                               |
+| `tangram`    | the target shape (`"A"` ... `"L"`)                        |
+| `message`    | what they typed                                           |
+| `num_words`  | its length in words                                       |
+| `correct`    | did the matcher pick right on this trial (1/0)            |
+
+<a class="btn btn-primary" href="tangrams_teaching.csv" download>
+⬇ tangrams_teaching.csv</a>
+
+``` r
+# Load and look.
+library(tidyverse)
+tangrams <- read.csv("tangrams_teaching.csv")
+glimpse(tangrams)
+```
+
+``` repl
+Rows: 7,867
+Columns: 8
+$ pair       <chr> "pair01", "pair01", "pair01", "pair01", "pair01", "pair01", "pair01", "pair01", "pair01…
+$ trial      <int> 1, 1, 2, 2, 3, 3, 4, 5, 5, 6, 7, 8, 8, 8, 8, 8, 9, 9, 10, 10, 10, 11, 11, 11, 11, 11, 1…
+$ repetition <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, …
+$ role       <chr> "director", "director", "director", "director", "director", "director", "director", "di…
+$ tangram    <chr> "B", "B", "F", "F", "C", "C", "I", "G", "G", "D", "E", "L", "L", "L", "L", "L", "A", "A…
+$ message    <chr> "this one kinda looks like they are looking a little down and kneeling with both arms o…
+$ num_words  <int> 17, 4, 5, 4, 7, 5, 14, 15, 6, 12, 5, 12, 3, 3, 5, 3, 12, 7, 13, 3, 6, 15, 1, 2, 1, 7, 2…
+$ correct    <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+> 
+```
+
+:::: {.predict-check data-answer="repetition" data-accept="repetition||the repetition column||repetition column"}
+The shorthand builds up over rounds. Which column is the corpus's clock (i.e., the one almost everything today gets grouped by)?
+
+::: {.pc-explanation}
+`repetition`: how many times the pair has met *that tangram*: 1 the first time, 6 the last. (`trial` just counts 1–72 through the game, all tangrams mixed.)
+:::
+::::
+
+## Read one pair first
+
+Raw data before numbers, as always. Pair 1's director, tangram B, all six rounds:
+
+``` r
+# One pair, one shape, six rounds.
+tangrams %>%
+  filter(pair == "pair01", role == "director", tangram == "B") %>%
+  select(repetition, message)
+```
+
+``` repl
+# A tibble: 9 × 2
+  repetition message
+       <dbl> <chr>
+1          1 this one kinda looks like they are looking a little down and kneeling with both arms out
+2          1 wearing a dress maybe.
+3          2 do not think we had this one
+4          2 square head with diamond on right side
+5          3 square triangle on side
+6          3 like last time
+7          4 square triangle on side forgot that one
+8          5 square triangle head
+9          6 triangle square head
+```
+
+Sixteen words become three. And notice rows 3 and 6: *do not think we had this one*, *like last time*: they're managing what the two of them remember. The common ground is being mutually negotiated between them.
+
+:::: {.callout-note .predict icon="false" title="🤔 Think first"}
+Look at what survived to round 6 (*square, triangle, head*) and what vanished (*kinda looks like, maybe, this one*). What is being compressed and what isn't?
+
+::: {.callout-tip collapse="true" title="Check your thinking"}
+What survives is what *distinguishes* this tangram from the other eleven. What vanishes is hedging and scaffolding: the apparatus of describing to someone who doesn't know it yet. Once your partner knows it, the scaffolding is dead weight and removed (maxim of quantity, only convey what you need).
+:::
+::::
+
+**Your turn.** Change one thing in the above code and follow tangram `"L"` instead. Does this exhibit the same progression?
+
+Next: [Exercise 1 — Less and less, better and better](03_exercise_reduction.qmd).

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>One Child, Word by Word – R Data Workshop, Aarhus University, Autumn 2026</title>
+<title>Exercise 1 · Less and less, better and better – R Data Workshop, Aarhus University, Autumn 2026</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,31 +20,67 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./session1-r/01_meet_the_data.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-234273d1456647dabc34a594ac50e507.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0348920b7671f696dc9078d39bff215e.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-234273d1456647dabc34a594ac50e507.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-0f0bb2b35f0c3ae46b2773d2b92c9e2d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-6353a5bacca7b1f5ff6dee18f156d94f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-0f0bb2b35f0c3ae46b2773d2b92c9e2d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../session2-tangrams/04_replication.html" rel="next">
+<link href="../session2-tangrams/01_meet_the_data.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-234273d1456647dabc34a594ac50e507.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-0348920b7671f696dc9078d39bff215e.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-234273d1456647dabc34a594ac50e507.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-0f0bb2b35f0c3ae46b2773d2b92c9e2d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-6353a5bacca7b1f5ff6dee18f156d94f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-0f0bb2b35f0c3ae46b2773d2b92c9e2d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -74,7 +110,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -246,7 +282,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">R Data Workshop, Aarhus University, Autumn 2026</span>
     </a>
   </div>
@@ -257,7 +293,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
 </ul>
@@ -272,7 +308,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Workshop 1 · One Child, Word by Word</a></li><li class="breadcrumb-item"><a href="./index.html">One Child, Word by Word</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../session2-tangrams/index.html">Workshop 2 · Building Common Ground</a></li><li class="breadcrumb-item"><a href="../session2-tangrams/03_exercise_reduction.html">Exercise 1: Less and less, better and better</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -286,16 +322,16 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Workshop 1 · One Child, Word by Word</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">One Child, Word by Word</span></a>
   </div>
 </li>
@@ -310,13 +346,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./session1-r/01_meet_the_data.html" class="sidebar-item-text sidebar-link">
+  <a href="../session1-r/01_meet_the_data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Meet the data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./session1-r/02_meet_anne.html" class="sidebar-item-text sidebar-link">
+  <a href="../session1-r/02_meet_anne.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">One child: Anne</span></a>
   </div>
 </li>
@@ -333,7 +369,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./session1-r/03_exercise1_mlu.html" class="sidebar-item-text sidebar-link">
+  <a href="../session1-r/03_exercise1_mlu.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Mean Length of Utterance</span></a>
   </div>
 </li>
@@ -350,7 +386,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./session1-r/04_islands.html" class="sidebar-item-text sidebar-link">
+  <a href="../session1-r/04_islands.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Islands, and how they grow</span></a>
   </div>
 </li>
@@ -367,7 +403,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./session1-r/05_open_questions.html" class="sidebar-item-text sidebar-link">
+  <a href="../session1-r/05_open_questions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Open questions</span></a>
   </div>
 </li>
@@ -377,40 +413,40 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
  <span class="menu-text">Workshop 2 · Building Common Ground</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./session2-tangrams/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../session2-tangrams/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Start here</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./session2-tangrams/01_meet_the_data.html" class="sidebar-item-text sidebar-link">
+  <a href="../session2-tangrams/01_meet_the_data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">1 · The corpus</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./session2-tangrams/03_exercise_reduction.html" class="sidebar-item-text sidebar-link">
+  <a href="../session2-tangrams/03_exercise_reduction.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Exercise 1: Less and less, better and better</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./session2-tangrams/04_replication.html" class="sidebar-item-text sidebar-link">
+  <a href="../session2-tangrams/04_replication.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2 · The replication</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./session2-tangrams/05_open_questions.html" class="sidebar-item-text sidebar-link">
+  <a href="../session2-tangrams/05_open_questions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Open questions</span></a>
   </div>
 </li>
@@ -426,9 +462,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-question" id="toc-the-question" class="nav-link active" data-scroll-target="#the-question">The question</a></li>
-  <li><a href="#learning-outcomes" id="toc-learning-outcomes" class="nav-link" data-scroll-target="#learning-outcomes">Learning Outcomes</a></li>
-  <li><a href="#how-it-works" id="toc-how-it-works" class="nav-link" data-scroll-target="#how-it-works">How it works</a></li>
+  <li><a href="#task-1-the-two-curves" id="toc-task-1-the-two-curves" class="nav-link active" data-scroll-target="#task-1-the-two-curves">Task 1: The two curves</a></li>
+  <li><a href="#task-2-for-this-pair-and-no-other" id="toc-task-2-for-this-pair-and-no-other" class="nav-link" data-scroll-target="#task-2-for-this-pair-and-no-other">Task 2: For this pair and no other</a></li>
   </ul>
 </nav>
     </div>
@@ -436,10 +471,9 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Workshop 1 · One Child, Word by Word</a></li><li class="breadcrumb-item"><a href="./index.html">One Child, Word by Word</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../session2-tangrams/index.html">Workshop 2 · Building Common Ground</a></li><li class="breadcrumb-item"><a href="../session2-tangrams/03_exercise_reduction.html">Exercise 1: Less and less, better and better</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">One Child, Word by Word</h1>
-<p class="subtitle lead">Cognition &amp; Communication · Data Analysis Workshop</p>
+<h1 class="title">Exercise 1 · Less and less, better and better</h1>
 </div>
 
 
@@ -457,30 +491,105 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="milestone">
-<p><strong>Friday’s seminar</strong> · Everything runs in RStudio on UCloud. Use your Methods01 procedure for setting up the running of the code.</p>
+<p><strong>Block 2</strong> · Measure the compression across all 83 pairs, check what it cost, and see what the common ground became.</p>
 </div>
-<section id="the-question" class="level2">
-<h2 class="anchored" data-anchor-id="the-question">The question</h2>
-<p>How does a child get from single words to grammar?</p>
-<p>This week’s reading gives you Tomasello’s answer: not all at once, and not as a system. Each verb starts out as its own island, its own little construction, with its own frame learned from use (want + thing; more + thing). Grammar, on this account, is what emerges as the islands grow and connect. It’s a radical claim, because the traditional picture (i.e., Chomsky’s) says grammatical knowledge is general from the start, not built verb by verb.</p>
-<p>Radical claims need evidence, and this one makes a checkable prediction: a two-year-old’s verbs should be uneven: some flexible, some frozen, each on its own schedule. Today you check it, on the corpus that was collected to check it: you’ll follow Anne from her second birthday toward her third, watch one island grow, and then ask whether what you found holds across eleven more children.</p>
+<div class="exercise-banner">
+<div class="ex-kicker">
+<p>Your code</p>
+</div>
+<div class="ex-title">
+<p>Two curves and a table of private languages</p>
+</div>
+<div class="ex-sub">
+<p>Wherever you see ____, you write the code. The tools are all from the last two Fridays.</p>
+</div>
+</div>
+<section id="task-1-the-two-curves" class="level2">
+<h2 class="anchored" data-anchor-id="task-1-the-two-curves">Task 1: The two curves</h2>
+<p>Pair 1 went from sixteen words to three. Rule or habit? And what did the matchers pay for it? Two pipelines, same shape:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For each repetition: average director message length.</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>reduction <span class="ot">&lt;-</span> tangrams <span class="sc">%&gt;%</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(role <span class="sc">==</span> <span class="st">"____"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(____) <span class="sc">%&gt;%</span> <span class="co"># Which variable are we interested in seeing the progression over here?</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_words =</span> <span class="fu">mean</span>(____))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>reduction</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># For each repetition: how often the matcher picked right.</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>accuracy <span class="ot">&lt;-</span> tangrams <span class="sc">%&gt;%</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(repetition) <span class="sc">%&gt;%</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">pct_correct =</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">mean</span>(____))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>accuracy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="repl"><code># A tibble: 6 × 2
+  repetition mean_words
+       &lt;dbl&gt;      &lt;dbl&gt;
+1          1        9.6
+2          2        7.0
+3          3        5.2
+4          4        4.0
+5          5        3.6
+6          6        3.2
+
+# A tibble: 6 × 2
+  repetition pct_correct
+       &lt;dbl&gt;       &lt;dbl&gt;
+1          1          78
+2          2          85
+3          3          91
+4          4          92
+5          5          95
+6          6          95</code></pre>
+<div class="predict-check" data-answer="up" data-accept="up||rises||it rises||increases||improves||goes up||higher">
+<p>Before you looked: directors say three times less by round six. What did you expect accuracy to do, and what does it actually do?</p>
+<div class="pc-explanation">
+<p>It <strong>rises</strong>: 78% to 95%. Less said, more understood. Grice’s maxim of quantity (i.e., <em>as much as is needed</em>) has a moving target in this experiment: what’s <em>needed</em> shrinks as common ground grows. The words that disappeared had become redundant <em>for this pair</em>.</p>
+</div>
+</div>
+<p>Try to plot both <code>repetition</code> on x, the measure on y, <code>geom_point() + geom_line()</code>. Two plots, four blanks, no help needed by now.</p>
 </section>
-<section id="learning-outcomes" class="level2">
-<h2 class="anchored" data-anchor-id="learning-outcomes">Learning Outcomes</h2>
-<p>By the end of this seminar, you will be able to:</p>
-<ul>
-<li>Load a real corpus into R and say precisely what one row of it means</li>
-<li>Compute and plot a developmental measure (MLU) and read its dips without over-reading them</li>
-<li>Hunt a construction through twelve months of child speech with str_detect(), and defend what you chose to count</li>
-<li>Compare development across twelve children, and say what one child’s data can and cannot show</li>
-<li>Tell the difference between a noisy point and a finding, using the n it rests on</li>
-</ul>
-</section>
-<section id="how-it-works" class="level2">
-<h2 class="anchored" data-anchor-id="how-it-works">How it works</h2>
-<p>Work with your neighbour. Similar to the Python workshop, there will be a short page that shows you something, then an exercise page where <strong>you write the code</strong>. Wherever you see <code>____</code>, that’s yours to fill in your own R environment. Every tool required for this exercise you have already have in your repertoire: <code>filter()</code>, <code>mutate()</code>, <code>group_by()</code>, <code>summarise()</code>, <code>count()</code>, the pipe, and <code>ggplot()</code>.</p>
-<p>If you get stuck: predict-checks and hints are built into the pages.</p>
-<p>Ready? Start with <a href="./session1-r/01_meet_the_data.html">Block 1 · Meet the data</a>.</p>
+<section id="task-2-for-this-pair-and-no-other" class="level2">
+<h2 class="anchored" data-anchor-id="task-2-for-this-pair-and-no-other">Task 2: For this pair and no other</h2>
+<p><em>For this pair</em>. Here’s what tangram B ended up being called, across pairs, in round six:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Final-round names for tangram B.</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>tangrams <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(role <span class="sc">==</span> <span class="st">"director"</span>, repetition <span class="sc">==</span> <span class="dv">6</span>, tangram <span class="sc">==</span> <span class="st">"B"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(pair, message) <span class="sc">%&gt;%</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="repl"><code>   pair    message
+ 1 pair01  triangle square head
+ 2 pair02  mountain praying
+ 3 pair03  hand is only a triangle to the right side
+ 4 pair04  kneeling tilted head
+ 5 pair05  angel praying
+ 6 pair06  on knees feet in back pointed down head bent next to triangle
+ 7 pair07  arms wide
+ 8 pair08  box being held up by triangle on the right
+ 9 pair09  split triangle
+10 pair10  praying monk
+11 pair11  mouse
+12 pair12  kneel arms right and left</code></pre>
+<p>One shape: <em>triangle square head</em>, <em>angel praying</em>, <em>arms wide</em>, <em>mouse</em>. Every pair compressed onto <strong>its own</strong> name, grown from its own first description. Drop pair 10’s matcher into pair 11 and <em>mouse</em> means nothing. Conventions are local to the dyad in communication!</p>
+<p>Hedges (<em>looks like, kinda, maybe, sort of</em>) are the grammar of not-yet-knowing-together. Count their disappearance:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tangrams <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(role <span class="sc">==</span> <span class="st">"director"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">hedged =</span> <span class="fu">str_detect</span>(message, <span class="st">"looks like|kinda|maybe|sort of"</span>)) <span class="sc">%&gt;%</span>    <span class="co"># the net, alternatives joined by |</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(repetition) <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">pct_hedged =</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">mean</span>(hedged, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="repl"><code># A tibble: 6 × 2
+  repetition pct_hedged
+       &lt;dbl&gt;      &lt;dbl&gt;
+1          1         29
+2          2          9
+3          3          3
+4          4          1
+5          5          1
+6          6          0</code></pre>
+<p>Twenty-nine percent to zero. Widen the net (<em>I think, possibly, seems</em>) and check the story survives your ruling.</p>
+<div class="milestone">
+<p><strong>So far:</strong> between two people, common ground grows, words fall, hedges vanish, understanding climbs, and the expression that remains is a private language. Next block: what does having an audience do to the task?</p>
+</div>
+<p>Next: <a href="../session2-tangrams/04_replication.html">The replication: two’s company</a>.</p>
 
 
 </section>
@@ -1122,10 +1231,13 @@ body.quarto-dark .predict-check.pc-done textarea.pc-input { background: #1b2437;
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../session2-tangrams/01_meet_the_data.html" class="pagination-link" aria-label="1 · The corpus">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">1 · The corpus</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./session1-r/01_meet_the_data.html" class="pagination-link" aria-label="Meet the data">
-        <span class="nav-page-text">Meet the data</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../session2-tangrams/04_replication.html" class="pagination-link" aria-label="2 · The replication">
+        <span class="nav-page-text">2 · The replication</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

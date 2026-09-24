@@ -167,4 +167,4 @@ He'd note they have different frames: *want* + thing, *wanna* + verb, and on his
 
 Done, or are you still curious? How do other verbs develop over time? You can have a look here:
 
-Next: [Exercise 2 — Does the island grow?](05_exercise2_island.qmd).
+Next: [Exercise 2 — Does the island grow?](05_open_questions.qmd).

@@ -1,0 +1,29 @@
+---
+title: "Building Common Ground: The Tangram Task"
+subtitle: "Cognition & Communication · Data Analysis Workshop II"
+---
+
+::: milestone
+**Friday's seminar, second hour** · You just played the game. Now we analyse it: first in a corpus of 83 pairs who played what you played, then in 104 *groups*. Audiences change everything. Everything runs in RStudio on UCloud. Use your Methods01 procedure for setting up the running of the code.
+:::
+
+## The question
+
+An hour ago, describing a tangram took you a sentence. By round six, likely only two words did it, and your partner got *faster* at recognising the pictures. Yesterday's lecture gave you Grice's frame: say as much as is needed, no more, and *what is needed* tends to shrink as common ground grows.
+
+But needed *by whom*? Today's data lets us ask two different questions: what happens between two people building common ground (Hawkins, Frank & Goodman, 2020: 83 pairs, every message preserved), and what happens when the audience grows (Boyce, Hawkins, Goodman & Frank, 2024: the same game, groups of two to six).
+
+## Learning Outcomes
+
+By the end of this seminar, you will be able to:
+
+- Trace how referring expressions compress across repeated reference, in raw messages and in numbers.
+- Show that pairs say *less* while understanding *more*, and explain why that isn't a paradox.
+- Compare experimental conditions: what does audience size do to compression and to understanding?
+- Match a measure to the right unit, and say why words-per-message and words-per-description can tell different stories.
+
+## How it works
+
+Same format as last week. Work with your partner from the game. Wherever you see `____`, you write the code; everything comes from the last two Fridays, plus exactly one new ggplot move, introduced when you need it.
+
+Start with [Block 1 · The corpus](01_meet_the_data.qmd).

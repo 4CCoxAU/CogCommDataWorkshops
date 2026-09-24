@@ -4,9 +4,10 @@ project:
   render:
     - "*.qmd"
     - "session1-r/"
+    - "session2-tangrams/"
 
 website:
-  title: "R Data Workshop - Aarhus University, Fall 2026"
+  title: "R Data Workshop, Aarhus University, Autumn 2026"
   description: "Analysing child language corpora with R and the tidyverse for Cognition & Communication."
   navbar:
     background: "#14213D"
@@ -16,27 +17,41 @@ website:
         text: "Home"
   sidebar:
     style: "docked"
-    collapse-level: 2
+    collapse-level: 1
     contents:
-      - href: index.qmd
-        text: "One Child, Word by Word"
-      - section: "Block 1 · Meet the data"
+      - section: "Workshop 1 · One Child, Word by Word"
         contents:
-          - href: session1-r/01_meet_the_data.qmd
-            text: "Meet the data"
-          - href: session1-r/02_meet_anne.qmd
-            text: "One child: Anne"
-      - section: "Block 2 · The growth curve"
+          - href: index.qmd
+            text: "One Child, Word by Word"
+          - section: "Block 1 · Meet the data"
+            contents:
+              - href: session1-r/01_meet_the_data.qmd
+                text: "Meet the data"
+              - href: session1-r/02_meet_anne.qmd
+                text: "One child: Anne"
+          - section: "Block 2 · The growth curve"
+            contents:
+              - href: session1-r/03_exercise1_mlu.qmd
+                text: "Mean Length of Utterance"
+          - section: "Block 3 · Verb islands"
+            contents:
+              - href: session1-r/04_islands.qmd
+                text: "Islands, and how they grow"
+          - section: "Open questions"
+            contents:
+              - href: session1-r/05_open_questions.qmd
+                text: "Open questions"
+      - section: "Workshop 2 · Building Common Ground"
         contents:
-          - href: session1-r/03_exercise1_mlu.qmd
-            text: "Mean Length of Utterance"
-      - section: "Block 3 · Verb islands"
-        contents:
-          - href: session1-r/04_islands.qmd
-            text: "Islands, and how they grow"
-      - section: "Open questions"
-        contents:
-          - href: session1-r/05_open_questions.qmd
+          - href: session2-tangrams/index.qmd
+            text: "Start here"
+          - href: session2-tangrams/01_meet_the_data.qmd
+            text: "1 · The corpus"
+          - href: session2-tangrams/03_exercise_reduction.qmd
+            text: "Exercise 1: Less and less, better and better"
+          - href: session2-tangrams/04_replication.qmd
+            text: "2 · The replication"
+          - href: session2-tangrams/05_open_questions.qmd
             text: "Open questions"
   page-navigation: true
 
