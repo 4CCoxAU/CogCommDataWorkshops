@@ -1,5 +1,7 @@
 ---
 title: "1 · Meet the data"
+resources:
+  - language_evolution.csv
 ---
 
 ::: milestone
