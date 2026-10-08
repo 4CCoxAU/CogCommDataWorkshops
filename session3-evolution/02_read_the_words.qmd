@@ -1,0 +1,89 @@
+---
+title: "2 · Watch a word being born"
+---
+
+::: milestone
+**Block 1** · Chapter 2 of 2. Before counting anything, read the raw words and watch two communities each agree on one.
+:::
+
+## Look before you count
+
+The same habit as every week: read the raw data before you measure it. Let's follow a single shape (item 9) through all fourteen rounds, and watch what a community does with it.
+
+There is a snag, though. One shape in one community is 76 separate words, far too many to read as a list. So we collapse them: one line per round, showing the distinct words the community used that round. `paste()` glues a set of words into a single string, and `unique()` keeps only the different ones:
+
+``` r
+# A big community (eight people) naming shape 9, round by round.
+lang %>%
+  filter(group == "g12", item == "9", word != "") %>%
+  group_by(round) %>%
+  summarise(words_this_round = paste(unique(word), collapse = ", "))
+```
+
+``` repl
+# A tibble: 14 × 2
+   round words_this_round
+   <int> <chr>
+ 1     1 huuu, hut-u, peos, mep, peeee, hok-ffff, femun, fem, pmmm, hut-kkk, femut, fom
+ 2     2 kooo, hut-kkk, fet, fom, kot-op, hut-opp, nii
+ 3     3 fem, koh-uu, fem-oppes, nii, fem-gu, hut-kk, fem-tt, femm
+ 4     4 fem-utf, kohuu, fem-oppi, fem, oktt, hut-tt, fem-ki, fem-ii
+ 5     5 moouu, fem-uiu, fem-oo, fem-pi
+ 6     6 koh-uu, fem-u, fem-uu, fem
+ 7     7 geik-ki, fem-kk, fem-uuu, fem-sw
+ 8     8 fem-kk, fem-ki, fem-nn
+ 9     9 fem-uu, fem-tu, fem-tt
+10    10 fem-uu, fem-uuu, fem-ui, fem-a
+11    11 fem-uu
+12    12 fem-uu, fem-uuu, fem-nn
+13    13 fem-uu, fem-pp, fem-nn
+14    14 fem-uu, fem-oo
+```
+
+Read it from the top. Round 1 is a scramble: eight people look at the same shape and type a dozen different things (*huuu, mep, fem, fom, peos*). There is no word for this shape yet, only guesses. By the middle rounds the guesses start to pull together; everything is now some version of *fem-*, and by the end the community has all but settled on **fem-uu**. Through nothing more than using the words and seeing which ones worked, the community grew itself a word.
+
+## Now a smaller community
+
+The same shape (item 9) but this time in a community of four:
+
+``` r
+# A small community (four people) naming the same shape.
+lang %>%
+  filter(group == "g13", item == "9", word != "") %>%
+  group_by(round) %>%
+  summarise(words_this_round = paste(unique(word), collapse = ", "))
+```
+
+``` repl
+# A tibble: 14 × 2
+   round words_this_round
+   <int> <chr>
+ 1     1 poik, piok, poki, ikie, pokie
+ 2     2 sopoe, ikkie, popo, poik
+ 3     3 waes, poik, hotaap
+ 4     4 poiki, kokii
+ 5     5 poik, pokuuu
+ 6     6 poik, poikuuu
+ 7     7 poikuu, poik
+ 8     8 poika, poik
+ 9     9 poiku, poik
+10    10 poik
+11    11 poiku, poik
+12    12 waesu, poik
+13    13 poik
+14    14 poik
+```
+
+This community settled too (on **poik**). The same shape, named from scratch by two sets of strangers, became two completely different words: *fem-uu* here, *poik* there. A word that works perfectly inside one community would mean nothing in the other. Each one grew its own.
+
+:::: {.callout-note .predict icon="false" title="🤔 Think first"}
+No one in a community could see the others' screens or agree on a word out loud. So how does a shared word take hold at all: what is the single piece of information each person gets about whether their word was a good one?
+
+::: {.callout-tip collapse="true" title="Check your thinking"}
+The only signal is whether the partner picked the right shape. A word that gets understood gets used again; a word that fails gets dropped or tweaked. Across many rounds, the words that survive are the ones that worked: the community comes to agree by keeping what succeeds and letting the rest fall away. Selection, round after round. That is the engine of this whole experiment, and of cultural evolution itself.
+:::
+::::
+
+**Your turn.** Pick any other shape (`item` from 1 to 28) and any community (a big one (`"g01"` to `"g12"`) or a small one (`"g13"` to `"g24"`)), and run the same code. Does it settle on a word too? Try one big and one small, and keep a question in mind for what comes next: does one of them seem to agree *faster* than the other?
+
+Next: [Exercise 1: Does communication improve?](03_exercise_accuracy.qmd)

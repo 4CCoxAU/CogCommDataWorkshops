@@ -1,0 +1,66 @@
+---
+title: "1 · Meet the data"
+---
+
+::: milestone
+**Block 1** · Chapter 1 of 2 before the first exercise. Load the data and understand what one row of it is.
+:::
+
+## Communities inventing words
+
+In this dataset, we have communities of four or eight people, inventing words for shapes that had no names (Raviv, Meyer & Lev-Ari, 2019). One quick reminder of a single turn, because its pieces become the columns of our table. One person (the producer) saw a shape and typed a made-up word for it. Their partner picked the shape they thought it meant: a hit if they were right, a miss if they were wrong. Then they swapped roles and moved on, pair after pair, for fourteen rounds.
+
+At the start, everyone typed different nonsense. Round by round, each community drifted toward words it came to share: a small language, different in every group. Every one of those turns is in the dataset below, one row each: one word that one person produced for one shape.
+
+The clever part is the design: **some communities were large and some were small.** That's the comparison we'll come back to. For now, just meet the data. We've put every turn into one table, where each row is **one word that one person produced for one shape**:
+
+| column      | what it holds                                                 |
+|-------------|---------------------------------------------------------------|
+| `community` | the size of the group: `"big"` or `"small"`                   |
+| `group`     | which group it was (`"g01"` … `"g24"`)                        |
+| `round`     | which round of the game (1-14) — the game's clock             |
+| `item`      | which shape was being described (a number, 1-28)              |
+| `shape`     | the shape's family (a rough visual category)                  |
+| `producer`  | which person in the group typed the word                      |
+| `word`      | the made-up word they typed                                   |
+| `correct`   | did the partner pick the right shape? (1 = yes, 0 = no)       |
+
+<a class="btn btn-primary" href="language_evolution.csv" download>
+⬇ language_evolution.csv
+</a>
+
+Download it, put it in your working folder on UCloud, and load it — same two steps as the last two weeks:
+
+``` r
+# Load the tidyverse, then read the data into a table called lang.
+library(tidyverse)
+lang <- read_csv("language_evolution.csv")
+
+# Look at what we've got.
+glimpse(lang)
+```
+
+``` repl
+Rows: 23,276
+Columns: 8
+$ community <chr> "big", "big", "big", "big", "big", "big", "big", "big", "big", "big", "big", "big", "big", "big", "big", "big", "big", "big", "big", "big", "big", "big", "big", "big…
+$ group     <chr> "g10", "g10", "g10", "g10", "g10", "g10", "g10", "g10", "g10", "g10", "g10", "g10", "g10", "g10", "g10", "g10", "g10", "g10", "g10", "g10", "g10", "g10", "g10", "g10…
+$ round     <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+$ item      <dbl> 28, 28, 28, 28, 25, 25, 25, 25, 8, 8, 8, 8, 11, 11, 11, 11, 16, 16, 16, 16, 2, 2, 2, 2, 24, 24, 24, 24, 4, 4, 4, 4, 25, 25, 25, 25, 24, 24, 24, 24, 2, 2, 2, 2, 16, 1…
+$ shape     <dbl> 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 1, 1, 1, 1, 4, 4, 4, 4, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 1, 1, 3, 3, 3, 3, 4, 4, 4, 4, 2, 2, 2, …
+$ producer  <dbl> 1, 3, 5, 7, 2, 4, 6, 8, 1, 3, 5, 7, 2, 4, 6, 8, 1, 3, 5, 7, 2, 4, 6, 8, 1, 3, 5, 7, 2, 4, 6, 8, 1, 3, 5, 7, 2, 4, 6, 8, 1, 3, 5, 7, 2, 4, 6, 8, 1, 3, 5, 7, 2, 4, 6, …
+$ word      <chr> "huk", "huk", "huipo", "tuk", "keton", "hukk", "gnot", "wuk", "kuiton", "kito", "wangi", "gmimpi", "gak", "kitoo", "gnot", "gmip", "wangi", "kitooo", "wangi", "gmip"…
+$ correct   <dbl> 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, …
+```
+
+The column that matters most today is `round`. The whole point of the experiment is to watch what changes *over the rounds*. Words at round 1 versus round 14, so almost everything we compute will be grouped by `round`.
+
+:::: {.predict-check data-answer="big" data-accept="big||the big ones||big groups||the big community||bigger"}
+Two communities, `"big"` and `"small"`. One of them has many more rows in the table than the other. Try some code to figure out which one?
+
+::: {.pc-explanation}
+`big` has about twice as many rows. More people in a group means more producers taking turns each round, so more words get typed. That's worth remembering: the bigger community *generates more data per round* simply because it has more members.
+:::
+::::
+
+Data loaded and `glimpse` looking right? Next: [Watch a word being born](02_read_the_words.qmd).

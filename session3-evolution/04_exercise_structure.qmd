@@ -1,0 +1,112 @@
+---
+title: "Exercise 2 · Why the big communities win"
+---
+
+::: milestone
+**Block 3** · Measure something surprising about the words themselves, and uncover *why* bigger communities build better languages.
+:::
+
+:::::: exercise-banner
+::: ex-kicker
+Your code
+:::
+
+::: ex-title
+The words get longer, and that holds the secret
+:::
+
+::: ex-sub
+Wherever you see ____, you write the code.
+:::
+::::::
+
+## Task 1: What happens to the length of the words?
+
+Last week, in the tangram game, descriptions got *shorter* over time: a whole sentence shrank to "mouse" or "praying monk". You might expect the same here: as a community settles on its words, the words get snappier.
+
+Let's check. `nchar()` gives the number of characters in a piece of text, so `nchar(word)` is a word's length. Average it per round:
+
+``` r
+# For each round, how long is the average word?
+word_length <- lang %>%
+  filter(word != "") %>%
+  group_by(round) %>%                       # the game's clock
+  summarise(mean_length = mean(nchar(word)))
+
+word_length
+```
+
+``` repl
+# A tibble: 14 × 2
+   round mean_length
+   <int>       <dbl>
+ 1     1         4.5
+ 2     2         4.8
+ 3     3         5.3
+ 4     4         5.7
+ 5     5         6.2
+ 6     6         6.4
+ 7     7         6.5
+ 8     8         6.5
+ 9     9         6.7
+10    10         6.8
+# ℹ 4 more rows
+```
+
+:::: {.predict-check data-answer="longer" data-accept="longer||they get longer||grow||grew||increase||increased||up||got longer"}
+Last week the utterances got shorter. This week, as you can already see in the first ten rounds, shorter again, or longer?
+
+::: {.pc-explanation}
+**Longer.** Words grow from about 4-5 characters in round 1 to around 7 by the end: the opposite of last week. Something different is going on here, and the next two tasks uncover what.
+:::
+::::
+
+## Task 2: And bigger communities' words grow longest
+
+Split it by community, exactly as you did for accuracy:
+
+``` r
+lang %>%
+  filter(word != "") %>%
+  group_by(round, ___) %>%                 # round AND ??
+  summarise(mean_length = mean(nchar(word)), .groups = "drop") %>%
+  ggplot(aes(x = round, y = mean_length, colour = community)) +   # colour by community
+  geom_point() + geom_line() +
+  labs(title = "Words grow longer; fastest in the big communities",
+       x = "round", y = "mean word length", colour = "community") +
+  theme_bw()
+```
+
+The big communities build the *longest* words: their average climbs past seven characters by the end, while the small communities level off near six. So the big communities communicate **better** (Exercise 1) *and* use **longer** words. Longer could mean harder: more letters to remember, more to get wrong. How can longer words make a community *better* understood?
+
+## Task 3: Read the words, and see the structure
+
+Numbers brought us this far; now let's read the raw words. Here is group 12 (a big community) and every word it used for one shape family in the final round. We glue them into a single line so the whole set is visible at once:
+
+``` r
+# Group 12's words for shape family 2, in the final round.
+lang %>%
+  filter(group == "g12", shape == "2", round == 14, word != "") %>%
+  summarise(words = paste(unique(word), collapse = ", ")) %>%
+  pull(words)
+```
+
+``` repl
+[1] "fem-hm, fem-gm, fem-mk, fem-ss, fem-aa, fem-hi, fem-ko, fem-to, fem-nn, fem-kk, fem-uu, fem-oo, fem-kn, fem-ai, fem-fe, fem-ot, fem-fw"
+```
+
+Every single one begins the same way: **fem-**. Back in round 1 this same shape family was a scramble of unrelated guesses: *gim, puieg, weeps, huuu, mep* (run the chunk again with `round == 1` to see the mess it grew out of). By the final round the community has invented a **root**, *fem-*, that means "this family of shapes", and a short **suffix** on the end to pick out which particular one.
+
+And it goes further. In the same community, a *different* shape family settled on *het-* and *hoe-*, and another on *gekki-*. One part for the category, one part for the specific item: a word built from meaningful pieces, exactly like **foot + ball + er**.
+
+That is **compositional structure**, and it could be an answer to why bigger communities end up communicating better:
+
+- The words get *longer* because they are now built from parts, where once they were single random blobs.
+- The big communities built the *most* structure, because a word like *fem-mk* can be understood by someone you have never met; they only need to know the parts. A private blob like "mouse" works solely with people who were there when you coined it, and in a big community you are always meeting new partners, so the part-based words are the ones that survive.
+- A language made of reusable parts is *easier to learn and use*, which is why the big communities ended up communicating better.
+
+::: milestone
+**The take-home.** A bigger community builds a more *structured* language (words made of reusable parts, where a small community can lean on one-off labels), because its words must work for a constant stream of new partners. Structure is what makes a language learnable by anyone.
+:::
+
+Next: [Open questions](05_open_questions.qmd)

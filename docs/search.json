@@ -1,5 +1,137 @@
 [
   {
+    "objectID": "session3-evolution/index.html",
+    "href": "session3-evolution/index.html",
+    "title": "A Language Is Born: Cultural Evolution in the Lab",
+    "section": "",
+    "text": "Friday’s seminar, second hour · Today we meet a community of people inventing a language from nothing: making up words for shapes that have never had names, and we ask a simple question: does the size of a community shape the language it builds? Everything runs in RStudio on UCloud; use your Methods01 setup to get started.",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
+      "Start here"
+    ]
+  },
+  {
+    "objectID": "session3-evolution/index.html#the-question",
+    "href": "session3-evolution/index.html#the-question",
+    "title": "A Language Is Born: Cultural Evolution in the Lab",
+    "section": "The question",
+    "text": "The question\nEvery human language was invented by a community. The words of English are shaped over many generations by people using them with one another. In the lecture, we explored processes of cultural evolution: structure that emerges from use. And these processes raise a question we can actually test. If communities build languages, do the properties of the community leave their fingerprint on the language itself?\nRaviv, Meyer and Lev-Ari (2019) brought that question into the laboratory. They gathered communities of volunteers and handed each one a private world to name: a set of novel shapes with no existing words. On every turn, one member saw a shape and typed a made-up word for it; the others chose, from an array, the shape they thought the word meant. Everyone saw whether the guess landed, then they swapped roles, and played again for fourteen rounds in all. Round by round, the invented words drifted from a scramble of private guesses toward a vocabulary the whole community came to share.\n\n\n  \n\n  \n  One round of the game\n\n  \n  \n  \n  \n  A shape to name\n\n  \n  \n\n  \n  \n  \n  \n  \n  \"fem-hm\"\n  One player invents\n  a word for it\n\n  \n  \n\n  \n  \n  \n    \n    \n    \n  \n  \n  \n  \n  \n  Their partner picks the\n  shape they think it means\n\n  \n  Both see whether the choice was right, then they swap roles. You always play in pairs, but across the game\n  you take turns with every other member of your community, more of them in a larger community.\n\n  \n  \n\n  \n  Two different conditions: community size\n\n  \n  \n  \n  \n  \n  \n  A community of four\n\n  \n  \n  \n  \n  \n   \n  \n  \n  \n  \n  A community of eight\n\n\nThe design had two main conditions. Some communities had four members; others had eight. That is the only knob the experimenters touched, and the question for today is whether it changed the properties of the languages that grew.\nPlace a bet before you go on. A community of four is intimate: few people, little to track, easy to fall into step. A community of eight is busier: more partners, more words in play, more to coordinate.\nWhich community do you think ends up communicating more accurately by the final round: the group of four or eight? Write your guess down and explain why you have chosen it. You will settle this question with the data, in Exercise 1.",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
+      "Start here"
+    ]
+  },
+  {
+    "objectID": "session3-evolution/index.html#learning-outcomes",
+    "href": "session3-evolution/index.html#learning-outcomes",
+    "title": "A Language Is Born: Cultural Evolution in the Lab",
+    "section": "Learning Outcomes",
+    "text": "Learning Outcomes\nBy the end of this seminar, you will be able to:\n\nRead raw experimental data and watch a shared word emerge from many competing ones.\nMeasure whether communication improves over time, and compare small communities with large ones.\nDiscover, in the words themselves, that the languages become structured.\nExplain, using the data, how the size of a community shapes the language it builds.",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
+      "Start here"
+    ]
+  },
+  {
+    "objectID": "session3-evolution/index.html#how-it-works",
+    "href": "session3-evolution/index.html#how-it-works",
+    "title": "A Language Is Born: Cultural Evolution in the Lab",
+    "section": "How it works",
+    "text": "How it works\nSame format as the last two weeks. Work with a partner. Short pages that show you something, then pages where you write the code: wherever you see ____, that’s yours. Every function is one you have already used; nothing new today, the tools just travel to a new place.\nStart with Block 1 · Meet the data.",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
+      "Start here"
+    ]
+  },
+  {
+    "objectID": "session3-evolution/04_exercise_structure.html",
+    "href": "session3-evolution/04_exercise_structure.html",
+    "title": "Exercise 2 · Why the big communities win",
+    "section": "",
+    "text": "Block 3 · Measure something surprising about the words themselves, and uncover why bigger communities build better languages.",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
+      "How a group agrees"
+    ]
+  },
+  {
+    "objectID": "session3-evolution/04_exercise_structure.html#task-1-what-happens-to-the-length-of-the-words",
+    "href": "session3-evolution/04_exercise_structure.html#task-1-what-happens-to-the-length-of-the-words",
+    "title": "Exercise 2 · Why the big communities win",
+    "section": "Task 1: What happens to the length of the words?",
+    "text": "Task 1: What happens to the length of the words?\nLast week, in the tangram game, descriptions got shorter over time: a whole sentence shrank to “mouse” or “praying monk”. You might expect the same here: as a community settles on its words, the words get snappier.\nLet’s check. nchar() gives the number of characters in a piece of text, so nchar(word) is a word’s length. Average it per round:\n# For each round, how long is the average word?\nword_length &lt;- lang %&gt;%\n  filter(word != \"\") %&gt;%\n  group_by(round) %&gt;%                       # the game's clock\n  summarise(mean_length = mean(nchar(word)))\n\nword_length\n# A tibble: 14 × 2\n   round mean_length\n   &lt;int&gt;       &lt;dbl&gt;\n 1     1         4.5\n 2     2         4.8\n 3     3         5.3\n 4     4         5.7\n 5     5         6.2\n 6     6         6.4\n 7     7         6.5\n 8     8         6.5\n 9     9         6.7\n10    10         6.8\n# ℹ 4 more rows\n\nLast week the utterances got shorter. This week, as you can already see in the first ten rounds, shorter again, or longer?\n\nLonger. Words grow from about 4-5 characters in round 1 to around 7 by the end: the opposite of last week. Something different is going on here, and the next two tasks uncover what.",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
+      "How a group agrees"
+    ]
+  },
+  {
+    "objectID": "session3-evolution/04_exercise_structure.html#task-2-and-bigger-communities-words-grow-longest",
+    "href": "session3-evolution/04_exercise_structure.html#task-2-and-bigger-communities-words-grow-longest",
+    "title": "Exercise 2 · Why the big communities win",
+    "section": "Task 2: And bigger communities’ words grow longest",
+    "text": "Task 2: And bigger communities’ words grow longest\nSplit it by community, exactly as you did for accuracy:\nlang %&gt;%\n  filter(word != \"\") %&gt;%\n  group_by(round, ___) %&gt;%                 # round AND ??\n  summarise(mean_length = mean(nchar(word)), .groups = \"drop\") %&gt;%\n  ggplot(aes(x = round, y = mean_length, colour = community)) +   # colour by community\n  geom_point() + geom_line() +\n  labs(title = \"Words grow longer; fastest in the big communities\",\n       x = \"round\", y = \"mean word length\", colour = \"community\") +\n  theme_bw()\nThe big communities build the longest words: their average climbs past seven characters by the end, while the small communities level off near six. So the big communities communicate better (Exercise 1) and use longer words. Longer could mean harder: more letters to remember, more to get wrong. How can longer words make a community better understood?",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
+      "How a group agrees"
+    ]
+  },
+  {
+    "objectID": "session3-evolution/04_exercise_structure.html#task-3-read-the-words-and-see-the-structure",
+    "href": "session3-evolution/04_exercise_structure.html#task-3-read-the-words-and-see-the-structure",
+    "title": "Exercise 2 · Why the big communities win",
+    "section": "Task 3: Read the words, and see the structure",
+    "text": "Task 3: Read the words, and see the structure\nNumbers brought us this far; now let’s read the raw words. Here is group 12 (a big community) and every word it used for one shape family in the final round. We glue them into a single line so the whole set is visible at once:\n# Group 12's words for shape family 2, in the final round.\nlang %&gt;%\n  filter(group == \"g12\", shape == \"2\", round == 14, word != \"\") %&gt;%\n  summarise(words = paste(unique(word), collapse = \", \")) %&gt;%\n  pull(words)\n[1] \"fem-hm, fem-gm, fem-mk, fem-ss, fem-aa, fem-hi, fem-ko, fem-to, fem-nn, fem-kk, fem-uu, fem-oo, fem-kn, fem-ai, fem-fe, fem-ot, fem-fw\"\nEvery single one begins the same way: fem-. Back in round 1 this same shape family was a scramble of unrelated guesses: gim, puieg, weeps, huuu, mep (run the chunk again with round == 1 to see the mess it grew out of). By the final round the community has invented a root, fem-, that means “this family of shapes”, and a short suffix on the end to pick out which particular one.\nAnd it goes further. In the same community, a different shape family settled on het- and hoe-, and another on gekki-. One part for the category, one part for the specific item: a word built from meaningful pieces, exactly like foot + ball + er.\nThat is compositional structure, and it could be an answer to why bigger communities end up communicating better:\n\nThe words get longer because they are now built from parts, where once they were single random blobs.\nThe big communities built the most structure, because a word like fem-mk can be understood by someone you have never met; they only need to know the parts. A private blob like “mouse” works solely with people who were there when you coined it, and in a big community you are always meeting new partners, so the part-based words are the ones that survive.\nA language made of reusable parts is easier to learn and use, which is why the big communities ended up communicating better.\n\n\nThe take-home. A bigger community builds a more structured language (words made of reusable parts, where a small community can lean on one-off labels), because its words must work for a constant stream of new partners. Structure is what makes a language learnable by anyone.\n\nNext: Open questions",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
+      "How a group agrees"
+    ]
+  },
+  {
+    "objectID": "session3-evolution/02_read_the_words.html",
+    "href": "session3-evolution/02_read_the_words.html",
+    "title": "2 · Watch a word being born",
+    "section": "",
+    "text": "Block 1 · Chapter 2 of 2. Before counting anything, read the raw words and watch two communities each agree on one.",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
+      "2 · Watch a word being born"
+    ]
+  },
+  {
+    "objectID": "session3-evolution/02_read_the_words.html#look-before-you-count",
+    "href": "session3-evolution/02_read_the_words.html#look-before-you-count",
+    "title": "2 · Watch a word being born",
+    "section": "Look before you count",
+    "text": "Look before you count\nThe same habit as every week: read the raw data before you measure it. Let’s follow a single shape (item 9) through all fourteen rounds, and watch what a community does with it.\nThere is a snag, though. One shape in one community is 76 separate words, far too many to read as a list. So we collapse them: one line per round, showing the distinct words the community used that round. paste() glues a set of words into a single string, and unique() keeps only the different ones:\n# A big community (eight people) naming shape 9, round by round.\nlang %&gt;%\n  filter(group == \"g12\", item == \"9\", word != \"\") %&gt;%\n  group_by(round) %&gt;%\n  summarise(words_this_round = paste(unique(word), collapse = \", \"))\n# A tibble: 14 × 2\n   round words_this_round\n   &lt;int&gt; &lt;chr&gt;\n 1     1 huuu, hut-u, peos, mep, peeee, hok-ffff, femun, fem, pmmm, hut-kkk, femut, fom\n 2     2 kooo, hut-kkk, fet, fom, kot-op, hut-opp, nii\n 3     3 fem, koh-uu, fem-oppes, nii, fem-gu, hut-kk, fem-tt, femm\n 4     4 fem-utf, kohuu, fem-oppi, fem, oktt, hut-tt, fem-ki, fem-ii\n 5     5 moouu, fem-uiu, fem-oo, fem-pi\n 6     6 koh-uu, fem-u, fem-uu, fem\n 7     7 geik-ki, fem-kk, fem-uuu, fem-sw\n 8     8 fem-kk, fem-ki, fem-nn\n 9     9 fem-uu, fem-tu, fem-tt\n10    10 fem-uu, fem-uuu, fem-ui, fem-a\n11    11 fem-uu\n12    12 fem-uu, fem-uuu, fem-nn\n13    13 fem-uu, fem-pp, fem-nn\n14    14 fem-uu, fem-oo\nRead it from the top. Round 1 is a scramble: eight people look at the same shape and type a dozen different things (huuu, mep, fem, fom, peos). There is no word for this shape yet, only guesses. By the middle rounds the guesses start to pull together; everything is now some version of fem-, and by the end the community has all but settled on fem-uu. Through nothing more than using the words and seeing which ones worked, the community grew itself a word.",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
+      "2 · Watch a word being born"
+    ]
+  },
+  {
+    "objectID": "session3-evolution/02_read_the_words.html#now-a-smaller-community",
+    "href": "session3-evolution/02_read_the_words.html#now-a-smaller-community",
+    "title": "2 · Watch a word being born",
+    "section": "Now a smaller community",
+    "text": "Now a smaller community\nThe same shape (item 9) but this time in a community of four:\n# A small community (four people) naming the same shape.\nlang %&gt;%\n  filter(group == \"g13\", item == \"9\", word != \"\") %&gt;%\n  group_by(round) %&gt;%\n  summarise(words_this_round = paste(unique(word), collapse = \", \"))\n# A tibble: 14 × 2\n   round words_this_round\n   &lt;int&gt; &lt;chr&gt;\n 1     1 poik, piok, poki, ikie, pokie\n 2     2 sopoe, ikkie, popo, poik\n 3     3 waes, poik, hotaap\n 4     4 poiki, kokii\n 5     5 poik, pokuuu\n 6     6 poik, poikuuu\n 7     7 poikuu, poik\n 8     8 poika, poik\n 9     9 poiku, poik\n10    10 poik\n11    11 poiku, poik\n12    12 waesu, poik\n13    13 poik\n14    14 poik\nThis community settled too (on poik). The same shape, named from scratch by two sets of strangers, became two completely different words: fem-uu here, poik there. A word that works perfectly inside one community would mean nothing in the other. Each one grew its own.\n\n\n\n\n\n\n🤔 Think first\n\n\n\nNo one in a community could see the others’ screens or agree on a word out loud. So how does a shared word take hold at all: what is the single piece of information each person gets about whether their word was a good one?\n\n\n\n\n\n\nCheck your thinking\n\n\n\n\n\nThe only signal is whether the partner picked the right shape. A word that gets understood gets used again; a word that fails gets dropped or tweaked. Across many rounds, the words that survive are the ones that worked: the community comes to agree by keeping what succeeds and letting the rest fall away. Selection, round after round. That is the engine of this whole experiment, and of cultural evolution itself.\n\n\n\n\n\nYour turn. Pick any other shape (item from 1 to 28) and any community (a big one (\"g01\" to \"g12\") or a small one (\"g13\" to \"g24\")), and run the same code. Does it settle on a word too? Try one big and one small, and keep a question in mind for what comes next: does one of them seem to agree faster than the other?\nNext: Exercise 1: Does communication improve?",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
+      "2 · Watch a word being born"
+    ]
+  },
+  {
     "objectID": "session2-tangrams/index.html",
     "href": "session2-tangrams/index.html",
     "title": "Building Common Ground: The Tangram Task",
@@ -148,7 +280,7 @@
     "href": "session2-tangrams/01_meet_the_data.html#read-one-pair-first",
     "title": "1 · The corpus",
     "section": "Read one pair first",
-    "text": "Read one pair first\nBefore counting anything, look at the raw data: the same habit as last week. Here is one pair’s director describing one shape, tangram B, every one of the six times it came up:\n# One pair, one shape, six rounds.\ntangrams %&gt;%\n  filter(pair == \"pair01\", role == \"director\", tangram == \"B\") %&gt;%\n  select(repetition, message)\n# A tibble: 9 × 2\n  repetition message\n       &lt;dbl&gt; &lt;chr&gt;\n1          1 this one kinda looks like they are looking a little down and kneeling with both arms out\n2          1 wearing a dress maybe.\n3          2 do not think we had this one\n4          2 square head with diamond on right side\n5          3 square triangle on side\n6          3 like last time\n7          4 square triangle on side forgot that one\n8          5 square triangle head\n9          6 triangle square head\nRead it from top to bottom. The first time, tangram B takes a whole sentence. By the last round, it is three words: triangle square head. The description has shrunk to almost nothing, and it still works.\nLook also at rows 3 and 6: do not think we had this one and like last time. These descriptions show the pair keeping track of what they’ve already sorted out together. That shared, growing store of “things we both know now” is the common ground from yesterday’s lecture, and you can watch them building it in real time. Round by round, the pair whittles the description down to just the part that distinguishes this shape from the other eleven, and throws away everything else.\n\nThe code above follows tangram B. To follow tangram L instead, you change one thing. What is it? What do you replace, and with what?\n\nReplace \"B\" with \"L\" in the filter line: filter(pair == \"pair01\", role == \"director\", tangram == \"L\"). Everything else stays: same pair, same director, same six rounds. Only the shape changes.\n\n\nYour turn. Change one thing in the above code and follow tangram \"L\" instead. Does this exhibit the same progression?\nNext: Exercise 1: Less and less, better and better.",
+    "text": "Read one pair first\nBefore counting anything, look at the raw data: the same habit as last week. Here is one pair’s director describing one shape, tangram B, every one of the six times it came up:\n# One pair, one shape, six rounds.\ntangrams %&gt;%\n  filter(pair == \"pair01\", role == \"director\", tangram == \"\") %&gt;%\n  select(repetition, message)\n# A tibble: 9 × 2\n  repetition message\n       &lt;dbl&gt; &lt;chr&gt;\n1          1 this one kinda looks like they are looking a little down and kneeling with both arms out\n2          1 wearing a dress maybe.\n3          2 do not think we had this one\n4          2 square head with diamond on right side\n5          3 square triangle on side\n6          3 like last time\n7          4 square triangle on side forgot that one\n8          5 square triangle head\n9          6 triangle square head\nRead it from top to bottom. The first time, tangram B takes a whole sentence. By the last round, it is three words: triangle square head. The description has shrunk to almost nothing, and it still works.\nLook also at rows 3 and 6: do not think we had this one and like last time. These descriptions show the pair keeping track of what they’ve already sorted out together. That shared, growing store of “things we both know now” is the common ground from yesterday’s lecture, and you can watch them building it in real time. Round by round, the pair whittles the description down to just the part that distinguishes this shape from the other eleven, and throws away everything else.\n\nThe code above follows tangram B. To follow tangram L instead, you change one thing. What is it? What do you replace, and with what?\n\nReplace \"B\" with \"L\" in the filter line: filter(pair == \"pair01\", role == \"director\", tangram == \"L\"). Everything else stays: same pair, same director, same six rounds. Only the shape changes.\n\n\nYour turn. Change one thing in the above code and follow tangram \"L\" instead. Does this exhibit the same progression?\nNext: Exercise 1: Less and less, better and better.",
     "crumbs": [
       "Home",
       "Workshop 2 · Building Common Ground",
@@ -647,6 +779,150 @@
     "crumbs": [
       "Home",
       "Workshop 2 · Building Common Ground",
+      "Open questions"
+    ]
+  },
+  {
+    "objectID": "session3-evolution/01_meet_the_data.html",
+    "href": "session3-evolution/01_meet_the_data.html",
+    "title": "1 · Meet the data",
+    "section": "",
+    "text": "Block 1 · Chapter 1 of 2 before the first exercise. Load the data and understand what one row of it is.",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
+      "1 · Meet the data"
+    ]
+  },
+  {
+    "objectID": "session3-evolution/01_meet_the_data.html#communities-inventing-words",
+    "href": "session3-evolution/01_meet_the_data.html#communities-inventing-words",
+    "title": "1 · Meet the data",
+    "section": "Communities inventing words",
+    "text": "Communities inventing words\nIn this dataset, we have communities of four or eight people, inventing words for shapes that had no names (Raviv, Meyer & Lev-Ari, 2019). One quick reminder of a single turn, because its pieces become the columns of our table. One person (the producer) saw a shape and typed a made-up word for it. Their partner picked the shape they thought it meant: a hit if they were right, a miss if they were wrong. Then they swapped roles and moved on, pair after pair, for fourteen rounds.\nAt the start, everyone typed different nonsense. Round by round, each community drifted toward words it came to share: a small language, different in every group. Every one of those turns is in the dataset below, one row each: one word that one person produced for one shape.\nThe clever part is the design: some communities were large and some were small. That’s the comparison we’ll come back to. For now, just meet the data. We’ve put every turn into one table, where each row is one word that one person produced for one shape:\n\n\n\n\n\n\n\ncolumn\nwhat it holds\n\n\n\n\ncommunity\nthe size of the group: \"big\" or \"small\"\n\n\ngroup\nwhich group it was (\"g01\" … \"g24\")\n\n\nround\nwhich round of the game (1-14) — the game’s clock\n\n\nitem\nwhich shape was being described (a number, 1-28)\n\n\nshape\nthe shape’s family (a rough visual category)\n\n\nproducer\nwhich person in the group typed the word\n\n\nword\nthe made-up word they typed\n\n\ncorrect\ndid the partner pick the right shape? (1 = yes, 0 = no)\n\n\n\n ⬇ language_evolution.csv \nDownload it, put it in your working folder on UCloud, and load it — same two steps as the last two weeks:\n# Load the tidyverse, then read the data into a table called lang.\nlibrary(tidyverse)\nlang &lt;- read_csv(\"language_evolution.csv\")\n\n# Look at what we've got.\nglimpse(lang)\nRows: 23,276\nColumns: 8\n$ community &lt;chr&gt; \"big\", \"big\", \"big\", \"big\", \"big\", \"big\", \"big\", \"big\", \"big\", \"big\", \"big\", \"big\", \"big\", \"big\", \"big\", \"big\", \"big\", \"big\", \"big\", \"big\", \"big\", \"big\", \"big\", \"big…\n$ group     &lt;chr&gt; \"g10\", \"g10\", \"g10\", \"g10\", \"g10\", \"g10\", \"g10\", \"g10\", \"g10\", \"g10\", \"g10\", \"g10\", \"g10\", \"g10\", \"g10\", \"g10\", \"g10\", \"g10\", \"g10\", \"g10\", \"g10\", \"g10\", \"g10\", \"g10…\n$ round     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …\n$ item      &lt;dbl&gt; 28, 28, 28, 28, 25, 25, 25, 25, 8, 8, 8, 8, 11, 11, 11, 11, 16, 16, 16, 16, 2, 2, 2, 2, 24, 24, 24, 24, 4, 4, 4, 4, 25, 25, 25, 25, 24, 24, 24, 24, 2, 2, 2, 2, 16, 1…\n$ shape     &lt;dbl&gt; 4, 4, 4, 4, 4, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 1, 1, 1, 1, 4, 4, 4, 4, 1, 1, 1, 1, 4, 4, 4, 4, 4, 4, 4, 4, 1, 1, 1, 1, 3, 3, 3, 3, 4, 4, 4, 4, 2, 2, 2, …\n$ producer  &lt;dbl&gt; 1, 3, 5, 7, 2, 4, 6, 8, 1, 3, 5, 7, 2, 4, 6, 8, 1, 3, 5, 7, 2, 4, 6, 8, 1, 3, 5, 7, 2, 4, 6, 8, 1, 3, 5, 7, 2, 4, 6, 8, 1, 3, 5, 7, 2, 4, 6, 8, 1, 3, 5, 7, 2, 4, 6, …\n$ word      &lt;chr&gt; \"huk\", \"huk\", \"huipo\", \"tuk\", \"keton\", \"hukk\", \"gnot\", \"wuk\", \"kuiton\", \"kito\", \"wangi\", \"gmimpi\", \"gak\", \"kitoo\", \"gnot\", \"gmip\", \"wangi\", \"kitooo\", \"wangi\", \"gmip\"…\n$ correct   &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, …\nThe column that matters most today is round. The whole point of the experiment is to watch what changes over the rounds. Words at round 1 versus round 14, so almost everything we compute will be grouped by round.\n\nTwo communities, \"big\" and \"small\". One of them has many more rows in the table than the other. Try some code to figure out which one?\n\nbig has about twice as many rows. More people in a group means more producers taking turns each round, so more words get typed. That’s worth remembering: the bigger community generates more data per round simply because it has more members.\n\n\nData loaded and glimpse looking right? Next: Watch a word being born.",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
+      "1 · Meet the data"
+    ]
+  },
+  {
+    "objectID": "session3-evolution/03_exercise_accuracy.html",
+    "href": "session3-evolution/03_exercise_accuracy.html",
+    "title": "Exercise 1 · Does communication improve?",
+    "section": "",
+    "text": "Block 2 · Measure whether the invented languages actually start to work, and then compare small communities with large ones.",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
+      "Does communication improve?"
+    ]
+  },
+  {
+    "objectID": "session3-evolution/03_exercise_accuracy.html#task-1-does-communication-get-better",
+    "href": "session3-evolution/03_exercise_accuracy.html#task-1-does-communication-get-better",
+    "title": "Exercise 1 · Does communication improve?",
+    "section": "Task 1: Does communication get better?",
+    "text": "Task 1: Does communication get better?\nYou watched a couple of groups drift from chaos toward a shared word. If that’s really happening across the board, then communication should succeed more often in later rounds: partners picking the right shape more and more as the shared words settle in.\nThe correct column is 1 for a hit, 0 for a miss. The average of a column of 1s and 0s is just the proportion of 1s, so mean(correct) per round is the success rate that round.\n# For each round, what fraction of guesses were correct?\naccuracy &lt;- lang %&gt;%\n  group_by(___) %&gt;%                 # the game's clock\n  summarise(pct_correct = 100 * mean(___))\n\naccuracy\n&gt; accuracy\n# A tibble: 14 × 2\n   round pct_correct\n   &lt;dbl&gt;       &lt;dbl&gt;\n 1     1        32.7\n 2     2        31.3\n 3     3        31.4\n 4     4        36.7\n 5     5        40.5\n 6     6        40.6\n 7     7        45.5\n 8     8        44.9\n 9     9        52.9\n10    10        52.9\n11    11        59.4\n12    12        59.5\n13    13        60.1\n14    14        64.5\nRound 1 starts around 33%, which is barely above pure guessing. By the final rounds it is far higher. The invented words are doing their job: they are becoming a language.",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
+      "Does communication improve?"
+    ]
+  },
+  {
+    "objectID": "session3-evolution/03_exercise_accuracy.html#task-2-small-communities-versus-large-ones",
+    "href": "session3-evolution/03_exercise_accuracy.html#task-2-small-communities-versus-large-ones",
+    "title": "Exercise 1 · Does communication improve?",
+    "section": "Task 2: Small communities versus large ones",
+    "text": "Task 2: Small communities versus large ones\nNow the real question. Before you run anything, commit to a guess.\n\nBy the final round, which communities communicate better: the small ones (four people) or the large ones (eight)?\n\nLock it in. Now build the plot below, and watch how far apart the two lines end up.\n\n\nTo compare the two, we group by round and community, then give each community its own coloured line:\nby_community &lt;- lang %&gt;%\n  group_by(round, ___) %&gt;%          # round AND ??\n  summarise(pct_correct = 100 * mean(correct, na.rm = T), .groups = \"drop\")\n\nggplot(by_community, aes(x = round, y = pct_correct,\n                         colour = ___)) +        # colour by community\n  geom_point() +\n  geom_line() +\n  labs(title = \"Bigger communities build better languages\",\n       x = \"round\", y = \"% of guesses correct\",\n       colour = \"community\") +\n  theme_bw()\nBoth lines climb: every community’s language improves. But after the first few rounds, the large-community line pulls clear and stays ahead, finishing near 70% while the small communities level off around 55%. If you bet on the small ones you’re in good company: most people do, and the data says the opposite. More people, better communication. But why?",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
+      "Does communication improve?"
+    ]
+  },
+  {
+    "objectID": "session3-evolution/03_exercise_accuracy.html#task-3-why-would-a-bigger-community-be-better",
+    "href": "session3-evolution/03_exercise_accuracy.html#task-3-why-would-a-bigger-community-be-better",
+    "title": "Exercise 1 · Does communication improve?",
+    "section": "Task 3: Why would a bigger community be better?",
+    "text": "Task 3: Why would a bigger community be better?\nThis is the genuinely surprising result: you’d expect a big, sprawling group to struggle. Talk it through with your partner: why might a bigger community end up communicating better?\nHere’s the shape of the answer, to hold in mind. In a small group, you talk to the same two or three people every round, so you can get away with quirky, private words (like the pair last week who called one of the tangrams “praying monk”). It works, but only because you all know each other’s quirks. In a big group you keep meeting different partners, so a private quirk falls flat with the next person. Only words that work for everybody survive.\nBut how does a word come to “work for everybody”? Let’s go find the answer in the data.\nNext: Exercise 2: Why the big communities win",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
+      "Does communication improve?"
+    ]
+  },
+  {
+    "objectID": "session3-evolution/05_open_questions.html",
+    "href": "session3-evolution/05_open_questions.html",
+    "title": "Open questions",
+    "section": "",
+    "text": "If you’re ahead, go exploring. These have no worksheet and no single right answer. Pick one that sounds fun and see how far you get.",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
+      "Open questions"
+    ]
+  },
+  {
+    "objectID": "session3-evolution/05_open_questions.html#the-spread-behind-the-averages",
+    "href": "session3-evolution/05_open_questions.html#the-spread-behind-the-averages",
+    "title": "Open questions",
+    "section": "1 · The spread behind the averages",
+    "text": "1 · The spread behind the averages\nThose two tidy lines from Exercise 1 are averages, and each one hides twelve separate communities. Let’s meet the crowd behind the average: draw every community as its own faint line, coloured by size. An answer would involve group = group inside aes(): it tells ggplot to draw one line per group. Now the real question: do the big communities all beat the small ones, or do they just tend to? Watch how far the two clouds overlap.",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
+      "Open questions"
+    ]
+  },
+  {
+    "objectID": "session3-evolution/05_open_questions.html#which-shapes-fought-back",
+    "href": "session3-evolution/05_open_questions.html#which-shapes-fought-back",
+    "title": "Open questions",
+    "section": "2 · Which shapes fought back?",
+    "text": "2 · Which shapes fought back?\nSome shapes are easy to name; others resist to the very end. For one community, work out each shape’s success rate in the final round and find the stubborn ones. Then read the words that community used for its hardest shape. Did they ever settle on a shared root for it, the way they did on fem-? A shape with no agreed word is a small window into why some meanings are harder to share than others.",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
+      "Open questions"
+    ]
+  },
+  {
+    "objectID": "session3-evolution/05_open_questions.html#does-a-fast-start-mean-a-strong-finish",
+    "href": "session3-evolution/05_open_questions.html#does-a-fast-start-mean-a-strong-finish",
+    "title": "Open questions",
+    "section": "3 · Does a fast start mean a strong finish?",
+    "text": "3 · Does a fast start mean a strong finish?\nSome communities find their feet quickly, others take a while. For each community, find the first round it crossed 50% accuracy, then compare that with where it finished. Do the quick starters also finish highest, or can a slow starter overtake late? There’s no guarantee that the community which communicates soonest is the one that communicates best by the end. The data will tell you which it is.",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
+      "Open questions"
+    ]
+  },
+  {
+    "objectID": "session3-evolution/05_open_questions.html#invent-your-own-measure",
+    "href": "session3-evolution/05_open_questions.html#invent-your-own-measure",
+    "title": "Open questions",
+    "section": "4 · Invent your own measure",
+    "text": "4 · Invent your own measure\nYou’ve measured two things about a language being born: whether it works (accuracy) and how its words are shaped (length). Now invent a third: something you’re curious about, turned into a number you can compute for each round. A few to spark ideas:\n\nVocabulary size: how many different words is a community juggling for one shape each round? Does it balloon early, then shrink as they prune?\nAgreement: what share of a community uses the single most common word for a shape?",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
+      "Open questions"
+    ]
+  },
+  {
+    "objectID": "session3-evolution/05_open_questions.html#make-something-cool",
+    "href": "session3-evolution/05_open_questions.html#make-something-cool",
+    "title": "Open questions",
+    "section": "5 · Make something cool",
+    "text": "5 · Make something cool\nEvery plot so far has been a line chart. Break the mould. Make one visualisation that shows something about these languages being born that a line chart can’t, and make it beautiful. Some thoughts:\n\na word cloud of everything one community ever coined, the words it used most shown largest (use ggwordcloud).\nplot a community’s average word length against its final accuracy to figure out whether longer words pay off (use geom_point()).",
+    "crumbs": [
+      "Home",
+      "Workshop 3 · A Language Is Born",
       "Open questions"
     ]
   }

@@ -1,0 +1,101 @@
+---
+title: "Exercise 1 · Does communication improve?"
+---
+
+::: milestone
+**Block 2** · Measure whether the invented languages actually start to work, and then compare small communities with large ones.
+:::
+
+:::::: exercise-banner
+::: ex-kicker
+Your code
+:::
+
+::: ex-title
+Does the language start to work, and does community size matter?
+:::
+
+::: ex-sub
+Wherever you see ____, you write the code. Every tool is one you already have.
+:::
+::::::
+
+## Task 1: Does communication get better?
+
+You watched a couple of groups drift from chaos toward a shared word. If that's really happening across the board, then communication should *succeed more often* in later rounds: partners picking the right shape more and more as the shared words settle in.
+
+The `correct` column is 1 for a hit, 0 for a miss. The average of a column of 1s and 0s is just the proportion of 1s, so `mean(correct)` per round is the success rate that round.
+
+``` r
+# For each round, what fraction of guesses were correct?
+accuracy <- lang %>%
+  group_by(___) %>%                 # the game's clock
+  summarise(pct_correct = 100 * mean(___))
+
+accuracy
+```
+
+``` repl
+> accuracy
+# A tibble: 14 × 2
+   round pct_correct
+   <dbl>       <dbl>
+ 1     1        32.7
+ 2     2        31.3
+ 3     3        31.4
+ 4     4        36.7
+ 5     5        40.5
+ 6     6        40.6
+ 7     7        45.5
+ 8     8        44.9
+ 9     9        52.9
+10    10        52.9
+11    11        59.4
+12    12        59.5
+13    13        60.1
+14    14        64.5
+```
+
+Round 1 starts around 33%, which is barely above pure guessing. By the final rounds it is far higher. The invented words are doing their job: they are becoming a language.
+
+## Task 2: Small communities versus large ones
+
+Now the real question. Before you run anything, commit to a guess.
+
+:::: {.predict-check data-answer="big" data-accept="big||the big ones||big groups||large||larger||bigger"}
+By the final round, which communities communicate *better*: the small ones (four people) or the large ones (eight)?
+
+::: {.pc-explanation}
+Lock it in. Now build the plot below, and watch how far apart the two lines end up.
+:::
+::::
+
+
+To compare the two, we group by `round` **and** `community`, then give each community its own coloured line:
+
+``` r
+by_community <- lang %>%
+  group_by(round, ___) %>%          # round AND ??
+  summarise(pct_correct = 100 * mean(correct, na.rm = T), .groups = "drop")
+
+ggplot(by_community, aes(x = round, y = pct_correct,
+                         colour = ___)) +        # colour by community
+  geom_point() +
+  geom_line() +
+  labs(title = "Bigger communities build better languages",
+       x = "round", y = "% of guesses correct",
+       colour = "community") +
+  theme_bw()
+```
+
+Both lines climb: every community's language improves. But after the first few rounds, the large-community line pulls clear and stays ahead, finishing near 70% while the small communities level off around 55%. If you bet on the small ones you’re in good company: most people do, and the data says the opposite. More people, better communication. But why?
+
+## Task 3: Why would a bigger community be better?
+
+This is the genuinely surprising result: you'd expect a big, sprawling group to struggle. Talk it through with your partner: why might a *bigger* community end up communicating *better*?
+
+Here's the shape of the answer, to hold in mind. In a small group, you talk to the same two or three people every round, so you can get away with quirky, private words (like the pair last week who called one of the tangrams "praying monk"). It works, but only because you all know each other's quirks. In a big group you keep meeting *different* partners, so a private quirk falls flat with the next person. Only words that work for *everybody* survive.
+
+But *how* does a word come to "work for everybody"? Let's go find the answer in the data.
+
+Next: [Exercise 2: Why the big communities win](04_exercise_structure.qmd)

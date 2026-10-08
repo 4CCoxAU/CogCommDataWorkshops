@@ -56,7 +56,7 @@ Before counting anything, look at the raw data: the same habit as last week. Her
 ``` r
 # One pair, one shape, six rounds.
 tangrams %>%
-  filter(pair == "pair01", role == "director", tangram == "B") %>%
+  filter(pair == "pair01", role == "director", tangram == "") %>%
   select(repetition, message)
 ```
 

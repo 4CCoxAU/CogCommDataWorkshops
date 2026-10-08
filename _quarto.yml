@@ -53,6 +53,20 @@ website:
             text: "2 · The replication"
           - href: session2-tangrams/05_open_questions.qmd
             text: "Open questions"
+      - section: "Workshop 3 · A Language Is Born"
+        contents:
+          - href: session3-evolution/index.qmd
+            text: "Start here"
+          - href: session3-evolution/01_meet_the_data.qmd
+            text: "1 · Meet the data"
+          - href: session3-evolution/02_read_the_words.qmd
+            text: "2 · Watch a word being born"
+          - href: session3-evolution/03_exercise_accuracy.qmd
+            text: "Does communication improve?"
+          - href: session3-evolution/04_exercise_structure.qmd
+            text: "How a group agrees"
+          - href: session3-evolution/05_open_questions.qmd
+            text: "Open questions"
   page-navigation: true
 
 format:

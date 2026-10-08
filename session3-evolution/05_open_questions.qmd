@@ -1,0 +1,36 @@
+---
+title: "Open questions"
+---
+
+::: milestone
+**If you're ahead, go exploring.** These have no worksheet and no single right answer. Pick one that sounds fun and see how far you get.
+:::
+
+
+## 1 · The spread behind the averages
+
+Those two tidy lines from Exercise 1 are *averages*, and each one hides twelve separate communities. Let's meet the crowd behind the average: draw every community as its own faint line, coloured by size. An answer would involve `group = group` inside `aes()`: it tells ggplot to draw one line per group. Now the real question: do the big communities *all* beat the small ones, or do they just tend to? Watch how far the two clouds overlap.
+
+## 2 · Which shapes fought back?
+
+Some shapes are easy to name; others resist to the very end. For one community, work out each shape's success rate in the final round and find the stubborn ones. Then read the words that community used for its hardest shape. Did they ever settle on a shared root for it, the way they did on *fem-*? A shape with no agreed word is a small window into why some meanings are harder to share than others.
+
+## 3 · Does a fast start mean a strong finish?
+
+Some communities find their feet quickly, others take a while. For each community, find the first round it crossed 50% accuracy, then compare that with where it finished. Do the quick starters also finish highest, or can a slow starter overtake late? There's no guarantee that the community which communicates *soonest* is the one that communicates *best* by the end. The data will tell you which it is.
+
+## 4 · Invent your own measure
+
+You've measured two things about a language being born: whether it *works* (accuracy) and how its words are *shaped* (length). Now invent a third: something you're curious about, turned into a number you can compute for each round. A few to spark ideas:
+
+- **Vocabulary size**: how many different words is a community juggling for one shape each round? Does it balloon early, then shrink as they prune?
+- **Agreement**: what share of a community uses the single most common word for a shape?
+
+## 5 · Make something cool
+
+Every plot so far has been a line chart. Break the mould. Make one visualisation that shows something about these languages being born that a line chart can't, and make it beautiful. Some thoughts:
+
+- a word cloud of everything one community ever coined, the words it used most shown largest (use ggwordcloud).
+- plot a community's average word length against its final accuracy to figure out whether longer words pay off (use geom_point()). 
+
+---
